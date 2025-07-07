@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naat Academy - اسلامی شاعری، کتب، حمد، نعت، منقبت، سلام و مضامین</title>
+    <meta name="description"
+        content="نعتیہ اکیڈمی میں اسلامی شاعری، کتب، حمد، نعت، منقبت، سلام، اور علمی مضامین کا وسیع ذخیرہ دریافت کریں۔ مشہور شعراء کے کلام سے اپنے روحانی سفر کو جلا بخشیں۔">
+    <meta name="keywords"
+        content="نعت, حمد, منقبت, سلام, اسلامی شاعری, اردو شاعری, کتب, اسلامی کتب, صوفیانہ کلام, اسلامی مضامین, شعراء, نعت فونٹ, نماز ٹائم, اسلامی کیلنڈر, نعت نوٹ بک">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="style.css"></script>
+    <style>
+        /* Custom Font for Urdu Text */
+        @font-face {
+            font-family: 'NaatFont';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Base Body Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            /* Lighter background */
+            color: #333;
+            font-size: 1.125rem;
+            /* Adjusted base font size */
+        }
+
+        /* Urdu Text Specific Styles */
+        .urdu-text {
+            font-family: 'NaatFont', 'Noto Nastaliq Urdu', serif;
+            line-height: 2.2;
+            /* Slightly adjusted line height */
+            font-size: 1.125rem;
+        }
+
+        .urdu-text-xl {
+            font-size: 2.2rem;
+        }
+
+        .urdu-text-lg {
+            font-size: 1.8rem;
+        }
+
+        .urdu-text-md {
+            font-size: 1.4rem;
+        }
+
+        .urdu-text-base {
+            font-size: 1.125rem;
+        }
+
+        .urdu-text-sm {
+            font-size: 1rem;
+        }
+
+        .urdu-text-xs {
+            font-size: 0.9rem;
+        }
+
+        /* Header Gradient Background */
+        .header-gradient {
+            background: linear-gradient(to bottom, #d2f4f2, #ffffff);
+            /* Softer gradient */
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 1.25rem;
+            /* More rounded corners */
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.08), 0 3px 6px -3px rgba(0, 0, 0, 0.05);
+            /* Enhanced shadow */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Softer transition */
+            overflow: hidden;
+            padding: 1.25rem;
+            /* More padding */
+            border: 1px solid #e2e8f0;
+            /* Subtle border */
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            /* More pronounced lift */
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Section Title Container */
+        .section-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            /* Increased margin */
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            /* Separator for titles */
+        }
+
+        /* Section Title Styles */
+        .section-title {
+            font-weight: 700;
+            color: #2a415a;
+            /* Darker, more prominent color */
+            font-size: 2rem;
+            /* Adjusted size */
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* Section Title Icon Wrapper */
+        .section-title-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            /* Adjusted size */
+            height: 3.2rem;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Shadow for icon background */
+        }
+
+        /* Section Title Icon */
+        .section-title-icon {
+            font-size: 1.6rem;
+            /* Adjusted size */
+            color: white;
+        }
+
+        /* Gradient Backgrounds for Icons */
+        .gradient-icon-bg-1 {
+            background-image: linear-gradient(45deg, #10b981, #34d399);
+        }
+
+        /* Emerald */
+        .gradient-icon-bg-2 {
+            background-image: linear-gradient(45deg, #2563eb, #60a5fa);
+        }
+
+        /* Blue */
+        .gradient-icon-bg-3 {
+            background-image: linear-gradient(45deg, #f59e0b, #fbbf24);
+        }
+
+        /* Amber */
+        .gradient-icon-bg-4 {
+            background-image: linear-gradient(45deg, #ef4444, #f87171);
+        }
+
+        /* Red */
+        .gradient-icon-bg-5 {
+            background-image: linear-gradient(45deg, #8b5cf6, #a78bfa);
+        }
+
+        /* Violet */
+        .gradient-icon-bg-prayer {
+            background-image: linear-gradient(45deg, #0ea5e9, #38bdf8);
+        }
+
+        /* Sky Blue */
+        .gradient-icon-bg-lyrics {
+            background-image: linear-gradient(45deg, #ec4899, #f472b6);
+        }
+
+        /* Pink */
+        .gradient-icon-bg-education {
+            background-image: linear-gradient(45deg, #14b8a6, #2dd4bf);
+        }
+
+        /* Teal */
+        .gradient-icon-bg-adab {
+            background-image: linear-gradient(45deg, #6d28d9, #8b5cf6);
+        }
+
+        /* Purple */
+        .gradient-icon-bg-durood {
+            background-image: linear-gradient(45deg, #f97316, #fb923c);
+        }
+
+        /* Orange */
+        .gradient-icon-bg-hamd {
+            background-image: linear-gradient(45deg, #06b6d4, #22d3ee);
+        }
+
+        /* Cyan */
+        .gradient-icon-bg-manqabat-famous {
+            background-image: linear-gradient(45deg, #d946ef, #e879f9);
+        }
+
+        /* Fuchsia */
+        .gradient-icon-bg-notebook {
+            background-image: linear-gradient(45deg, #3b82f6, #60a5fa);
+        }
+
+        /* Blue */
+        .gradient-icon-bg-festivals {
+            background-image: linear-gradient(45deg, #f43f5e, #fb7185);
+        }
+
+        /* Rose */
+        .gradient-icon-bg-poetry-info {
+            background-image: linear-gradient(45deg, #4CAF50, #8BC34A);
+        }
+
+        /* Green */
+
+
+        /* Responsive Section Title Size */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Footer Styles */
+        .footer-bg {
+            background-color: #2a415a;
+            color: #cbd5e1;
+        }
+
+        /* Darker footer */
+
+        /* WhatsApp Floating Action Button */
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-fab:hover {
+            background-color: #1DAE52;
+            transform: scale(1.15);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-fab i {
+            font-size: 1.6rem;
+        }
+
+        /* Slide Up Fade In Animation */
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slideUpFadeIn {
+            animation: slideUpFadeIn 0.6s ease-out forwards;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.25rem;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            background-color: transparent;
+        }
+
+        /* Removed background */
+        .slider-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            padding: 0.6rem 0.8rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .slider-button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-button.prev {
+            left: 10px;
+        }
+
+        .slider-button.next {
+            right: 10px;
+        }
+
+        /* Category Tags */
+        .category-tag {
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            /* Subtle shadow */
+            display: inline-flex;
+            /* To align name and count */
+            align-items: center;
+            /* Vertically align name and count */
+        }
+
+        .category-tag.selected {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+            border-color: currentColor;
+        }
+
+        /* Emphasize selection */
+        .category-naat {
+            background-color: #e0f2f1;
+            color: #00796b;
+            border-color: #b2dfdb;
+        }
+
+        .category-naat.selected,
+        .category-naat:hover {
+            background-color: #00796b;
+            color: white;
+            border-color: #00695c;
+        }
+
+        .category-salam {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-color: #bbdefb;
+        }
+
+        .category-salam.selected,
+        .category-salam:hover {
+            background-color: #1565c0;
+            color: white;
+            border-color: #1e88e5;
+        }
+
+        .category-manqabat {
+            background-color: #fff8e1;
+            color: #ff8f00;
+            border-color: #ffecb3;
+        }
+
+        .category-manqabat.selected,
+        .category-manqabat:hover {
+            background-color: #ff8f00;
+            color: white;
+            border-color: #fb8c00;
+        }
+
+        .category-qataat {
+            background-color: #fce4ec;
+            color: #d81b60;
+            border-color: #f8bbd0;
+        }
+
+        .category-qataat.selected,
+        .category-qataat:hover {
+            background-color: #d81b60;
+            color: white;
+            border-color: #c2185b;
+        }
+
+        .category-mawzoat {
+            background-color: #e8eaf6;
+            color: #303f9f;
+            border-color: #c5cae9;
+        }
+
+        .category-mawzoat.selected,
+        .category-mawzoat:hover {
+            background-color: #303f9f;
+            color: white;
+            border-color: #3949ab;
+        }
+
+        .category-shayar {
+            background-color: #f3e5f5;
+            color: #6a1b9a;
+            border-color: #e1bee7;
+        }
+
+        .category-shayar.selected,
+        .category-shayar:hover {
+            background-color: #6a1b9a;
+            color: white;
+            border-color: #7b1fa2;
+        }
+
+        .category-mazameen {
+            background-color: #e0f7fa;
+            color: #00838f;
+            border-color: #b2ebf2;
+        }
+
+        .category-mazameen.selected,
+        .category-mazameen:hover {
+            background-color: #00838f;
+            color: white;
+            border-color: #0097a7;
+        }
+
+        .category-kutub {
+            background-color: #f9f0ff;
+            color: #8e44ad;
+            border-color: #e8daef;
+        }
+
+        .category-kutub.selected,
+        .category-kutub:hover {
+            background-color: #8e44ad;
+            color: white;
+            border-color: #7d3c98;
+        }
+
+        /* Smaller font size for category post counts */
+        .category-post-count {
+            font-size: 0.7rem;
+            /* Very small size */
+            margin-right: 0.3rem;
+            /* Adjust spacing as needed */
+        }
+
+
+        /* Mazameen Card Writer Icon */
+        .mazameen-card .writer-icon-container {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.6rem;
+            padding: 0.3rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .mazameen-card .writer-icon-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            /* Added to make icon white */
+        }
+
+        /* New gradient backgrounds for writer icons */
+        .writer-icon-bg-1 {
+            background-image: linear-gradient(45deg, #60a5fa, #3b82f6);
+        }
+
+        /* Blue-ish */
+        .writer-icon-bg-2 {
+            background-image: linear-gradient(45deg, #10b981, #059669);
+        }
+
+        /* Green-ish */
+        .writer-icon-bg-3 {
+            background-image: linear-gradient(45deg, #f97316, #ea580c);
+        }
+
+        /* Orange-ish */
+
+        /* Poet Card Styles */
+        .poet-card .poet-icon-container {
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 50%;
+            padding: 0.4rem;
+            margin: 0 auto 0.9rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            /* More prominent shadow */
+        }
+
+        .poet-card .poet-icon-container img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .poet-icon-gradient-1 {
+            background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+        }
+
+        .poet-icon-gradient-2 {
+            background-image: linear-gradient(to right, #a18cd1 0%, #fbc2eb 100%);
+        }
+
+        .poet-icon-gradient-3 {
+            background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+        }
+
+        .poet-icon-gradient-4 {
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            /* More spacing */
+            font-size: 0.95rem;
+            color: #6b7280;
+            padding-top: 0.6rem;
+            margin-top: 0.6rem;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .stats-bar i {
+            font-size: 1.1rem;
+            margin-right: 0.25rem;
+        }
+
+        .stats-bar .urdu-text-xs {
+            font-size: 0.95rem !important;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Darker overlay */
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 3% auto;
+            padding: 30px;
+            /* More padding */
+            border-radius: 1rem;
+            width: 95%;
+            max-width: 700px;
+            /* Adjusted max-width */
+            position: relative;
+            animation: slideDownFadeIn 0.3s ease-out;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #718096;
+            /* Subtle close button */
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            color: #333;
+        }
+
+        /* AI Search Modal Specific */
+        .ai-search-modal-content {
+            border: 2px solid transparent;
+            animation: glowing-border 2.5s infinite alternate;
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.6), 0 0 30px rgba(40, 167, 69, 0.4);
+        }
+
+        @keyframes glowing-border {
+            0% {
+                border-color: rgba(40, 167, 69, 0.4);
+                box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+            }
+
+            50% {
+                border-color: rgba(40, 167, 69, 0.8);
+                box-shadow: 0 0 20px rgba(40, 167, 69, 0.8);
+            }
+
+            100% {
+                border-color: rgba(40, 167, 69, 0.4);
+                box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Container and Input */
+        .search-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            /* Even more rounded */
+            padding: 1.25rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            /* Stronger shadow */
+            border: 1px solid #e2e8f0;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            border-radius: 9999px;
+            background-color: #f8f9fa;
+            border: 1px solid #d1d5db;
+            transition: all 0.3s ease;
+            padding: 0.35rem;
+            /* More padding */
+        }
+
+        .search-input-wrapper:focus-within {
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Emerald focus */
+
+        .search-input-wrapper input[type="text"] {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            padding: 0.6rem 1.2rem;
+            font-size: 1.1rem;
+            background-color: transparent;
+            text-align: right;
+        }
+
+        .search-button-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-left: 0.6rem;
+        }
+
+        .search-icon-button {
+            background-color: #fff;
+            color: #64748b;
+            /* Slate gray */
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .search-icon-button:hover {
+            background-color: #f1f5f9;
+            transform: scale(1.08);
+        }
+
+        .ai-search-button-inline {
+            background-color: #10b981;
+            color: white;
+        }
+
+        /* Emerald */
+        .ai-search-button-inline:hover {
+            background-color: #059669;
+        }
+
+        /* Style for the new AI search SVG icon */
+        .ai-search-icon-image {
+            filter: brightness(0) invert(1);
+            /* Makes the SVG white */
+        }
+
+        /* Search Options */
+        #searchOptionsContainer {
+            display: block;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 1rem 0;
+            /* More padding */
+            margin-top: 1.25rem;
+            /* Increased margin */
+            position: static;
+            transform: none;
+            width: auto;
+            max-width: none;
+        }
+
+        /* Book Card Image */
+        .book-card-image {
+            width: 100%;
+            height: 11rem;
+            object-fit: cover;
+            border-radius: 0.75rem;
+        }
+
+        .download-button {
+            background-color: #06b6d4;
+            /* Cyan */
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 1.05rem;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .download-button:hover {
+            background-color: #0891b2;
+        }
+
+        /* Share Icon */
+        .share-icon {
+            color: #6b7280;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            font-size: 1.45rem;
+        }
+
+        .share-icon:hover {
+            color: #10b981;
+            transform: scale(1.2);
+        }
+
+        /* Emerald hover */
+
+        /* Instagram Embed Placeholder */
+        .instagram-embed-placeholder {
+            background-color: #f8f9fa;
+            border: 1px dashed #cbd5e1;
+            padding: 2.5rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+            /* Inner shadow */
+        }
+
+        /* Pill Button */
+        .pill-button {
+            background-color: #10b981;
+            /* Emerald */
+            color: white;
+            padding: 0.4rem 0.9rem;
+            /* Compacted */
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            /* Smaller font for compact */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Adjusted shadow */
+        }
+
+        .pill-button:hover {
+            background-color: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Adjusted hover */
+        .pill-button i {
+            margin-right: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Smaller icon */
+
+        /* Article Category Tag */
+        .article-category-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.9rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            z-index: 5;
+            /* Ensure it's above other content */
+        }
+
+        /* Kalaam Preview Grid */
+        .kalaam-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            /* Slightly larger min-width */
+            gap: 1.25rem;
+            /* Increased gap */
+            margin-top: 1.25rem;
+        }
+
+        .kalaam-preview-item-image {
+            width: 100%;
+            height: 140px;
+            /* Slightly taller */
+            object-fit: cover;
+            border-radius: 0.85rem;
+            /* More rounded */
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .kalaam-preview-item-image:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-slider-image {
+            /* Style for images inside the modal slider */
+            width: 100%;
+            height: auto;
+            /* Maintain aspect ratio */
+            max-height: 70vh;
+            /* Limit height in modal */
+            object-fit: contain;
+            /* Ensure full image is visible */
+            border-radius: 0.75rem;
+        }
+
+
+        /* Prayer Time Table */
+        .prayer-times-table-container {
+            background: white;
+            border-radius: 1.25rem;
+            /* More rounded */
+            padding: 1.5rem;
+            /* More padding */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            /* Stronger shadow */
+            border: 1px solid #e2e8f0;
+        }
+
+        .prayer-times-table-row {
+            display: flex;
+            /* Ensure flex for columns */
+            justify-content: space-between;
+            /* Space out items */
+            align-items: center;
+            /* Vertically align */
+            background-color: #f8f9fa;
+            margin-bottom: 0.5rem;
+            /* More space between rows */
+            border-radius: 0.65rem;
+            /* Rounded rows */
+            padding: 0.6rem 1rem;
+            /* More padding */
+            border-bottom: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .prayer-times-table-row:nth-child(odd) {
+            background-color: #f1f3f5;
+        }
+
+        .prayer-times-table-row:hover {
+            background-color: #e6f0fa;
+            /* Subtle hover effect */
+        }
+
+        .prayer-name {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .prayer-time-value {
+            font-weight: 500;
+            color: #10b981;
+            /* Emerald green for times */
+            font-size: 1.15rem;
+            /* Slightly larger time font */
+        }
+
+        .prayer-times-table-row span {
+            flex: 1;
+            /* Distribute space evenly */
+            text-align: center;
+        }
+
+        .prayer-times-table-row .prayer-time-day-name {
+            text-align: right;
+            flex: 1.5;
+            /* Give more space to the day name */
+        }
+
+        /* Islamic Calendar */
+        .islamic-calendar-container {
+            background-color: #e0f7fa;
+            border: 1px solid #b2ebf2;
+            color: #004d40;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .islamic-calendar-header {
+            background-color: #00796b;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.8rem 0.8rem 0 0;
+            /* Rounded top corners */
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            /* Extend to edges, push content down */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .islamic-calendar-header-title {
+            font-size: 1.6rem;
+        }
+
+        /* Naat Notebook Editor */
+        .naat-editor-container {
+            min-height: 250px;
+            /* Taller editor */
+            border: 1px solid #cbd5e1;
+            /* Subtle border */
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            background-color: #fff;
+            direction: rtl;
+            text-align: right;
+            margin-bottom: 1.25rem;
+            outline: none;
+            /* Remove default outline */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .naat-editor-container:focus-within {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .couplet-editor {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            /* More space */
+            border-bottom: 1px dashed #e2e8f0;
+            /* Softer dashed line */
+            padding-bottom: 0.75rem;
+        }
+
+        .misra-editor {
+            width: 49%;
+            /* Keep them balanced */
+            padding: 0.4rem;
+            outline: 1px dashed #f3f4f6;
+            /* Very subtle outline */
+            border-radius: 0.3rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .misra-editor:focus {
+            background-color: #f8f9fa;
+            outline: 1px dashed #9ca3af;
+        }
+
+        .naat-notebook-modal-content {
+            max-width: 850px;
+            /* Wider modal */
+        }
+
+        .naat-editor-output-area {
+            direction: rtl;
+            text-align: right;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Utility for right-to-left text alignment with left-aligned icons */
+        .flex-row-reverse-gap {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="header-gradient py-4 shadow-md">
+        <div class="container mx-auto px-4">
+            <!-- Top Utility Bar -->
+            <div
+                class="flex flex-col sm:flex-row justify-between items-center gap-2 py-1 mb-4 border-b border-gray-200 pb-3">
+                <div class="flex items-center space-x-4 space-x-reverse header-utility-links-group">
+                    <a href="#"
+                        class="text-gray-700 hover:text-green-700 text-sm urdu-text urdu-text-sm font-medium transition-colors header-utility-link">کتب</a>
+                    <a href="#"
+                        class="text-gray-700 hover:text-green-700 text-sm urdu-text urdu-text-sm font-medium transition-colors header-utility-link">انسائیکلوپیڈیا</a>
+                    <a href="#"
+                        class="text-gray-700 hover:text-green-700 text-sm urdu-text urdu-text-sm font-medium transition-colors header-utility-link">رابطہ</a>
+                </div>
+                <div class="flex items-center header-language-selector">
+                    <div class="relative">
+                        <button class="text-gray-700 hover:text-green-700 text-sm flex items-center transition-colors">
+                            English <i class="bi bi-chevron-down mr-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Logo and Tagline -->
+            <div class="text-center mb-5 animate-slideUpFadeIn header-logo-section" style="animation-delay: 0.05s;">
+                <a href="#" aria-label="Naat Academy Home">
+                    <img src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png"
+                        alt="نعتیہ اکیڈمی لوگو"
+                        class="h-24 md:h-28 lg:h-32 mx-auto mb-3 transform hover:scale-105 transition-transform duration-300 header-logo-image">
+                </a>
+                <p class="text-gray-600 urdu-text urdu-text-md lg:urdu-text-lg header-tagline">اسلامی ادبی شاعری کی
+                    تحریک</p>
+            </div>
+
+            <!-- Search Section -->
+            <div class="text-center mb-8 animate-slideUpFadeIn header-search-section" style="animation-delay: 0.1s;">
+                <h2 class="text-xl lg:text-2xl text-green-800 urdu-text urdu-text-lg mb-3 header-search-title">حمد، نعت،
+                    منقبت، سلام، دعا و مناجات کا خزانہ</h2>
+                <p class="text-gray-500 urdu-text urdu-text-sm mb-5 lg:urdu-text-base header-search-subtitle">پسندیدہ
+                    کلام و اشعار تلاش کریں</p>
+                <div class="max-w-2xl mx-auto relative search-card header-search-card">
+                    <div class="search-input-wrapper header-search-input-wrapper">
+                        <input type="text" id="mainSearchInput" placeholder="مكمل كلام تلاش کریں..."
+                            class="urdu-text urdu-text-sm header-main-search-input" />
+                        <div class="search-button-group header-search-button-group">
+                            <button id="mainSearchButton" class="search-icon-button header-search-icon-button"
+                                aria-label="Search">
+                                <i class="bi bi-search text-lg"></i>
+                            </button>
+                            <button id="aiSearchModalTrigger"
+                                class="search-icon-button ai-search-button-inline header-ai-search-button"
+                                aria-label="AI Search">
+                                <img src="https://res.cloudinary.com/awescreative/image/upload/v1749722719/Ai_Search_icon_ylzork.svg"
+                                    alt="AI Search Icon" class="h-6 w-6 ai-search-icon-image">
+                            </button>
+                        </div>
+                    </div>
+                    <div id="searchOptionsContainer" class="urdu-text header-search-options-container">
+                        <!-- <div class="flex justify-center flex-wrap gap-3 mt-4 header-category-buttons-wrap">
+                            <button data-category="نعت"
+                                class="category-tag urdu-text-xs category-naat header-category-tag"><span
+                                    class="category-name">نعت</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="سلام"
+                                class="category-tag urdu-text-xs category-salam header-category-tag"><span
+                                    class="category-name">سلام</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="منقبت"
+                                class="category-tag urdu-text-xs category-manqabat header-category-tag"><span
+                                    class="category-name">منقبت</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="قطعات"
+                                class="category-tag urdu-text-xs category-qataat header-category-tag"><span
+                                    class="category-name">قطعات</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="موضوعات"
+                                class="category-tag urdu-text-xs category-mawzoat header-category-tag"><span
+                                    class="category-name">موضوعات</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="شاعر"
+                                class="category-tag urdu-text-xs category-shayar header-category-tag"><span
+                                    class="category-name">شاعر</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="مضامین"
+                                class="category-tag urdu-text-xs category-mazameen header-category-tag"><span
+                                    class="category-name">مضامین</span> (<span
+                                    class="category-post-count"></span>)</button>
+                            <button data-category="کتب"
+                                class="category-tag urdu-text-xs category-kutub header-category-tag"><span
+                                    class="category-name">کتب</span> (<span
+                                    class="category-post-count"></span>)</button>
+                        </div> -->
+
+                        <div id="category-buttons"></div>
+                        <div id="articles-container"></div>
+                        <input type="hidden" id="selectedSearchCategory" value=""
+                            class="header-selected-category-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-8 main-content-container">
+        <!-- اصنافِ سخن Section -->
+        <section class="mb-10 animate-slideUpFadeIn poetry-types-section" style="animation-delay: 0.4s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-3"><i
+                            class="bi bi-grid-1x2-fill section-title-icon"></i></span>اصنافِ سخن</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs poetry-type-collection-link"> تمام اصناف <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 hover:bg-amber-50 transition-colors duration-300 poetry-types-card">
+                    <div class="flex justify-between items-center mb-3 poetry-type-title-group">
+                        <h3 class="text-xl urdu-text urdu-text-md font-bold text-amber-700 poetry-type-title">منقبت</h3>
+                        <a href="#"
+                            class="text-sm text-amber-600 hover:text-amber-800 urdu-text urdu-text-xs font-medium transition-colors poetry-type-collection-link">مجموعہ
+                            <i class="bi bi-arrow-left-short"></i></a>
+                    </div>
+                    <img src="https://img.freepik.com/free-photo/opened-quran-near-candle-sweet-dates_23-2147868960.jpg"
+                        alt="Manqabat Collection"
+                        class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
+                        onerror="this.onerror=null;this.src='https://placehold.co/300x150/ffecb3/8d6e63?text=Manqabat+Art';">
+                    <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed poetry-type-description">ذکر تیرا ہو
+                        زباں پر یا علی مولا علی<br>یاد ہو سینے کے اندر یا علی مولا علی</p>
+                    <div class="stats-bar poetry-type-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span></div>
+                </article>
+                <!-- <article class="card p-4 hover:bg-blue-50 transition-colors duration-300 poetry-types-card">
+                    <div class="flex justify-between items-center mb-3 poetry-type-title-group">
+                        <h3 class="text-xl urdu-text urdu-text-md font-bold text-blue-700 poetry-type-title">حمد</h3>
+                        <a href="#"
+                            class="text-sm text-blue-600 hover:text-blue-800 urdu-text urdu-text-xs font-medium transition-colors poetry-type-collection-link">مجموعہ
+                            <i class="bi bi-arrow-left-short"></i></a>
+                    </div>
+                    <img src="https://img.freepik.com/free-photo/books-imagination-still-life_23-2149082172.jpg"
+                        alt="Hamd Collection"
+                        class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
+                        onerror="this.onerror=null;this.src='https://placehold.co/300x150/bbdefb/313063?text=Hamd+Art';">
+                    <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed poetry-type-description">حمد ہے اس
+                        ذات کو جس نے مسلماں کر دیا<br>عشقِ نبی سلطانِ جہاں سینہ میں پنہاں کر دیا</p>
+                    <div class="stats-bar poetry-type-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i>
+                            <span class="like-count urdu-text-xs">2.0k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.8k</span></span></div>
+                </article> -->
+                <!-- <article class="card p-4 hover:bg-rose-50 transition-colors duration-300 poetry-types-card">
+                    <div class="flex justify-between items-center mb-3 poetry-type-title-group">
+                        <h3 class="text-xl urdu-text urdu-text-md font-bold text-rose-700 poetry-type-title">قطعات</h3>
+                        <a href="#"
+                            class="text-sm text-rose-600 hover:text-rose-800 urdu-text urdu-text-xs font-medium transition-colors poetry-type-collection-link">مجموعہ
+                            <i class="bi bi-arrow-left-short"></i></a>
+                    </div>
+                    <img src="https://img.freepik.com/free-photo/muslim-men-praying-tashahhud-posture_53876-41088.jpg"
+                        alt="Qataat Collection"
+                        class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
+                        onerror="this.onerror=null;this.src='https://placehold.co/300x150/f8bbd0/880e4f?text=Qataat+Art';">
+                    <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed poetry-type-description">[یہاں قطعات
+                        کا نمونہ درج کریں]<br>[دوسرا مصرعہ یہاں]</p>
+                    <div class="stats-bar poetry-type-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.0k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">1.3k</span></span></div>
+                </article> -->
+            </div>
+        </section>
+
+        <!-- اہم اسلامی ایام Section -->
+        <section class="mb-10 animate-slideUpFadeIn islamic-events-section" style="animation-delay: 0.25s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-festivals"><i
+                            class="bi bi-calendar-heart-fill section-title-icon"></i></span>اہم اسلامی ایام</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs islamic-events-more-link"> مکمل کیلنڈر <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div id="islamic-event-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- <div   class="card p-4 text-center bg-rose-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-rose-800 islamic-event-title">عید میلاد النبی
+                        ﷺ</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۲ ربیع الاول</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div> -->
+
+                <!-- <div class="card p-4 text-center bg-sky-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-sky-800 islamic-event-title">شبِ معراج</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۲۷ رجب</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div>
+                <div class="card p-4 text-center bg-purple-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-purple-800 islamic-event-title">شبِ برات</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۵ شعبان</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div>
+                <div class="card p-4 text-center bg-red-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-red-800 islamic-event-title">عید الفطر</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱ شوال</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div>
+                <div class="card p-4 text-center bg-orange-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-orange-800 islamic-event-title">عید الاضحی
+                    </h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۰ ذوالحجہ</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div>
+                <div class="card p-4 text-center bg-gray-100 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-gray-800 islamic-event-title">یومِ عاشورہ
+                    </h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۰ محرم</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div>
+                <div class="card p-4 text-center bg-yellow-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-yellow-800 islamic-event-title">عرسِ خواجہ
+                        غریب نوازؒ</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۶ رجب</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div>
+                <div class="card p-4 text-center bg-indigo-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-indigo-800 islamic-event-title">عرسِ اعلیٰ
+                        حضرتؒ</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۲۵ صفر</p>
+                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
+                    </p>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- پیشکش خاص Section (Slider) -->
+        <section
+            class="mb-10 animate-slideUpFadeIn bg-gradient-to-tr from-emerald-50 via-teal-50 to-green-50 p-6 sm:p-8 rounded-2xl shadow-xl special-offering-section"
+            style="animation-delay: 0.3s;">
+            <!-- Centered Title -->
+            <h2 class="section-title urdu-text !text-green-700 !mb-5 mx-auto w-fit"><span
+                    class="section-title-icon-wrapper gradient-icon-bg-1"><i
+                        class="bi bi-stars section-title-icon"></i></span>پیشکش خاص</h2>
+            <div class="slider-container relative special-offering-slider-container" id="peshkashSlider">
+                <div class="slider-wrapper special-offering-slider-wrapper">
+                    
+                    <div id="special-offering-container" class="slider-slide p-4 text-center special-offering-slide-content">
+                        <!-- <p
+                        id="line1"
+                            class="urdu-text urdu-text-lg sm:urdu-text-xl text-gray-800 leading-loose max-w-2xl mx-auto special-offering-slide-couplet">
+                          </p>
+                        <p
+                        id="line2"
+                            class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-600 block mt-3 special-offering-slide-poet">
+                           </p> -->
+                    </div>
+                </div>
+                <button class="slider-button prev urdu-text special-offering-prev-button"><i
+                        class="bi bi-chevron-right"></i></button>
+                <button class="slider-button next urdu-text special-offering-next-button"><i
+                        class="bi bi-chevron-left"></i></button>
+            </div>
+        </section>
+
+        <!-- منتخب کلام Section -->
+        <section class="mb-10 animate-slideUpFadeIn selected-kalaam-section" style="animation-delay: 0.35s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-2"><i
+                            class="bi bi-music-note-list section-title-icon"></i></span>منتخب کلام</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs selected-kalaam-more-link"> مزید منتخب کلام <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 bg-white selected-kalaam-card">
+                    <h4
+                        class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
+                        تحت الفت مدینہ</h4>
+                    <p
+                        class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
+                        وجہ نشاطِ زندگی راحتِ جاں تم ہی تو ہو<br>روحِ روانِ زندگی جانِ جہاں تم ہی تو ہو</p>
+                    <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">شاعر: [شاعر کا نام
+                        یہاں]</p>
+                    <div class="stats-bar selected-kalaam-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i>
+                            <span class="like-count urdu-text-xs">1.2k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.5k</span></span></div>
+                    <div class="mt-4 flex justify-start items-center"><span
+                            class="category-tag urdu-text-xs category-naat selected-kalaam-category-tag">نعت</span>
+                    </div>
+                </article>
+                <article class="card p-4 bg-white selected-kalaam-card">
+                    <h4
+                        class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-sky-700 mb-2 text-right selected-kalaam-title">
+                        کلامِ رضا</h4>
+                    <p
+                        class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
+                        مصطفیٰ جانِ رحمت پہ لاکھوں سلام<br>شمعِ بزمِ ہدایت پہ لاکھوں سلام</p>
+                    <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">شاعر: امام احمد رضا
+                        خان</p>
+                    <div class="stats-bar selected-kalaam-stats-bar"><span><i class="bi bi-heart text-gray-500"></i>
+                            <span class="like-count urdu-text-xs">1.8k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.1k</span></span></div>
+                    <div class="mt-4 flex justify-start items-center"><span
+                            class="category-tag urdu-text-xs category-salam selected-kalaam-category-tag">سلام</span>
+                    </div>
+                </article>
+                <article class="card p-4 bg-white selected-kalaam-card">
+                    <h4
+                        class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-amber-700 mb-2 text-right selected-kalaam-title">
+                        مناجات</h4>
+                    <p
+                        class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
+                        یا الٰہی ہر جگہ تیری عطا کا ساتھ ہو<br>جب پڑے مشکل شہِ مشکل کشا کا ساتھ ہو</p>
+                    <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">شاعر: امام احمد رضا
+                        خان</p>
+                    <div class="stats-bar selected-kalaam-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i>
+                            <span class="like-count urdu-text-xs">2.5k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">3.0k</span></span></div>
+                    <div class="mt-4 flex justify-start items-center"><span
+                            class="category-tag urdu-text-xs category-manqabat selected-kalaam-category-tag"
+                            style="background-color: #fff3e0; color: #f57c00; border-color: #ffe0b2;">مناجات</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- تزئین شدہ کلام (سلائیڈر) Section -->
+        <section class="mb-10 animate-slideUpFadeIn decorated-kalaam-section" style="animation-delay: 0.45s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text cursor-pointer hover:text-green-700" id="openKalaamModalTitle"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-4"><i
+                            class="bi bi-images section-title-icon"></i></span>تزئین شدہ کلام</h2>
+                <a href="#" id="openKalaamModalLinkPill"
+                    class="pill-button urdu-text urdu-text-xs decorated-kalaam-more-link"> مزید دیکھیں <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div  class="kalaam-preview-grid decorated-kalaam-grid">
+                <div id="kalamlist" class="kalaam-preview-item"><img src="https://placehold.co/200x280/d1c4e9/333333?text=Kalaam+1"
+                        alt="تزئین شدہ کلام 1" class="kalaam-preview-item-image"
+                        onclick="document.getElementById('openKalaamModalTitle').click()"></div>
+                <!-- <div class="kalaam-preview-item"><img src="https://placehold.co/200x280/c5cae9/333333?text=Kalaam+2"
+                        alt="تزئین شدہ کلام 2" class="kalaam-preview-item-image"
+                        onclick="document.getElementById('openKalaamModalTitle').click()"></div> -->
+               
+            </div>
+        </section>
+
+        <!-- علمی و ادبی مضامین Section -->
+        <section class="mb-10 animate-slideUpFadeIn articles-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-5"><i
+                            class="bi bi-pencil-square section-title-icon"></i></span>علمی و ادبی مضامین</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs articles-more-link"> مزید مضامین <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 relative article-card">
+                    <span
+                        class="article-category-tag bg-teal-100 text-teal-600 urdu-text urdu-text-xs font-medium">نعت</span>
+                    <h4
+                        class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-teal-700 mb-2 mt-9 text-right article-title">
+                        تو ہے نوشاہ، براتی ہے یہ سارا گلزار</h4>
+                    <p class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-700 leading-relaxed mb-4 text-right article-preview-text"
+                        style="max-height: 10.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
+                        لاتی ہے فصلِ سمن گوندھ کے سہرا تیرا۔ الی دو لوگ جو شادی کے موقع پر دولہا کے ساتھ برات میں جاتے
+                        ہیں۔ گھروں میں دلہن کو سجاتے ہیں اور باراتیوں کا استقبال کرتے ہیں۔ یہ ایک خوبصورت منظر ہوتا ہے
+                        جب خوشی اور مسرت ہر طرف پھیلی ہوتی ہے۔ اسلامی تہذیب میں شادی بیاہ کی رسومات کو خاص اہمیت حاصل
+                        ہے۔ ان رسومات میں ادب اور شاعری کا بھی گہرا تعلق رہا ہے۔ قدیم زمانے سے ہی شعراء کرام خوشی کے
+                        مواقع پر اپنے کلام سے محفل کو چار چاند لگاتے رہے ہیں۔ نعت، حمد اور منقبت کے علاوہ غزلیات اور
+                        قطعات بھی پڑھے جاتے ہیں۔</p>
+                    <div class="flex items-center justify-end mt-3 pt-3 border-t border-gray-100 article-meta-row">
+                        <p class="urdu-text urdu-text-xs text-gray-600 article-writer-info">شعر کا مفہوم: اے غوث اعظم...
+                        </p>
+                        <div class="writer-icon-container writer-icon-bg-1 article-writer-icon-container"><img
+                                src="https://res.cloudinary.com/awescreative/image/upload/v1749154741/Awes/User_icon.svg"
+                                alt="Writer Icon" class="article-writer-icon"></div>
+                    </div>
+                    <div class="stats-bar article-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span
+                                class="like-count urdu-text-xs">1.9k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.6k</span></span></div>
+                </article>
+                <article class="card p-4 relative article-card">
+                    <span
+                        class="article-category-tag bg-purple-100 text-purple-600 urdu-text urdu-text-xs font-medium">مضمون</span>
+                    <h4
+                        class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-purple-700 mb-2 mt-9 text-right article-title">
+                        فضائلِ درود شریف اور اس کی برکات</h4>
+                    <p class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-700 leading-relaxed mb-4 text-right article-preview-text"
+                        style="max-height: 10.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
+                        درود شریف پڑھنے کی اہمیت اور اس کے فضائل قرآن و حدیث کی روشنی میں بے شمار ہیں۔ یہ ایک ایسی عظیم
+                        عبادت ہے جو قربِ الٰہی کا بہترین ذریعہ ہے۔ درود پاک پڑھنے سے دلوں کو سکون ملتا ہے، گناہ معاف
+                        ہوتے ہیں اور درجات بلند ہوتے ہیں۔ مسلمانوں پر لازم ہے کہ وہ کثرت سے نبی اکرم صلی اللہ علیہ وسلم
+                        پر درود و سلام بھیجیں۔ یہ محبت رسول کا تقاضا بھی ہے اور ہماری اپنی نجات کا وسیلہ بھی۔ مختلف
+                        اولیاء کرام نے درود شریف کے فضائل پر کئی کتب تحریر کی ہیں جن میں اس کی روحانی اور دنیاوی برکات
+                        کا تفصیل سے ذکر کیا گیا ہے۔</p>
+                    <div class="flex items-center justify-end mt-3 pt-3 border-t border-gray-100 article-meta-row">
+                        <p class="urdu-text urdu-text-xs text-gray-600 article-writer-info">مضمون نگار: مفتی عبدالرحمٰن
+                            قادری</p>
+                        <div class="writer-icon-container writer-icon-bg-2 article-writer-icon-container"><img
+                                src="https://res.cloudinary.com/awescreative/image/upload/v1749154741/Awes/User_icon.svg"
+                                alt="Writer Icon" class="article-writer-icon"></div>
+                    </div>
+                    <div class="stats-bar article-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">2.1k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.9k</span></span></div>
+                </article>
+                <article class="card p-4 relative article-card">
+                    <span
+                        class="article-category-tag bg-pink-100 text-pink-600 urdu-text urdu-text-xs font-medium">سیرت</span>
+                    <h4
+                        class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-pink-700 mb-2 mt-9 text-right article-title">
+                        سیرت النبی ﷺ کے چند روشن پہلو</h4>
+                    <p class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-700 leading-relaxed mb-4 text-right article-preview-text"
+                        style="max-height: 10.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
+                        حضور اکرم صلی اللہ علیہ وسلم کی حیاتِ طیبہ کے وہ گوشے جو ہر مسلمان کے لئے مشعلِ راہ ہیں۔ آپ ﷺ کا
+                        اخلاق، معاملات، عبادات اور انسانیت سے محبت کا درس ہمارے لئے بہترین نمونہ ہے۔ آپ ﷺ کی زندگی کا ہر
+                        پہلو حکمت و دانائی سے بھرپور ہے۔ صحابہ کرام رضوان اللہ علیہم اجمعین نے آپ ﷺ کی سیرت کو جس طرح
+                        محفوظ کیا وہ ایک معجزہ ہے۔ آج بھی اگر ہم سیرت نبوی پر عمل پیرا ہوجائیں تو دنیا و آخرت میں
+                        کامیابی حاصل کرسکتے ہیں۔ سیرت نگاروں نے آپ ﷺ کی زندگی کے ہر ہر لمحے کو قلمبend کیا ہے تاکہ امت
+                        اس سے رہنمائی حاصل کرسکے اور اپنی زندگیوں کو سنوار سکے۔</p>
+                    <div class="flex items-center justify-end mt-3 pt-3 border-t border-gray-100 article-meta-row">
+                        <p class="urdu-text urdu-text-xs text-gray-600 article-writer-info">تحقیق و ترتیب: ڈاکٹر محمد
+                            حسین چشتی</p>
+                        <div class="writer-icon-container writer-icon-bg-3 article-writer-icon-container"><img
+                                src="https://res.cloudinary.com/awescreative/image/upload/v1749154741/Awes/User_icon.svg"
+                                alt="Writer Icon" class="article-writer-icon"></div>
+                    </div>
+                    <div class="stats-bar article-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span
+                                class="like-count urdu-text-xs">2.8k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">3.1k</span></span></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- نعت کے بول Section -->
+        <section class="mb-10 animate-slideUpFadeIn naat-lyrics-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-lyrics"><i
+                            class="bi bi-journal-text section-title-icon"></i></span>نعت کے بول</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs naat-lyrics-more-link"> تمام بول <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 text-right naat-lyrics-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">نعت شریف 1 کا عنوان
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">یہاں نعت کے کچھ ابتدائی بول آئیں
+                        گے...</p>
+                </article>
+                <article class="card p-4 text-right naat-lyrics-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">نعت شریف 2 کا عنوان
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">یہاں نعت کے کچھ ابتدائی بول آئیں
+                        گے...</p>
+                </article>
+                <article class="card p-4 text-right hidden md:block naat-lyrics-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">نعت شریف 3 کا عنوان
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">یہاں نعت کے کچھ ابتدائی بول آئیں
+                        گے...</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- نعتیہ تعلیم Section -->
+        <section class="mb-10 animate-slideUpFadeIn naat-education-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-education"><i
+                            class="bi bi-mortarboard-fill section-title-icon"></i></span>نعتیہ تعلیم</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs naat-education-more-link"> مزید تعلیمی مواد <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 text-right naat-education-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت گوئی کے اصول
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کہنے کے بنیادی اصول
+                        اور رہنما ہدایات۔</p>
+                </article>
+                <article class="card p-4 text-right naat-education-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">تاریخِ نعت</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کی تاریخی پس منظر اور
+                        ارتقاء۔</p>
+                </article>
+                <article class="card p-4 text-right hidden md:block naat-education-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت کی اہمیت
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">اسلام میں نعت کی فضیلت
+                        اور اہمیت۔</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- نعتیہ ادب Section -->
+        <section class="mb-10 animate-slideUpFadeIn naat-literature-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-adab"><i
+                            class="bi bi-flower1 section-title-icon"></i></span>نعتیہ ادب</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs naat-literature-more-link"> مزید ادبی پہلو <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 text-right naat-literature-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">نعتیہ ادب کی
+                        خصوصیات</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعتیہ شاعری کی ممتاز
+                        خصوصیات پر ایک نظر۔</p>
+                </article>
+                <article class="card p-4 text-right naat-literature-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">عشقِ رسولﷺ اور
+                        نعت</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعت میں عشقِ رسول کے
+                        مظاہر۔</p>
+                </article>
+                <article class="card p-4 text-right hidden md:block naat-literature-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">اردو نعت کا سفر
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">اردو زبان میں نعت گوئی
+                        کا ارتقائی سفر۔</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- درود و سلام Section -->
+        <section class="mb-10 animate-slideUpFadeIn durood-salam-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-durood"><i
+                            class="bi bi-suit-heart-fill section-title-icon"></i></span>درود و سلام</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs durood-salam-more-link"> مزید درود شریف <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 text-right durood-salam-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ ابراہیمی
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">نماز میں پڑھا جانے والا
+                        مشہور درود۔</p>
+                </article>
+                <article class="card p-4 text-right durood-salam-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ تاج</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">ایک معروف اور بابرکت درود
+                        شریف۔</p>
+                </article>
+                <article class="card p-4 text-right hidden md:block durood-salam-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">فضائلِ درود</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">درود شریف پڑھنے کے فضائل و
+                        برکات۔</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- حمد باری تعالیٰ Section -->
+        <section class="mb-10 animate-slideUpFadeIn hamd-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-hamd"><i
+                            class="bi bi-brightness-high-fill section-title-icon"></i></span>حمد باری تعالیٰ</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs hamd-more-link"> مزید حمدیں <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 text-right hamd-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">کوئی تو ہے جو نظامِ ہستی
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 hamd-description">ایک مشہور حمدیہ کلام۔</p>
+                </article>
+                <article class="card p-4 text-right hamd-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">تیری حمد و ثنا یا الٰہی
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 hamd-description">اللہ تعالیٰ کی تعریف میں ایک
+                        خوبصورت حمد۔</p>
+                </article>
+                <article class="card p-4 text-right hidden md:block hamd-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">حمد کی اہمیت</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 hamd-description">اسلام میں حمد کی فضیلت۔</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- مشہور منقبتیں Section -->
+        <section class="mb-10 animate-slideUpFadeIn famous-manqabat-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-manqabat-famous"><i
+                            class="bi bi-person-check-fill section-title-icon"></i></span>مشہور منقبتیں</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs famous-manqabat-more-link"> تمام منقبتیں <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 text-right famous-manqabat-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 famous-manqabat-title">منقبتِ غوثِ
+                        اعظم</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 famous-manqabat-description">حضرت شیخ عبدالقادر
+                        جیلانیؒ کی شان میں۔</p>
+                </article>
+                <article class="card p-4 text-right famous-manqabat-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 famous-manqabat-title">من در بتکدہ
+                        حیرانم</h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 famous-manqabat-description">ایک مشہور صوفیانہ منقبت۔
+                    </p>
+                </article>
+                <article class="card p-4 text-right hidden md:block famous-manqabat-card">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 famous-manqabat-title">شانِ اہل بیت
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 famous-manqabat-description">اہلِ بیت اطہار کی فضیلت
+                        میں کلام۔</p>
+                </article>
+            </div>
+        </section>
+
+
+        <!-- نعت گو شعراء Section -->
+        <section class="mb-10 animate-slideUpFadeIn poets-section" style="animation-delay: 0.55s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-1"><i
+                            class="bi bi-people-fill section-title-icon"></i></span>نعت گو شعراء</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs poets-more-link"> تمام شعراء <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div id="writergrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+               
+                
+            </div>
+        </section>
+
+        <!-- نعت نوٹ بک Section -->
+        <section class="mb-12 animate-slideUpFadeIn notebook-section" style="animation-delay: 0.5s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-notebook"><i
+                            class="bi bi-journal-richtext section-title-icon"></i></span>نعت نوٹ بک</h2>
+                <button id="openNaatNotebookModal" class="pill-button urdu-text urdu-text-xs notebook-open-button">نوٹ
+                    بک کھولیں <i class="bi bi-pencil-square ml-1"></i></button>
+            </div>
+            <p class="urdu-text urdu-text-sm text-center text-gray-600 notebook-description">اپنی پسندیدہ نعتیں تحریر
+                کریں، فارمیٹ کریں اور محفوظ کریں۔</p>
+        </section>
+
+        <!-- شعر، قافیہ، عروض وغیرہ سے متعلق متفرق معلومات Section -->
+        <section class="mb-12 animate-slideUpFadeIn poetry-info-section" style="animation-delay: 0.65s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-poetry-info"><i
+                            class="bi bi-book-half section-title-icon"></i></span>شعر، قافیہ، عروض وغیرہ</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs poetry-info-more-link"> مزید معلومات <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <p class="urdu-text urdu-text-base text-gray-700 text-center mb-6 poetry-info-subtitle">شاعری کی گہرائیوں کو
+                سمجھنے کے لیے ایک جامع نصاب</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <article class="card p-4 poetry-info-module-card">
+                    <h5
+                        class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">
+                        مڈول 1: شاعری کی تعریف اور اقسام</h5>
+                    <p
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        شاعری ایک ایسا فن ہے جس میں جذبات اور خیالات کا اظہار خوبصورت الفاظ اور منظم طریقوں سے کیا جاتا
+                        ہے۔ اس مڈول میں شاعری کی بنیادی تعریف، اس کی مختلف اقسام جیسے غزل، نظم، قصیدہ، مرثیہ، مثنوی، اور
+                        رباعی کا تعارف پیش کیا گیا ہے۔ آپ یہ بھی سیکھیں گے کہ ہر صنف کی اپنی منفرد ساخت اور خصوصیات ہوتی
+                        ہیں، جو اسے دوسرے سے ممتاز کرتی ہیں۔</p>
+                </article>
+                <article class="card p-4 poetry-info-module-card">
+                    <h5
+                        class="urdu-text urdu-text-md font-semibold text-blue-700 mb-2 text-right poetry-info-module-title">
+                        مڈول 2: قافیہ اور ردیف</h5>
+                    <p
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        قافیہ اور ردیف شاعری کے دو اہم ستون ہیں جو شعر کو موسیقیت اور ہم آہنگی بخشتے ہیں۔ قافیہ ایسے ہم
+                        آواز الفاظ کو کہتے ہیں جو شعر کے آخر میں آتے ہیں۔ ردیف وہ لفظ یا الفاظ کا مجموعہ ہوتا ہے جو
+                        قافیہ کے بعد بار بار دہرایا جاتا ہے۔ اس مڈول میں آپ قافیہ اور ردیف کی اقسام، ان کا استعمال، اور
+                        شاعری میں ان کی اہمیت کو مثالوں کے ساتھ سمجھیں گے۔</p>
+                </article>
+                <article class="card p-4 poetry-info-module-card">
+                    <h5
+                        class="urdu-text urdu-text-md font-semibold text-amber-700 mb-2 text-right poetry-info-module-title">
+                        مڈول 3: عروض کا تعارف</h5>
+                    <p
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        عروض وہ علم ہے جس کے ذریعے شعر کے وزن کو پرکھا جاتا ہے۔ یہ علم شاعری میں بحر، رکن، اور وزن کے
+                        اصولوں کو متعین کرتا ہے۔ اس مڈول میں عروض کی بنیادی اصطلاحات، مختلف بحور، اور شعر کو عروضی ترازو
+                        پر پرکھنے کے طریقے کو آسان مثالوں کے ساتھ بیان کیا گیا ہے۔ عروض کی مدد سے آپ صحیح وزن میں شعر
+                        کہنا اور موجودہ شاعری کا تجزیہ کرنا سیکھیں گے۔</p>
+                </article>
+                <article class="card p-4 poetry-info-module-card">
+                    <h5
+                        class="urdu-text urdu-text-md font-semibold text-rose-700 mb-2 text-right poetry-info-module-title">
+                        مڈول 4: استعارہ، تشبیہ اور کنایہ</h5>
+                    <p
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        شاعری میں خوبصورتی پیدا کرنے کے لیے استعارہ، تشبیہ اور کنایہ کا استعمال کیا جاتا ہے۔ تشبیہ دو
+                        مختلف چیزوں کو کسی مشترکہ صفت کی بنیاد پر ایک دوسرے سے مشابہت دینا ہے۔ استعارہ اس سے ایک قدم آگے
+                        بڑھ کر کسی چیز کو براہ راست دوسری چیز قرار دینا ہے۔ کنایہ کسی بات کو براہ راست کہنے کی بجائے
+                        اشاروں میں بیان کرنا ہے۔ یہ مڈول ان ادبی صنعتوں کی تفصیلات اور شاعری میں ان کے اثرات کو واضح کرے
+                        گا۔</p>
+                </article>
+                <article class="card p-4 poetry-info-module-card">
+                    <h5
+                        class="urdu-text urdu-text-md font-semibold text-purple-700 mb-2 text-right poetry-info-module-title">
+                        مڈول 5: حسنِ تعلیل اور تضاد</h5>
+                    <p
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        حسنِ تعلیل اور تضاد شاعری میں معنویت اور گہرائی پیدا کرنے کے لیے استعمال ہونے والی اہم ادبی
+                        صنعتیں ہیں۔ حسنِ تعلیل میں کسی بات کی ایسی وجہ بیان کی جاتی ہے جو حقیقی نہ ہو لیکن شاعرانہ خوبی
+                        کے لیے اسے استعمال کیا جائے۔ تضاد میں دو متضاد یا مخالف معنی والے الفاظ کو ایک ساتھ استعمال کیا
+                        جاتا ہے تاکہ مفہوم میں زور اور وضاحت پیدا ہو۔ یہ مڈول ان صنعتوں کے استعمال اور ان کے فنی اثرات
+                        کو سمجھنے میں معاون ہوگا۔</p>
+                </article>
+                <article class="card p-4 poetry-info-module-card">
+                    <h5
+                        class="urdu-text urdu-text-md font-semibold text-teal-700 mb-2 text-right poetry-info-module-title">
+                        مڈول 6: تشبیہات و استعارات کا عملی استعمال</h5>
+                    <p
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        اس مڈول میں آپ تشبیہات اور استعارات کا عملی استعمال سیکھیں گے۔ مختلف شعراء کے کلام سے مثالیں لے
+                        کر یہ واضح کیا جائے گا کہ کس طرح شاعر اپنے جذبات اور افکار کو مؤثر طریقے سے بیان کرنے کے لیے ان
+                        ادبی صنعتوں کا سہارا لیتے ہیں۔ یہ مڈول آپ کو اپنی شاعری میں ان صنعتوں کو مؤثر طریقے سے شامل کرنے
+                        میں مدد فراہم کرے گا اور آپ کی ادبی سمجھ میں اضافہ کرے گا۔</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- انسٹاگرام Section -->
+        <section class="mb-12 animate-slideUpFadeIn instagram-section" style="animation-delay: 0.6s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span class="section-title-icon-wrapper gradient-icon-bg-2"><i
+                            class="bi bi-instagram section-title-icon"></i></span>ہمیں انسٹاگرام پر فالو کریں</h2>
+            </div>
+            <div class="instagram-embed-placeholder">
+                <p class="urdu-text urdu-text-md text-gray-700 mb-4 instagram-description">
+                    تازہ ترین اپڈیٹس، خوبصورت خطاطی، اور نعتیہ کلام کے لئے ہمارا انسٹاگرام پیج فالو کریں۔
+                </p>
+                <a href="https://www.instagram.com/naatacademy/" target="_blank"
+                    class="inline-block bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 urdu-text urdu-text-sm transform hover:scale-105 instagram-button">
+                    <i class="bi bi-instagram mr-2"></i> Naat Academy انسٹاگرام
+                </a>
+                <p class="urdu-text urdu-text-xs text-gray-500 mt-5 instagram-note">
+                    (یہاں انسٹاگرام فیڈ ایمبیڈ کرنے کے لئے، انسٹاگرام سے ایمbed کوڈ کاپی کرکے پیسٹ کریں)
+                </p>
+            </div>
+        </section>
+
+        <!-- اوقاتِ نماز اور اسلامی کیلنڈر Section -->
+        <section class="mb-8 animate-slideUpFadeIn prayer-times-section" style="animation-delay: 0.3s;">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 prayer-times-table-container urdu-text">
+                    <div class="flex justify-between items-center mb-5">
+                        <button id="prevWeekBtn"
+                            class="pill-button urdu-text urdu-text-xs bg-gray-500 hover:bg-gray-600 prayer-times-nav-button"><i
+                                class="bi bi-arrow-right-short"></i> پچھلا ہفتہ</button>
+                        <h2 class="section-title urdu-text text-center !mb-0 prayer-times-title-main"><span
+                                class="section-title-icon-wrapper gradient-icon-bg-prayer"><i
+                                    class="bi bi-clock-history section-title-icon"></i></span>اوقاتِ نماز (ممبئی، انڈیا)
+                        </h2>
+                        <button id="nextWeekBtn"
+                            class="pill-button urdu-text urdu-text-xs bg-gray-500 hover:bg-gray-600 prayer-times-nav-button">اگلا
+                            ہفتہ <i class="bi bi-arrow-left-short"></i></button>
+                    </div>
+                    <!-- Prayer times headers -->
+                    <div
+                        class="prayer-times-table-row font-bold text-gray-700 text-base mb-3 prayer-times-table-headers">
+                        <span class="w-2/5 text-right prayer-time-header-day">دن</span>
+                        <span class="w-1/5 text-center prayer-time-header-fajr">فجر</span>
+                        <span class="w-1/5 text-center prayer-time-header-dhuhr">ظہر</span>
+                        <span class="w-1/5 text-center prayer-time-header-asr">عصر</span>
+                    </div>
+                    <div id="prayerTimesContainer">
+                        <!-- Prayer times will be dynamically inserted here -->
+                    </div>
+                    <p class="text-xs text-center mt-4 text-gray-500 prayer-times-note">یہ اوقات <span
+                            id="currentPrayerWeek" class="font-semibold text-gray-700 prayer-times-week-range"></span>
+                        کے لئے ہیں۔ اوقات میں معمولی تبدیلی ہو سکتی ہے۔</p>
+                </div>
+                <div class="lg:col-span-1 islamic-calendar-container p-5 rounded-2xl urdu-text">
+                    <div class="islamic-calendar-header text-center p-4 rounded-t-xl mb-4">
+                        <h3 class="text-xl font-bold urdu-text islamic-calendar-header-title" id="islamicMonthYear">
+                        </h3>
+                    </div>
+                    <h4
+                        class="font-bold mb-3 urdu-text urdu-text-md text-center text-gray-800 islamic-calendar-events-title">
+                        اہم اسلامی ایام و تہوار:</h4>
+                    <ul class="space-y-2 text-base islamic-calendar-event-list">
+                        <li id="islamicDateToday"
+                            class="font-medium text-center p-3 bg-white/40 rounded-lg shadow-sm islamic-calendar-today-date">
+                            آج: <span class="font-bold text-teal-800"></span></li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۰ ذوالحجہ:</span> عید
+                            الاضحی</li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱ محرم:</span> اسلامی نیا
+                            سال</li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۰ محرم:</span> یومِ عاشورہ
+                        </li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۲ ربیع الاول:</span> عید
+                            میلاد النبی ﷺ</li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۲۷ رجب:</span> شبِ معراج
+                        </li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۵ شعبان:</span> شبِ برات
+                        </li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">رمضان المبارک:</span> روزوں
+                            کا مہینہ</li>
+                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱ شوال:</span> عید الفطر
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-bg py-8 text-center shadow-inner">
+        <div class="container mx-auto px-4">
+            <p class="urdu-text urdu-text-lg mb-2 font-bold text-white/90">نعتیہ اکیڈمی®</p>
+            <p class="text-sm text-gray-300">کاپی رائٹ © <span id="currentYear"></span> نعتیہ اکیڈمی آرگنائزیشن۔ جملہ
+                حقوق محفوظ ہیں۔</p>
+            <p class="text-xs mt-2 opacity-80 text-gray-400">ڈیزائن از القلم آرٹس ڈاٹ کام - اویس رضوی صدیقی</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp FAB -->
+    <a href="https://wa.me/yourphonenumber" target="_blank" class="whatsapp-fab" aria-label="Join WhatsApp Group"><i
+            class="bi bi-whatsapp"></i></a>
+
+    <!-- Modals -->
+    <!-- Kalaam Modal -->
+    <div id="kalaamModal" class="modal">
+        <div class="modal-content">
+            <button id="closeKalaamModal" class="modal-close-button urdu-text">&times;</button>
+            <h3 class="section-title urdu-text text-center mb-5">تزئین شدہ کلام</h3>
+            <div class="slider-container relative" id="kalaamSliderInModal">
+                <div class="slider-wrapper"></div>
+                <button class="slider-button prev urdu-text"><i class="bi bi-chevron-right"></i></button>
+                <button class="slider-button next urdu-text"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Search Modal -->
+    <div id="aiSearchModal" class="modal">
+        <div class="modal-content ai-search-modal-content">
+            <button id="closeAiSearchModal" class="modal-close-button urdu-text">&times;</button>
+            <h3 class="section-title urdu-text text-center mb-5"><span
+                    class="section-title-icon-wrapper gradient-icon-bg-1"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749722719/Ai_Search_icon_ylzork.svg"
+                        alt="AI Search Icon" class="h-6 w-6 ai-search-icon-image section-title-icon"></span>AI سے ذہین
+                تلاش</h3>
+            <div class="p-4">
+                <p class="urdu-text urdu-text-sm text-gray-700 mb-4 text-center">
+                    اپنے مطلوبہ کلام، شاعر، یا موضوع کے بارے میں یہاں لکھیں، اور ہماری AI آپ کی مدد کرے گی۔
+                </p>
+                <div class="search-input-wrapper mb-5"
+                    style="border-radius: 9999px; overflow: hidden; border: 1px solid #d1d5db;">
+                    <input type="text" id="aiSearchInputInsideModal"
+                        placeholder="مثال: 'امام احمد رضا کی کوئی مشہور نعت'" class="urdu-text urdu-text-sm w-full"
+                        style="padding: 0.75rem 1.1rem; border: none; outline: none; background: transparent;" />
+                </div>
+                <button
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-full shadow-md urdu-text urdu-text-sm transition-colors transform hover:scale-105">
+                    <i class="bi bi-magic mr-1"></i> AI سے پوچھیں
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Naat Notebook Modal -->
+    <div id="naatNotebookModal" class="modal">
+        <div class="modal-content naat-notebook-modal-content">
+            <button id="closeNaatNotebookModal" class="modal-close-button urdu-text">&times;</button>
+            <h3 class="section-title urdu-text text-center mb-5"><span
+                    class="section-title-icon-wrapper gradient-icon-bg-notebook"><i
+                        class="bi bi-journal-richtext section-title-icon"></i></span>نعت نوٹ بک</h3>
+            <div class="mb-5">
+                <label for="naatTitleInput" class="block urdu-text urdu-text-sm font-medium text-gray-700 mb-2">نعت کا
+                    عنوان:</label>
+                <input type="text" id="naatTitleInput"
+                    class="urdu-text urdu-text-base w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 transition-all"
+                    placeholder="یہاں عنوان درج کریں">
+            </div>
+            <button id="addCoupletButton"
+                class="mb-5 pill-button urdu-text urdu-text-xs bg-blue-600 hover:bg-blue-700 transition-colors">
+                <i class="bi bi-plus-lg mr-1"></i> شعر شامل کریں
+            </button>
+
+            <!-- Output section for PNG/PDF generation -->
+            <div id="naatEditorOutput" class="hidden">
+                <h4 id="outputNaatTitle" class="urdu-text urdu-text-lg font-bold text-center mb-5"></h4>
+                <div id="outputCoupletsContainer" class="urdu-text"></div>
+            </div>
+
+            <!-- Naat Editor (contenteditable) -->
+            <div id="naatEditor" class="urdu-text text-right naat-editor-container" contenteditable="true"
+                spellcheck="false" placeholder="یہاں اپنی نعت لکھنا شروع کریں...">
+                <!-- Default couplet for initial display -->
+                <div class="couplet-editor urdu-text">
+                    <div class="misra-editor urdu-text">پہلا مصرع</div>
+                    <div class="misra-editor urdu-text">دوسرا مصرع</div>
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end space-x-3 space-x-reverse">
+                <button id="saveNaatAsPng"
+                    class="pill-button urdu-text urdu-text-xs bg-teal-600 hover:bg-teal-700 transition-colors"><i
+                        class="bi bi-image-fill mr-1"></i> PNG محفوظ کریں</button>
+                <button id="saveNaatAsPdf"
+                    class="pill-button urdu-text urdu-text-xs bg-red-600 hover:bg-red-700 transition-colors"><i
+                        class="bi bi-file-earmark-pdf-fill mr-1"></i> PDF محفوظ کریں</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./script.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Function to initialize sliders (for Peshkash and Kalaam Modals)
+        const initSlider = (sliderId, isModalKalaamSlider = false) => {
+            const sliderElement = document.getElementById(sliderId);
+            if (!sliderElement) return; // Exit if slider element not found
+
+            const wrapper = sliderElement.querySelector('.slider-wrapper');
+            const nextButton = sliderElement.querySelector('.slider-button.next');
+            const prevButton = sliderElement.querySelector('.slider-button.prev');
+
+            let slides;
+            if (!wrapper || !nextButton || !prevButton) return; // Exit if critical elements are missing
+
+            let currentIndex = 0;
+            let totalSlides = 0;
+
+            // Populates the Kalaam Modal Slider with placeholder images
+            const populateKalaamModalSlider = () => {
+                const kalaamImageSources = [
+                    "https://placehold.co/600x400/d1c4e9/333333?text=Kalaam+Art+1", "https://placehold.co/600x400/c5cae9/333333?text=Kalaam+Art+2",
+                    "https://placehold.co/600x400/b3e5fc/333333?text=Kalaam+Art+3", "https://placehold.co/600x400/dcedc8/333333?text=Kalaam+Art+4",
+                    "https://placehold.co/600x400/f0f4c3/333333?text=Kalaam+Art+5", "https://placehold.co/600x400/fff9c4/333333?text=Kalaam+Art+6"
+                ];
+                wrapper.innerHTML = ''; // Clear existing content
+                kalaamImageSources.forEach(src => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'slider-slide'; // Apply slide class
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = "تزئین شدہ کلام";
+                    img.className = 'modal-slider-image'; // Apply specific modal image style
+                    slideDiv.appendChild(img);
+                    wrapper.appendChild(slideDiv);
+                });
+                slides = Array.from(wrapper.querySelectorAll('.slider-slide'));
+                totalSlides = slides.length;
+                if (totalSlides > 0) updateSliderTransform();
+            };
+
+            // Updates the CSS transform property to show the current slide
+            const updateSliderTransform = () => {
+                if (!slides || slides.length === 0) return;
+                wrapper.style.transform = `translateX(${currentIndex * 100}%)`;
+            };
+
+            // Sets up the slider, populating modal slider if needed
+            const setupSlider = () => {
+                if (isModalKalaamSlider) {
+                    populateKalaamModalSlider();
+                } else {
+                    slides = Array.from(wrapper.querySelectorAll('.slider-slide'));
+                    totalSlides = slides.length;
+                }
+                if (totalSlides > 0) updateSliderTransform();
+            };
+
+            // Event listener for Next button (moves to previous slide in RTL)
+            nextButton.addEventListener('click', () => {
+                if (totalSlides === 0) return;
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSliderTransform();
+            });
+
+            // Event listener for Previous button (moves to next slide in RTL)
+            prevButton.addEventListener('click', () => {
+                if (totalSlides === 0) return;
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSliderTransform();
+            });
+
+            setupSlider(); // Initial setup of the slider
+        };
+
+        // Initialize both sliders on the page
+        initSlider('peshkashSlider');
+        initSlider('kalaamSliderInModal', true);
+
+        // Function to set up modal behavior (open/close)
+        const setupModal = (modalId, openTriggerIds, closeTriggerId) => {
+            const modal = document.getElementById(modalId);
+            const closeButton = document.getElementById(closeTriggerId);
+
+            if (!modal) return; // Exit if modal element not found
+
+            // Function to open the modal
+            const openModal = () => {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling body when modal is open
+            };
+
+            // Function to close the modal
+            const closeModal = () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable body scrolling
+            };
+
+            // Attach event listeners to open triggers
+            openTriggerIds.forEach(triggerId => {
+                const triggerElement = document.getElementById(triggerId);
+                if (triggerElement) {
+                    triggerElement.addEventListener('click', (e) => {
+                        e.preventDefault(); // Prevent default link/button behavior
+                        openModal();
+                    });
+                }
+            });
+
+            // Attach event listener to close button
+            if (closeButton) {
+                closeButton.addEventListener('click', closeModal);
+            }
+
+            // Close modal when clicking outside of it
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Close modal when Escape key is pressed
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
+        };
+
+        // Setup various modals
+        setupModal('kalaamModal', ['openKalaamModalTitle', 'openKalaamModalLinkPill'], 'closeKalaamModal');
+        // Additional listener for clicking on preview images to open kalaam modal
+        document.querySelectorAll('.kalaam-preview-item-image').forEach(img => {
+            img.addEventListener('click', () => {
+                const modal = document.getElementById('kalaamModal');
+                if (modal) modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        setupModal('aiSearchModal', ['aiSearchModalTrigger'], 'closeAiSearchModal');
+        setupModal('naatNotebookModal', ['openNaatNotebookModal'], 'closeNaatNotebookModal');
+
+
+        // Search category selection logic
+        const mainSearchInput = document.getElementById('mainSearchInput');
+        const searchOptionsContainer = document.getElementById('searchOptionsContainer');
+        const selectedSearchCategoryInput = document.getElementById('selectedSearchCategory');
+        const categoryButtonsInOptions = searchOptionsContainer ? searchOptionsContainer.querySelectorAll('.category-tag') : [];
+        let currentSelectedCategoryTag = null; // Track currently selected category button
+
+        if (mainSearchInput && searchOptionsContainer) {
+            categoryButtonsInOptions.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    selectedSearchCategoryInput.value = category; // Set hidden input value
+                    // Update the placeholder based on the selected category, without overriding the count display
+                    const categoryNameElement = button.querySelector('.category-name');
+                    if (categoryNameElement) {
+                        mainSearchInput.placeholder = `${categoryNameElement.textContent} تلاش کریں...`;
+                    } else {
+                        mainSearchInput.placeholder = `${category} تلاش کریں...`; // Fallback
+                    }
+
+                    // Remove 'selected' class from previously selected button
+                    if (currentSelectedCategoryTag) {
+                        currentSelectedCategoryTag.classList.remove('selected');
+                    }
+                    // Add 'selected' class to the clicked button
+                    button.classList.add('selected');
+                    currentSelectedCategoryTag = button; // Update tracker
+                });
+            });
+        }
+
+        // Naat Notebook functionality
+        const addCoupletButton = document.getElementById('addCoupletButton');
+        const naatEditor = document.getElementById('naatEditor');
+
+        if (addCoupletButton && naatEditor) {
+            addCoupletButton.addEventListener('click', () => {
+                const coupletDiv = document.createElement('div');
+                coupletDiv.className = 'couplet-editor urdu-text'; // Apply urdu-text class
+
+                const misra1 = document.createElement('div');
+                misra1.className = 'misra-editor urdu-text'; // Apply urdu-text class
+                misra1.contentEditable = 'true';
+                misra1.textContent = 'پہلا مصرع';
+
+                const misra2 = document.createElement('div');
+                misra2.className = 'misra-editor urdu-text'; // Apply urdu-text class
+                misra2.contentEditable = 'true';
+                misra2.textContent = 'دوسرا مصرع';
+
+                coupletDiv.appendChild(misra1);
+                coupletDiv.appendChild(misra2);
+                naatEditor.appendChild(coupletDiv);
+                misra1.focus(); // Focus on the first misra for immediate typing
+            });
+        }
+
+        // PNG and PDF saving functionality for Naat Notebook
+        const saveNaatAsPngButton = document.getElementById('saveNaatAsPng');
+        const saveNaatAsPdfButton = document.getElementById('saveNaatAsPdf');
+        const naatEditorOutput = document.getElementById('naatEditorOutput'); // Hidden div for rendering
+        const outputNaatTitle = document.getElementById('outputNaatTitle');
+        const outputCoupletsContainer = document.getElementById('outputCoupletsContainer');
+        const naatTitleInput = document.getElementById('naatTitleInput');
+
+        // Prepares content for export by copying from editor to output div
+        function prepareOutputContent() {
+            outputNaatTitle.textContent = naatTitleInput.value || "بے عنوان نعت"; // Set title, fallback if empty
+            outputCoupletsContainer.innerHTML = naatEditor.innerHTML; // Copy HTML content
+
+            // Apply specific styling for output
+            outputNaatTitle.classList.add('urdu-text', 'urdu-text-lg');
+            outputCoupletsContainer.querySelectorAll('.couplet-editor, .misra-editor').forEach(el => {
+                el.classList.add('urdu-text');
+                if (el.classList.contains('misra-editor')) {
+                    el.classList.add('urdu-text-base'); // Ensure correct font size for misras
+                }
+            });
+            naatEditorOutput.style.fontFamily = "'NaatFont', 'Noto Nastaliq Urdu', serif"; // Apply NaatFont
+        }
+
+        // Save as PNG
+        if (saveNaatAsPngButton && naatEditorOutput) {
+            saveNaatAsPngButton.addEventListener('click', () => {
+                prepareOutputContent();
+                naatEditorOutput.style.display = 'block'; // Make output div visible for screenshot
+
+                // Use html2canvas to capture the content as an image
+                html2canvas(naatEditorOutput, {
+                    backgroundColor: "#ffffff", // Set background explicitly
+                    scale: 2, // Higher scale for better quality
+                    useCORS: true // Important for external images if any
+                }).then(canvas => {
+                    const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // Convert to data URL
+                    const link = document.createElement('a');
+                    const naatTitle = naatTitleInput.value.trim() || "Naat-Academy-Kalam";
+                    link.download = `${naatTitle.replace(/[^a-z0-9ء-ی\s]/gi, '_')}.png`; // Sanitize filename
+                    link.href = image;
+                    link.click(); // Trigger download
+                    naatEditorOutput.style.display = 'none'; // Hide output div after capture
+                }).catch(err => {
+                    console.error("Error generating PNG:", err);
+                    naatEditorOutput.style.display = 'none'; // Hide in case of error
+                });
+            });
+        }
+
+        // Save as PDF
+        if (saveNaatAsPdfButton && naatEditorOutput) {
+            saveNaatAsPdfButton.addEventListener('click', () => {
+                prepareOutputContent();
+                naatEditorOutput.style.display = 'block'; // Make output div visible for screenshot
+
+                const { jsPDF } = window.jspdf; // Get jsPDF from window object
+                // Use html2canvas to capture the content as an image for PDF
+                html2canvas(naatEditorOutput, {
+                    backgroundColor: "#ffffff",
+                    scale: 2,
+                    useCORS: true
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF({
+                        orientation: 'p', // Portrait
+                        unit: 'mm', // Millimeters
+                        format: 'a4' // A4 size
+                    });
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; // Calculate height to maintain aspect ratio
+
+                    let position = 0;
+                    let heightLeft = pdfHeight;
+                    const pageHeight = pdf.internal.pageSize.getHeight() - 20; // A4 height minus top/bottom margins
+
+                    // Add image to PDF, handling multiple pages if content is too long
+                    pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth - 20, pdfHeight - (pdfHeight > pageHeight ? (pdfHeight - pageHeight + 10) : 0));
+                    heightLeft -= pageHeight;
+
+                    while (heightLeft > 0) {
+                        position = heightLeft - pdfHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 10, position + 10, pdfWidth - 20, pdfHeight - (pdfHeight > pageHeight ? (pdfHeight - pageHeight + 10) : 0));
+                        heightLeft -= pageHeight;
+                    }
+                    const naatTitle = naatTitleInput.value.trim() || "Naat-Academy-Kalam";
+                    pdf.save(`${naatTitle.replace(/[^a-z0-9ء-ی\s]/gi, '_')}.pdf`); // Sanitize filename and save
+                    naatEditorOutput.style.display = 'none'; // Hide output div after capture
+                }).catch(err => {
+                    console.error("Error generating PDF:", err);
+                    naatEditorOutput.style.display = 'none'; // Hide in case of error
+                });
+            });
+        }
+
+
+        // DOM Content Loaded event listener for animations and dynamic content
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply slideUpFadeIn animation with staggered delays
+            const animatedElements = document.querySelectorAll('.animate-slideUpFadeIn');
+            animatedElements.forEach((el, index) => {
+                const delay = el.style.animationDelay || (index * 0.08) + 's'; // Increased delay for more pronounced stagger
+                el.style.animationDelay = delay;
+                el.style.animationFillMode = 'forwards'; // Keep final state of animation
+            });
+
+            // Function to generate random like/view counts (for demo purposes)
+            const getRandomCount = (min = 100, max = 5000) => {
+                const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'k';
+                }
+                return num.toString();
+            };
+
+            // Update all like/view/download counts with random values
+            document.querySelectorAll('.like-count').forEach(el => el.textContent = getRandomCount());
+            document.querySelectorAll('.view-count').forEach(el => el.textContent = getRandomCount());
+            document.querySelectorAll('.download-count').forEach(el => el.textContent = getRandomCount(500, 1500));
+
+            // Update Islamic event card post counts
+            document.querySelectorAll('.islamic-event-post-count').forEach(el => {
+                el.textContent = getRandomCount(50, 500); // 50 to 500 posts for events
+            });
+
+            // Update header category tag post counts
+            const updateHeaderCategoryCounts = () => {
+                document.querySelectorAll('.header-category-tag').forEach(button => {
+                    let postCountSpan = button.querySelector('.category-post-count');
+                    if (postCountSpan) {
+                        postCountSpan.textContent = getRandomCount(100, 1500); // Posts per category
+                    }
+                });
+            };
+            updateHeaderCategoryCounts();
+
+
+            // Prayer times and Islamic calendar
+            let currentDisplayDate = new Date(); // Stores the currently displayed date for prayer times
+            const urduLocale = 'ur-IN'; // Locale for Urdu formatting
+
+            const prayerTimesContainer = document.getElementById('prayerTimesContainer');
+            const currentPrayerWeekSpan = document.getElementById('currentPrayerWeek');
+            const islamicMonthYearEl = document.getElementById('islamicMonthYear');
+            const islamicDateTodayEl = document.getElementById('islamicDateToday')?.querySelector('span');
+
+            // Formats a Date object into a readable time string
+            function formatTime(date) {
+                return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            }
+
+            // Renders the prayer times calendar for the given date
+            function renderPrayerCalendar(date) {
+                if (!prayerTimesContainer || !currentPrayerWeekSpan || !islamicMonthYearEl) return;
+
+                const startOfWeek = new Date(date);
+                startOfWeek.setDate(date.getDate() - date.getDay()); // Set to the start of the week (Sunday)
+
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6); // Set to the end of the week (Saturday)
+
+                // Display the week range in Urdu
+                const weekRangeString = `${startOfWeek.toLocaleDateString(urduLocale, { day: 'numeric', month: 'long' })} - ${endOfWeek.toLocaleDateString(urduLocale, { day: 'numeric', month: 'long', year: 'numeric' })}`;
+                currentPrayerWeekSpan.textContent = weekRangeString;
+
+                // Display the Islamic month and year
+                const islamicMonthParts = new Intl.DateTimeFormat(urduLocale + '-u-ca-islamic', { month: 'long', year: 'numeric' }).formatToParts(date);
+                let iMonth = '', iYear = '';
+                islamicMonthParts.forEach(p => {
+                    if (p.type === 'month') iMonth = p.value;
+                    if (p.type === 'year') iYear = p.value.replace(/\D/g, '') + 'ھ'; // Extract year digits and append 'ھ'
+                });
+                islamicMonthYearEl.textContent = `${iMonth} ${iYear}`;
+
+                prayerTimesContainer.innerHTML = ''; // Clear previous prayer times
+
+                // Simulate prayer times (for demo purposes) - these are not real prayer times
+                // In a real app, these would come from an API or calculation library
+                let baseFajrHour = 4;
+                let baseFajrMinute = 38;
+                let baseDhuhrHour = 12;
+                let baseDhuhrMinute = 38;
+                let baseAsrHour = 16;
+                let baseAsrMinute = 2;
+
+
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(startOfWeek);
+                    day.setDate(startOfWeek.getDate() + i);
+
+                    // Simple logic to vary times slightly for different days in a week
+                    // (This is highly simplified and not accurate for real prayer times)
+                    let fajrDate = new Date(day.getFullYear(), day.getMonth(), day.getDate(), baseFajrHour, baseFajrMinute + (i % 5 - 2));
+                    let dhuhrDate = new Date(day.getFullYear(), day.getMonth(), day.getDate(), baseDhuhrHour, baseDhuhrMinute + (i % 3 - 1));
+                    let asrDate = new Date(day.getFullYear(), day.getMonth(), day.getDate(), baseAsrHour, baseAsrMinute + (i % 4 - 2));
+
+
+                    const row = document.createElement('div');
+                    row.className = 'prayer-times-table-row urdu-text';
+                    row.innerHTML = `
+                        <span class="w-2/5 text-right font-semibold prayer-time-day-name">${day.toLocaleDateString(urduLocale, { weekday: 'long', day: 'numeric' })}</span>
+                        <span class="w-1/5 text-center prayer-time-value">${formatTime(fajrDate)}</span>
+                        <span class="w-1/5 text-center prayer-time-value">${formatTime(dhuhrDate)}</span>
+                        <span class="w-1/5 text-center prayer-time-value">${formatTime(asrDate)}</span>
+                    `;
+                    prayerTimesContainer.appendChild(row);
+                }
+            }
+
+            // Updates the current Islamic date display
+            function updateCurrentIslamicDate() {
+                if (!islamicDateTodayEl) return;
+                const now = new Date();
+                const parts = new Intl.DateTimeFormat(urduLocale + '-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).formatToParts(now);
+                let day = '', month = '', year = '';
+                parts.forEach(part => {
+                    if (part.type === 'day') day = part.value;
+                    if (part.type === 'month') month = part.value;
+                    if (part.type === 'year') year = part.value.replace(/\D/g, '');
+                });
+                islamicDateTodayEl.textContent = `${day} ${month} ${year}ھ`;
+            }
+
+            // Event listeners for navigating prayer time weeks
+            document.getElementById('prevWeekBtn')?.addEventListener('click', () => {
+                currentDisplayDate.setDate(currentDisplayDate.getDate() - 7);
+                renderPrayerCalendar(currentDisplayDate);
+            });
+
+            document.getElementById('nextWeekBtn')?.addEventListener('click', () => {
+                currentDisplayDate.setDate(currentDisplayDate.getDate() + 7);
+                renderPrayerCalendar(currentDisplayDate);
+            });
+
+            // Initial render of prayer calendar and Islamic date
+            renderPrayerCalendar(currentDisplayDate);
+            updateCurrentIslamicDate();
+        });
+    </script>
+</body>
+
+</html>
