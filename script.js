@@ -87,7 +87,7 @@ const ArticlesList = async () => {
       const topicName = fixMojibake(article.Topic || 'بدون عنوان');
       const slug = fixMojibake(article.Title || '');
       const title = fixMojibake(article.Title || 'اشاعت دستیاب نہیں');
-      const image = article.ThumbnailURL || "http://updated-naatacademy.onrender.com/uploads/1751805519877-923129333.png";
+      const image = article.ThumbnailURL ;
       const likes = article.likes || '10';
       const views = article.views || '10';
 
@@ -100,7 +100,7 @@ const ArticlesList = async () => {
             مجموعہ <i class="bi bi-arrow-left-short"></i>
           </a>
         </div>
-        <img src="http://updated-naatacademy.onrender.com/uploads/1751805519877-923129333.png"
+        <img src=${image}
              alt="${slug} Image"
              class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
              onerror="this.onerror=null;this.src='https://placehold.co/300x150/ffecb3/8d6e63?text=Image+Missing';">
