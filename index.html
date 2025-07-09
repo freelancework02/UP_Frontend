@@ -16,8 +16,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-<script src="style.css"></script>
     <style>
         /* Custom Font for Urdu Text */
         @font-face {
@@ -331,7 +329,8 @@
 
         /* Category Tags */
         .category-tag {
-            padding: 0.6rem 1.2rem;
+            padding: 0.1rem 1.0rem;
+            /* Reduced padding for compact pill */
             border-radius: 9999px;
             font-size: 1rem;
             transition: all 0.2s ease;
@@ -341,9 +340,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             /* Subtle shadow */
             display: inline-flex;
-            /* To align name and count */
             align-items: center;
-            /* Vertically align name and count */
         }
 
         .category-tag.selected {
@@ -457,12 +454,30 @@
             border-color: #7d3c98;
         }
 
-        /* Smaller font size for category post counts */
+        /* Smaller font size for category post counts and pill-shaped design */
         .category-post-count {
-            font-size: 0.7rem;
-            /* Very small size */
-            margin-right: 0.3rem;
-            /* Adjust spacing as needed */
+            font-size: 0.75rem;
+            /* Slightly increased text size */
+            background-color: rgba(255, 255, 255, 0.3);
+            /* Semi-transparent white background */
+            color: inherit;
+            /* Inherit color from parent for contrast */
+            padding: 0.05rem 0.35rem;
+            /* Reduced padding */
+            border-radius: 9999px;
+            /* Pill shape */
+            margin-right: 0.5rem;
+            /* Space between name and pill */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            /* Ensure a minimum width for small numbers */
+        }
+
+        .category-name {
+            font-size: 20px;
+            /* Explicitly set to 20px */
         }
 
 
@@ -552,6 +567,8 @@
             padding-top: 0.6rem;
             margin-top: 0.6rem;
             border-top: 1px solid #f3f4f6;
+            margin-top: auto;
+            /* Push to bottom of card */
         }
 
         .stats-bar i {
@@ -562,6 +579,50 @@
         .stats-bar .urdu-text-xs {
             font-size: 0.95rem !important;
         }
+
+        /* Share Icon Button (very small, Facebook style) */
+        .share-icon-button {
+            background-color: transparent;
+            /* Transparent background */
+            color: #6b7280;
+            /* Gray color */
+            width: 20px;
+            /* Very small width */
+            height: 20px;
+            /* Very small height */
+            border: 1px solid #9ca3af;
+            /* Thin outline */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            /* Remove existing shadow */
+            transition: all 0.2s ease;
+            /* Smooth transition for all properties */
+            padding: 0;
+            /* No extra padding inside for a tight fit */
+            margin-left: auto;
+            /* Push to the left in RTL */
+        }
+
+        .share-icon-button:hover {
+            background-color: #f3f4f6;
+            /* Subtle hover background */
+            color: #4b5563;
+            /* Darker gray on hover */
+            transform: scale(1.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            /* Slight shadow on hover */
+        }
+
+        .share-icon-button i {
+            font-size: 0.7rem;
+            /* Match button's font-size for icon */
+            margin-right: 0;
+            /* Remove extra margin if any */
+        }
+
 
         /* Modal Styles */
         .modal {
@@ -657,14 +718,38 @@
         }
 
         /* Search Container and Input */
-        .search-card {
+        .header-search-card {
             background-color: white;
             border-radius: 1.5rem;
             /* Even more rounded */
-            padding: 1.25rem;
+            padding: 1.5rem 1.0rem;
+            /* Fixed padding for all screens */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
             /* Stronger shadow */
             border: 1px solid #e2e8f0;
+            width: 100%;
+            /* Full width */
+        }
+
+        /* Mobile responsive adjustments for header-search-card */
+        @media (max-width: 639px) {
+
+            /* Tailwind's 'sm' breakpoint for mobile */
+            .header-search-card {
+                padding: 0.2rem 1.0rem;
+                /* Compact padding for mobile */
+            }
+        }
+
+        @media (min-width: 640px) {
+
+            /* Tailwind's 'sm' breakpoint */
+            .header-search-card {
+                max-width: 42rem;
+                /* Tailwind's max-w-2xl */
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         .search-input-wrapper {
@@ -674,8 +759,8 @@
             background-color: #f8f9fa;
             border: 1px solid #d1d5db;
             transition: all 0.3s ease;
-            padding: 0.35rem;
-            /* More padding */
+            padding: 0.25rem;
+            /* Made padding more compact */
         }
 
         .search-input-wrapper:focus-within {
@@ -699,7 +784,8 @@
             display: flex;
             align-items: center;
             gap: 0.6rem;
-            margin-left: 0.6rem;
+            margin-left: 0.4rem;
+            /* Adjusted margin-left */
         }
 
         .search-icon-button {
@@ -747,13 +833,78 @@
             box-shadow: none;
             padding: 1rem 0;
             /* More padding */
-            margin-top: 1.25rem;
-            /* Increased margin */
+            /* margin-top: 1.25rem; */
+            /* Removed margin-top */
             position: static;
             transform: none;
             width: auto;
             max-width: none;
         }
+
+        /* Milad Banner Specific Styles */
+        .milad-banner-section {
+            background-image: linear-gradient(to bottom right, #fce0e6, #e0f2f1);
+            /* Softer, more inviting gradient */
+            border-color: #f8bbd0;
+            /* A soft border color */
+        }
+
+        .milad-banner-section .section-title-icon-wrapper {
+            background-image: linear-gradient(45deg, #d81b60, #f06292);
+            /* More vibrant gradient for the icon */
+        }
+
+        .milad-tab-button {
+            background-color: transparent;
+            /* Make tabs transparent initially */
+            border: 1px solid currentColor;
+            /* Outline effect */
+            color: #555;
+            /* Default text color */
+            transition: all 0.3s ease;
+        }
+
+        .milad-tab-button:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            /* Subtle hover background */
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .milad-tab-button.active-tab {
+            color: white;
+            /* White text for active tab */
+            background-image: linear-gradient(45deg, var(--tab-start-color), var(--tab-end-color));
+            /* Dynamic gradient */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Dynamic colors for active tabs */
+        .milad-tab-button[data-tab="milad-seerat"].active-tab {
+            --tab-start-color: #8b5cf6;
+            --tab-end-color: #a78bfa;
+        }
+
+        /* Purple */
+        .milad-tab-button[data-tab="milad-poetry"].active-tab {
+            --tab-start-color: #ec4899;
+            --tab-end-color: #f472b6;
+        }
+
+        /* Pink */
+        .milad-tab-button[data-tab="milad-articles"].active-tab {
+            --tab-start-color: #ef4444;
+            --tab-end-color: #f87171;
+        }
+
+        /* Red */
+        .milad-tab-button[data-tab="milad-events"].active-tab {
+            --tab-start-color: #f97316;
+            --tab-end-color: #fb923c;
+        }
+
+        /* Orange */
 
         /* Book Card Image */
         .book-card-image {
@@ -877,16 +1028,55 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
 
-        .modal-slider-image {
-            /* Style for images inside the modal slider */
+        /* Modal-specific styling for the status-style slider */
+        #kalaamModal .modal-content {
+            max-width: 95vw;
+            /* Almost full width */
+            height: 90vh;
+            /* Almost full height */
+            margin: 2.5vh auto;
+            /* Center vertically */
+            display: flex;
+            /* Use flexbox for internal layout */
+            flex-direction: column;
+            /* Stack children vertically */
+            padding: 1.5rem;
+            /* Adjust padding */
+            background-color: transparent;
+            /* Make modal content background transparent */
+            box-shadow: none;
+            /* Remove modal content shadow */
+        }
+
+        #kalaamModal .modal-slider-image {
             width: 100%;
-            height: auto;
-            /* Maintain aspect ratio */
-            max-height: 70vh;
-            /* Limit height in modal */
+            height: 100%;
+            /* Make image take full height of its container */
             object-fit: contain;
-            /* Ensure full image is visible */
+            /* Ensure full image is visible, scale down if needed */
             border-radius: 0.75rem;
+        }
+
+        /* Ensure slider-wrapper and slider-slide inside modal take up available space */
+        #kalaamModal .slider-wrapper {
+            flex-grow: 1;
+            /* Allow wrapper to grow and fill space */
+            display: flex;
+            align-items: center;
+            /* Center image vertically */
+            justify-content: center;
+            /* Center image horizontally */
+        }
+
+        #kalaamModal .slider-slide {
+            display: flex;
+            /* Use flexbox for individual slide content */
+            align-items: center;
+            /* Center image inside slide */
+            justify-content: center;
+            /* Center image inside slide */
+            background-color: transparent;
+            /* Ensure slide background is transparent */
         }
 
 
@@ -1048,6 +1238,7 @@
             align-items: center;
             gap: 0.5rem;
         }
+
     </style>
 </head>
 
@@ -1076,23 +1267,19 @@
                 </div>
             </div>
 
-            <!-- Main Logo and Tagline -->
+            <!-- Main Logo and Title -->
             <div class="text-center mb-5 animate-slideUpFadeIn header-logo-section" style="animation-delay: 0.05s;">
                 <a href="#" aria-label="Naat Academy Home">
                     <img src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png"
                         alt="نعتیہ اکیڈمی لوگو"
                         class="h-24 md:h-28 lg:h-32 mx-auto mb-3 transform hover:scale-105 transition-transform duration-300 header-logo-image">
                 </a>
-                <p class="text-gray-600 urdu-text urdu-text-md lg:urdu-text-lg header-tagline">اسلامی ادبی شاعری کی
-                    تحریک</p>
             </div>
 
             <!-- Search Section -->
             <div class="text-center mb-8 animate-slideUpFadeIn header-search-section" style="animation-delay: 0.1s;">
-                <h2 class="text-xl lg:text-2xl text-green-800 urdu-text urdu-text-lg mb-3 header-search-title">حمد، نعت،
-                    منقبت، سلام، دعا و مناجات کا خزانہ</h2>
-                <p class="text-gray-500 urdu-text urdu-text-sm mb-5 lg:urdu-text-base header-search-subtitle">پسندیدہ
-                    کلام و اشعار تلاش کریں</p>
+                <h2 class="text-xl lg:text-2xl text-green-800 urdu-text urdu-text-lg mb-3 header-search-title">نعت
+                    اکیڈمی - حمد، نعت، منقبت، سلام، مناجات کا خزانہ</h2>
                 <div class="max-w-2xl mx-auto relative search-card header-search-card">
                     <div class="search-input-wrapper header-search-input-wrapper">
                         <input type="text" id="mainSearchInput" placeholder="مكمل كلام تلاش کریں..."
@@ -1111,43 +1298,17 @@
                         </div>
                     </div>
                     <div id="searchOptionsContainer" class="urdu-text header-search-options-container">
-                        <!-- <div class="flex justify-center flex-wrap gap-3 mt-4 header-category-buttons-wrap">
-                            <button data-category="نعت"
-                                class="category-tag urdu-text-xs category-naat header-category-tag"><span
-                                    class="category-name">نعت</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="سلام"
-                                class="category-tag urdu-text-xs category-salam header-category-tag"><span
-                                    class="category-name">سلام</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="منقبت"
-                                class="category-tag urdu-text-xs category-manqabat header-category-tag"><span
-                                    class="category-name">منقبت</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="قطعات"
-                                class="category-tag urdu-text-xs category-qataat header-category-tag"><span
-                                    class="category-name">قطعات</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="موضوعات"
-                                class="category-tag urdu-text-xs category-mawzoat header-category-tag"><span
-                                    class="category-name">موضوعات</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="شاعر"
-                                class="category-tag urdu-text-xs category-shayar header-category-tag"><span
-                                    class="category-name">شاعر</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="مضامین"
-                                class="category-tag urdu-text-xs category-mazameen header-category-tag"><span
-                                    class="category-name">مضامین</span> (<span
-                                    class="category-post-count"></span>)</button>
-                            <button data-category="کتب"
-                                class="category-tag urdu-text-xs category-kutub header-category-tag"><span
-                                    class="category-name">کتب</span> (<span
-                                    class="category-post-count"></span>)</button>
-                        </div> -->
-
-                        <div id="category-buttons"></div>
-                        <div id="articles-container"></div>
+                        <div id="categoryButtons"
+                            class="flex justify-center flex-wrap gap-3 mt-4 header-category-buttons-wrap">
+                            <!--     <button data-category="نعت" class="category-tag urdu-text-xs category-naat header-category-tag"><span class="category-name">نعت</span> <span class="category-post-count"></span></button>
+                            <button data-category="سلام" class="category-tag urdu-text-xs category-salam header-category-tag"><span class="category-name">سلام</span> <span class="category-post-count"></span></button>
+                            <button data-category="منقبت" class="category-tag urdu-text-xs category-manqabat header-category-tag"><span class="category-name">منقبت</span> <span class="category-post-count"></span></button>
+                            <button data-category="قطعات" class="category-tag urdu-text-xs category-qataat header-category-tag"><span class="category-name">قطعات</span> <span class="category-post-count"></span></button>
+                            <button data-category="موضوعات" class="category-tag urdu-text-xs category-mawzoat header-category-tag"><span class="category-name">موضوعات</span> <span class="category-post-count"></span></button>
+                            <button data-category="شاعر" class="category-tag urdu-text-xs category-shayar header-category-tag"><span class="category-name">شاعر</span> <span class="category-post-count"></span></button>
+                            <button data-category="مضامین" class="category-tag urdu-text-xs category-mazameen header-category-tag"><span class="category-name">مضامین</span> <span class="category-post-count"></span></button>
+                            <button data-category="کتب" class="category-tag urdu-text-xs category-kutub header-category-tag"><span class="category-name">کتب</span> <span class="category-post-count"></span></button> -->
+                        </div>
                         <input type="hidden" id="selectedSearchCategory" value=""
                             class="header-selected-category-input">
                     </div>
@@ -1158,6 +1319,172 @@
 
     <!-- Main Content Area -->
     <main class="container mx-auto px-4 py-8 main-content-container">
+
+        <!-- 1500-Year Eid Milad-un-Nabi ﷺ Banner Section -->
+        <section
+            class="milad-banner-section mb-10 animate-slideUpFadeIn bg-gradient-to-br from-purple-100 via-pink-100 to-red-100 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200"
+            style="animation-delay: 0.2s;">
+            <div class="text-center mb-6">
+                <h2 class="section-title urdu-text !text-purple-800 !mb-4 mx-auto w-fit">
+                    <span class="section-title-icon-wrapper bg-gradient-to-r from-purple-600 to-pink-600"><i
+                            class="bi bi-gift-fill section-title-icon"></i></span>
+                    ۱۵۰۰ سو سالہ جشنِ عید میلاد النبی ﷺ
+                </h2>
+                <p class="urdu-text urdu-text-md text-gray-700">سیرت، شاعری، مقالات، اور واقعات کا ایک منفرد مجموعہ</p>
+            </div>
+
+            <div class="milad-tabs-container flex flex-wrap justify-center gap-3 mb-6">
+                <button data-tab="milad-seerat"
+                    class="milad-tab-button urdu-text urdu-text-sm bg-purple-200 text-purple-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-purple-300 active-tab">سیرت</button>
+                <button data-tab="milad-poetry"
+                    class="milad-tab-button urdu-text urdu-text-sm bg-pink-200 text-pink-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-pink-300">شاعری</button>
+                <button data-tab="milad-articles"
+                    class="milad-tab-button urdu-text urdu-text-sm bg-red-200 text-red-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-red-300">مقالات</button>
+                <button data-tab="milad-events"
+                    class="milad-tab-button urdu-text urdu-text-sm bg-orange-200 text-orange-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-orange-300">واقعات</button>
+            </div>
+
+            <div class="milad-tab-content-wrapper">
+                <div id="milad-seerat" class="milad-tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-purple-700 mb-2 text-right">نبی اکرم ﷺ کی
+                            پیدائش</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">اس مڈول میں نبی اکرم
+                            صلی اللہ علیہ وسلم کی پیدائش سے متعلق تفصیلات شامل ہیں۔ آپ کی ولادت، بچپن، اور ابتدائی زندگی
+                            کے اہم واقعات کا ذکر کیا گیا ہے، جو ہر مسلمان کے لیے مشعل راہ ہیں۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-purple-700 mb-2 text-right">بعثت سے پہلے کی
+                            زندگی</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">بعثت سے قبل کی آپ ﷺ
+                            کی زندگی، نبوت سے سرفراز ہونے سے پہلے کے اہم واقعات، اور آپ ﷺ کی ایمانداری و صداقت کے بارے
+                            میں معلومات فراہم کی گئی ہے۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-purple-700 mb-2 text-right">مدینہ ہجرت</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">مکہ مکرمہ سے مدینہ
+                            منورہ کی ہجرت کا واقعہ، اس کے اسباب، اور ہجرت کے بعد اسلامی ریاست کے قیام کی بنیاد پر روشنی
+                            ڈالی گئی ہے۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                </div>
+
+                <div id="milad-poetry"
+                    class="milad-tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 hidden">
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-pink-700 mb-2 text-right">میلاد کی نعتیہ
+                            شاعری</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">۱۵۰۰ سالہ جشنِ میلاد
+                            النبیﷺ کے حوالے سے لکھی گئی خصوصی نعتیہ شاعری اور قصائد کا مجموعہ۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-pink-700 mb-2 text-right">مشہور شعراء کا
+                            کلام</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">حضرت حسان بن ثابتؓ سے
+                            لے کر عصر حاضر کے شعراء تک، میلاد النبیﷺ کے موضوع پر لکھے گئے بہترین اشعار۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-pink-700 mb-2 text-right">تاریخی منظوم کلام
+                        </h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">میلاد سے متعلق تاریخی
+                            منظوم کلام اور اس کی ادبی اہمیت پر ایک نظر۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                </div>
+
+                <div id="milad-articles"
+                    class="milad-tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 hidden">
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-red-700 mb-2 text-right">میلاد کی اہمیت
+                            قرآن و حدیث کی روشنی میں</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">میلاد النبی ﷺ منانے
+                            کی شرعی حیثیت اور اس کی اہمیت پر تفصیلی مقالہ۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-red-700 mb-2 text-right">جشنِ میلاد النبی ﷺ
+                            اور اس کے اثرات</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">تاریخی اور معاشرتی
+                            تناظر میں جشنِ میلاد النبی ﷺ کے اثرات و برکات کا جائزہ۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-red-700 mb-2 text-right">عالمی سطح پر میلاد
+                            کی تقریبات</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">دنیا بھر میں میلاد
+                            النبی ﷺ کی تقریبات کے مختلف انداز اور ثقافتی پہلو۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                </div>
+
+                <div id="milad-events"
+                    class="milad-tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 hidden">
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-orange-700 mb-2 text-right">میلاد کے تاریخی
+                            واقعات</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">آپ ﷺ کی ولادت اور
+                            سیرت سے جڑے اہم تاریخی واقعات اور معجزات کا ذکر۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-orange-700 mb-2 text-right">۱۵۰۰ سالہ جشن
+                            کی جھلکیاں</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">گزشتہ ۱۵۰۰ سال میں
+                            میلاد النبی ﷺ کے جشن کی مختلف ادوار میں اہمیت اور منانے کے انداز۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                    <article class="card p-4">
+                        <h5 class="urdu-text urdu-text-md font-semibold text-orange-700 mb-2 text-right">واقعاتِ میلاد
+                            پر مبنی دروس</h5>
+                        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right">میلاد النبی ﷺ کے
+                            واقعات پر مبنی علمی اور روحانی دروس کا مجموعہ۔</p>
+                        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                    class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                    class="bi bi-eye-fill text-blue-500"></i> <span
+                                    class="view-count urdu-text-xs">2.2k</span></span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
         <!-- اصنافِ سخن Section -->
         <section class="mb-10 animate-slideUpFadeIn poetry-types-section" style="animation-delay: 0.4s;">
             <div class="section-title-container">
@@ -1166,7 +1493,7 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs poetry-type-collection-link"> تمام اصناف <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div id="articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="kalampost" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 hover:bg-amber-50 transition-colors duration-300 poetry-types-card">
                     <div class="flex justify-between items-center mb-3 poetry-type-title-group">
                         <h3 class="text-xl urdu-text urdu-text-md font-bold text-amber-700 poetry-type-title">منقبت</h3>
@@ -1183,9 +1510,10 @@
                     <div class="stats-bar poetry-type-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
                                 class="like-count urdu-text-xs">1.4k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">2.2k</span></span></div>
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
-                <!-- <article class="card p-4 hover:bg-blue-50 transition-colors duration-300 poetry-types-card">
+                <article class="card p-4 hover:bg-blue-50 transition-colors duration-300 poetry-types-card">
                     <div class="flex justify-between items-center mb-3 poetry-type-title-group">
                         <h3 class="text-xl urdu-text urdu-text-md font-bold text-blue-700 poetry-type-title">حمد</h3>
                         <a href="#"
@@ -1201,9 +1529,10 @@
                     <div class="stats-bar poetry-type-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i>
                             <span class="like-count urdu-text-xs">2.0k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">2.8k</span></span></div>
-                </article> -->
-                <!-- <article class="card p-4 hover:bg-rose-50 transition-colors duration-300 poetry-types-card">
+                                class="view-count urdu-text-xs">2.8k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
+                </article>
+                <article class="card p-4 hover:bg-rose-50 transition-colors duration-300 poetry-types-card">
                     <div class="flex justify-between items-center mb-3 poetry-type-title-group">
                         <h3 class="text-xl urdu-text urdu-text-md font-bold text-rose-700 poetry-type-title">قطعات</h3>
                         <a href="#"
@@ -1219,77 +1548,13 @@
                     <div class="stats-bar poetry-type-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
                                 class="like-count urdu-text-xs">1.0k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">1.3k</span></span></div>
-                </article> -->
+                                class="view-count urdu-text-xs">1.3k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
+                </article>
             </div>
         </section>
 
-        <!-- اہم اسلامی ایام Section -->
-        <section class="mb-10 animate-slideUpFadeIn islamic-events-section" style="animation-delay: 0.25s;">
-            <div class="section-title-container">
-                <h2 class="section-title urdu-text"><span
-                        class="section-title-icon-wrapper gradient-icon-bg-festivals"><i
-                            class="bi bi-calendar-heart-fill section-title-icon"></i></span>اہم اسلامی ایام</h2>
-                <a href="#" class="pill-button urdu-text urdu-text-xs islamic-events-more-link"> مکمل کیلنڈر <i
-                        class="bi bi-arrow-left-short ml-1"></i></a>
-            </div>
-            <div id="islamic-event-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- <div   class="card p-4 text-center bg-rose-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-rose-800 islamic-event-title">عید میلاد النبی
-                        ﷺ</h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۲ ربیع الاول</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div> -->
 
-                <!-- <div class="card p-4 text-center bg-sky-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-sky-800 islamic-event-title">شبِ معراج</h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۲۷ رجب</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div>
-                <div class="card p-4 text-center bg-purple-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-purple-800 islamic-event-title">شبِ برات</h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۵ شعبان</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div>
-                <div class="card p-4 text-center bg-red-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-red-800 islamic-event-title">عید الفطر</h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱ شوال</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div>
-                <div class="card p-4 text-center bg-orange-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-orange-800 islamic-event-title">عید الاضحی
-                    </h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۰ ذوالحجہ</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div>
-                <div class="card p-4 text-center bg-gray-100 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-gray-800 islamic-event-title">یومِ عاشورہ
-                    </h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۱۰ محرم</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div>
-                <div class="card p-4 text-center bg-yellow-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-yellow-800 islamic-event-title">عرسِ خواجہ
-                        غریب نوازؒ</h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۶ رجب</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div>
-                <div class="card p-4 text-center bg-indigo-50 islamic-event-card">
-                    <h5 class="urdu-text urdu-text-base font-semibold text-indigo-800 islamic-event-title">عرسِ اعلیٰ
-                        حضرتؒ</h5>
-                    <p class="urdu-text urdu-text-xs text-gray-700 islamic-event-date">۲۵ صفر</p>
-                    <p class="urdu-text-xs text-gray-500 mt-1">اشاعتیں: <span class="islamic-event-post-count"></span>
-                    </p>
-                </div> -->
-            </div>
-        </section>
 
         <!-- پیشکش خاص Section (Slider) -->
         <section
@@ -1301,16 +1566,39 @@
                         class="bi bi-stars section-title-icon"></i></span>پیشکش خاص</h2>
             <div class="slider-container relative special-offering-slider-container" id="peshkashSlider">
                 <div class="slider-wrapper special-offering-slider-wrapper">
-                    
-                    <div id="special-offering-container" class="slider-slide p-4 text-center special-offering-slide-content">
-                        <!-- <p
-                        id="line1"
-                            class="urdu-text urdu-text-lg sm:urdu-text-xl text-gray-800 leading-loose max-w-2xl mx-auto special-offering-slide-couplet">
-                          </p>
+                    <div class="slider-slide p-4 text-center special-offering-slide-content">
                         <p
-                        id="line2"
+                            class="urdu-text urdu-text-lg sm:urdu-text-xl text-gray-800 leading-loose max-w-2xl mx-auto special-offering-slide-couplet">
+                            اے شافعِ تَر دامناں و وے چارہ دردِ نہاں<br>جانِ دل و روحِ رواں یعنی شہِ عرش آستاں</p>
+                        <p
                             class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-600 block mt-3 special-offering-slide-poet">
-                           </p> -->
+                            اعلیٰ حضرت امام احمد رضا خان - حدائقِ بخشش</p>
+                    </div>
+                    <div class="slider-slide p-4 text-center special-offering-slide-content">
+                        <p
+                            class="urdu-text urdu-text-lg sm:urdu-text-xl text-gray-800 leading-loose max-w-2xl mx-auto special-offering-slide-couplet">
+                            لم یات نظیرک فی نظر مثل تو نہ شد پیدا جانا<br>جگ راج کو تاج تورے سر سو ہے تجھ کو شہ دوسرا
+                            جانا</p>
+                        <p
+                            class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-600 block mt-3 special-offering-slide-poet">
+                            اعلیٰ حضرت امام احمد رضا خان - حدائقِ بخشش</p>
+                    </div>
+                    <div class="slider-slide p-4 text-center special-offering-slide-content">
+                        <p
+                            class="urdu-text urdu-text-lg sm:urdu-text-xl text-gray-800 leading-loose max-w-2xl mx-auto special-offering-slide-couplet">
+                            سب سے اولیٰ و اعلیٰ ہمارا نبی<br>سب سے بالا و والا ہمارا نبی</p>
+                        <p
+                            class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-600 block mt-3 special-offering-slide-poet">
+                            اعلیٰ حضرت امام احمد رضا خان</p>
+                    </div>
+                    <div class="slider-slide p-4 text-center special-offering-slide-content">
+                        <p
+                            class="urdu-text urdu-text-lg sm:urdu-text-xl text-gray-800 leading-loose max-w-2xl mx-auto special-offering-slide-couplet">
+                            وہ کمالِ حسنِ حضور ہے کہ گمانِ نقص جہاں نہیں<br>یہی پھول خار سے دور ہے یہی شمع ہے کہ دھواں
+                            نہیں</p>
+                        <p
+                            class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-600 block mt-3 special-offering-slide-poet">
+                            اعلیٰ حضرت امام احمد رضا خان - حدائقِ بخشش</p>
                     </div>
                 </div>
                 <button class="slider-button prev urdu-text special-offering-prev-button"><i
@@ -1334,14 +1622,15 @@
                         class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
                         تحت الفت مدینہ</h4>
                     <p
-                        class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
+                        class="urdu-text urdu-text-sm text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
                         وجہ نشاطِ زندگی راحتِ جاں تم ہی تو ہو<br>روحِ روانِ زندگی جانِ جہاں تم ہی تو ہو</p>
                     <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">شاعر: [شاعر کا نام
                         یہاں]</p>
                     <div class="stats-bar selected-kalaam-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i>
                             <span class="like-count urdu-text-xs">1.2k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">2.5k</span></span></div>
+                                class="view-count urdu-text-xs">2.5k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                     <div class="mt-4 flex justify-start items-center"><span
                             class="category-tag urdu-text-xs category-naat selected-kalaam-category-tag">نعت</span>
                     </div>
@@ -1358,7 +1647,8 @@
                     <div class="stats-bar selected-kalaam-stats-bar"><span><i class="bi bi-heart text-gray-500"></i>
                             <span class="like-count urdu-text-xs">1.8k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">2.1k</span></span></div>
+                                class="view-count urdu-text-xs">2.1k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                     <div class="mt-4 flex justify-start items-center"><span
                             class="category-tag urdu-text-xs category-salam selected-kalaam-category-tag">سلام</span>
                     </div>
@@ -1375,7 +1665,8 @@
                     <div class="stats-bar selected-kalaam-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i>
                             <span class="like-count urdu-text-xs">2.5k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">3.0k</span></span></div>
+                                class="view-count urdu-text-xs">3.0k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                     <div class="mt-4 flex justify-start items-center"><span
                             class="category-tag urdu-text-xs category-manqabat selected-kalaam-category-tag"
                             style="background-color: #fff3e0; color: #f57c00; border-color: #ffe0b2;">مناجات</span>
@@ -1390,18 +1681,31 @@
                 <h2 class="section-title urdu-text cursor-pointer hover:text-green-700" id="openKalaamModalTitle"><span
                         class="section-title-icon-wrapper gradient-icon-bg-4"><i
                             class="bi bi-images section-title-icon"></i></span>تزئین شدہ کلام</h2>
-                <a href="#" id="openKalaamModalLinkPill"
-                    class="pill-button urdu-text urdu-text-xs decorated-kalaam-more-link"> مزید دیکھیں <i
+                <a href="#" class="pill-button urdu-text urdu-text-xs decorated-kalaam-more-link"> مزید دیکھیں <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div  class="kalaam-preview-grid decorated-kalaam-grid">
-                <div id="kalamlist" class="kalaam-preview-item"><img src="https://placehold.co/200x280/d1c4e9/333333?text=Kalaam+1"
+            <div class="kalaam-preview-grid decorated-kalaam-grid">
+                <div class="kalaam-preview-item"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749919980/naat/ba32c779-6a4f-4075-885a-66b21df81b51.png"
                         alt="تزئین شدہ کلام 1" class="kalaam-preview-item-image"
                         onclick="document.getElementById('openKalaamModalTitle').click()"></div>
-                <!-- <div class="kalaam-preview-item"><img src="https://placehold.co/200x280/c5cae9/333333?text=Kalaam+2"
+                <div class="kalaam-preview-item"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749919968/naat/7d69d7e9-c484-44f9-b7e6-293c5c283c6e.png"
                         alt="تزئین شدہ کلام 2" class="kalaam-preview-item-image"
-                        onclick="document.getElementById('openKalaamModalTitle').click()"></div> -->
-               
+                        onclick="document.getElementById('openKalaamModalTitle').click()"></div>
+                <div class="kalaam-preview-item"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749919957/naat/a8802dfb-5d01-4a20-accf-67fde49af286.png"
+                        alt="تزئین شدہ کلام 3" class="kalaam-preview-item-image"
+                        onclick="document.getElementById('openKalaamModalTitle').click()"></div>
+                <div class="kalaam-preview-item hidden sm:block"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749919919/naat/62ea9ec3-4955-4c5d-ac49-619a1c150224.png"
+                        alt="تزئین شدہ کلام 4" onclick="document.getElementById('openKalaamModalTitle').click()"></div>
+                <div class="kalaam-preview-item hidden md:block"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749919900/naat/f7c759d2-0c9f-43eb-b107-55ec4d8937d8.png"
+                        alt="تزئین شدہ کلام 5" onclick="document.getElementById('openKalaamModalTitle').click()"></div>
+                <div class="kalaam-preview-item hidden lg:block"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749919845/naat/f89a6783-04fc-4391-929c-73802416fafd.png"
+                        alt="تزئین شدہ کلام 6" onclick="document.getElementById('openKalaamModalTitle').click()"></div>
             </div>
         </section>
 
@@ -1413,8 +1717,8 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs articles-more-link"> مزید مضامین <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <article class="card p-4 relative article-card">
+            <div id="blogCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- <article class="card p-4 relative article-card">
                     <span
                         class="article-category-tag bg-teal-100 text-teal-600 urdu-text urdu-text-xs font-medium">نعت</span>
                     <h4
@@ -1438,9 +1742,10 @@
                     <div class="stats-bar article-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span
                                 class="like-count urdu-text-xs">1.9k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">2.6k</span></span></div>
-                </article>
-                <article class="card p-4 relative article-card">
+                                class="view-count urdu-text-xs">2.6k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
+                </article> -->
+                <!-- <article class="card p-4 relative article-card"> 
                     <span
                         class="article-category-tag bg-purple-100 text-purple-600 urdu-text urdu-text-xs font-medium">مضمون</span>
                     <h4
@@ -1464,7 +1769,8 @@
                     <div class="stats-bar article-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
                                 class="like-count urdu-text-xs">2.1k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">2.9k</span></span></div>
+                                class="view-count urdu-text-xs">2.9k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 relative article-card">
                     <span
@@ -1490,8 +1796,17 @@
                     <div class="stats-bar article-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span
                                 class="like-count urdu-text-xs">2.8k</span></span><span><i
                                 class="bi bi-eye-fill text-blue-500"></i> <span
-                                class="view-count urdu-text-xs">3.1k</span></span></div>
-                </article>
+                                class="view-count urdu-text-xs">3.1k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
+                </article> -->
+            </div>
+            <!-- View All Articles Button -->
+            <div class="text-center mt-6">
+                <button id="viewAllArticlesBtn"
+                    class="pill-button urdu-text urdu-text-base bg-blue-600 hover:bg-blue-700 transition-colors transform hover:scale-105">
+                    تمام مضامین دیکھیں (<span id="totalArticleCount">0</span>) <i
+                        class="bi bi-arrow-left-short ml-1"></i>
+                </button>
             </div>
         </section>
 
@@ -1509,18 +1824,33 @@
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">یہاں نعت کے کچھ ابتدائی بول آئیں
                         گے...</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right naat-lyrics-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">نعت شریف 2 کا عنوان
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">یہاں نعت کے کچھ ابتدائی بول آئیں
                         گے...</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hidden md:block naat-lyrics-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">نعت شریف 3 کا عنوان
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">یہاں نعت کے کچھ ابتدائی بول آئیں
                         گے...</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
             </div>
         </section>
@@ -1540,17 +1870,32 @@
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کہنے کے بنیادی اصول
                         اور رہنما ہدایات۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right naat-education-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">تاریخِ نعت</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کی تاریخی پس منظر اور
                         ارتقاء۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hidden md:block naat-education-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت کی اہمیت
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">اسلام میں نعت کی فضیلت
                         اور اہمیت۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
             </div>
         </section>
@@ -1569,18 +1914,33 @@
                         خصوصیات</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعتیہ شاعری کی ممتاز
                         خصوصیات پر ایک نظر۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right naat-literature-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">عشقِ رسولﷺ اور
                         نعت</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعت میں عشقِ رسول کے
                         مظاہر۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hidden md:block naat-literature-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">اردو نعت کا سفر
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">اردو زبان میں نعت گوئی
                         کا ارتقائی سفر۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
             </div>
         </section>
@@ -1599,16 +1959,31 @@
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">نماز میں پڑھا جانے والا
                         مشہور درود۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right durood-salam-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ تاج</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">ایک معروف اور بابرکت درود
                         شریف۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hidden md:block durood-salam-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">فضائلِ درود</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">درود شریف پڑھنے کے فضائل و
                         برکات۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
             </div>
         </section>
@@ -1626,16 +2001,31 @@
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">کوئی تو ہے جو نظامِ ہستی
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 hamd-description">ایک مشہور حمدیہ کلام۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hamd-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">تیری حمد و ثنا یا الٰہی
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 hamd-description">اللہ تعالیٰ کی تعریف میں ایک
                         خوبصورت حمد۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hidden md:block hamd-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">حمد کی اہمیت</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 hamd-description">اسلام میں حمد کی فضیلت۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
             </div>
         </section>
@@ -1655,18 +2045,33 @@
                         اعظم</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 famous-manqabat-description">حضرت شیخ عبدالقادر
                         جیلانیؒ کی شان میں۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right famous-manqabat-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 famous-manqabat-title">من در بتکدہ
                         حیرانم</h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 famous-manqabat-description">ایک مشہور صوفیانہ منقبت۔
                     </p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
                 <article class="card p-4 text-right hidden md:block famous-manqabat-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 famous-manqabat-title">شانِ اہل بیت
                     </h5>
                     <p class="urdu-text urdu-text-sm text-gray-700 famous-manqabat-description">اہلِ بیت اطہار کی فضیلت
                         میں کلام۔</p>
+                    <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs">1.4k</span></span><span><i
+                                class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i
+                                class="bi bi-share-fill"></i></button></div>
                 </article>
             </div>
         </section>
@@ -1680,9 +2085,48 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs poets-more-link"> تمام شعراء <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div id="writergrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
-               
-                
+            <div id="poets-container"
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+                <!-- <article class="card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50">
+                    <div class="poet-icon-container poet-icon-gradient-1">
+                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon" class="poet-icon-image">
+                    </div>
+                    <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">حضرت حسان بن ثابتؓ</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: [سال] - وفات: [سال]</p>
+                    <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description">نبی کریم ﷺ کے مشہور صحابی شاعر۔<br>آپ کے نعتیہ کلام کو بلند مقام حاصل ہے۔</p>
+                    <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 200+</p>
+                    <div class="stats-bar justify-center poet-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span class="like-count urdu-text-xs">2.7k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">3.0k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+                </article>
+                <article class="card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50">
+                    <div class="poet-icon-container poet-icon-gradient-2">
+                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon" class="poet-icon-image">
+                    </div>
+                    <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">امام احمد رضا خان</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: 1856ء - وفات: 1921ء</p>
+                    <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description">اعلیٰ حضرت، عظیم عاشقِ رسولﷺ۔<br>مجموعہ "حدائقِ بخشش" مشہور ہے۔</p>
+                    <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 200+</p>
+                    <div class="stats-bar justify-center poet-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span class="like-count urdu-text-xs">3.0k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">3.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+                </article>
+                <article class="card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50">
+                    <div class="poet-icon-container poet-icon-gradient-3">
+                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon" class="poet-icon-image">
+                    </div>
+                    <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">مظفر وارثی</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: 1933ء - وفات: 2011ء</p>
+                    <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description">عصرِ حاضر کے ممتاز نعت گو شاعر۔<br>کلام سادگی و پُرکاری کا امتزاج ہے۔</p>
+                    <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 200+</p>
+                    <div class="stats-bar justify-center poet-stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.5k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">1.9k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+                </article>
+                <article class="card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50 hidden lg:block">
+                    <div class="poet-icon-container poet-icon-gradient-4">
+                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon" class="poet-icon-image">
+                    </div>
+                    <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">علامہ محمد اقبال</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: 1877ء - وفات: 1938ء</p>
+                    <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description">شاعرِ مشرق، فلسفی و مفکرِ پاکستان۔<br>کلام میں عشقِ رسولﷺ و ملت کا درد۔</p>
+                    <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 150+</p>
+                    <div class="stats-bar justify-center poet-stats-bar"><span><i class="bi bi-heart-fill text-red-500"></i> <span class="like-count urdu-text-xs">2.2k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.5k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+                </article> -->
             </div>
         </section>
 
@@ -1712,6 +2156,8 @@
                 سمجھنے کے لیے ایک جامع نصاب</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 poetry-info-module-card">
+                    <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
                     <h5
                         class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">
                         مڈول 1: شاعری کی تعریف اور اقسام</h5>
@@ -1721,8 +2167,17 @@
                         ہے۔ اس مڈول میں شاعری کی بنیادی تعریف، اس کی مختلف اقسام جیسے غزل، نظم، قصیدہ، مرثیہ، مثنوی، اور
                         رباعی کا تعارف پیش کیا گیا ہے۔ آپ یہ بھی سیکھیں گے کہ ہر صنف کی اپنی منفرد ساخت اور خصوصیات ہوتی
                         ہیں، جو اسے دوسرے سے ممتاز کرتی ہیں۔</p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs"></span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs"></span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
                 </article>
                 <article class="card p-4 poetry-info-module-card">
+                    <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Module Thumbnail" class="w-full h-32 object-cover rounded-lg mb-3 poetry-info-thumbnail">
                     <h5
                         class="urdu-text urdu-text-md font-semibold text-blue-700 mb-2 text-right poetry-info-module-title">
                         مڈول 2: قافیہ اور ردیف</h5>
@@ -1732,8 +2187,17 @@
                         آواز الفاظ کو کہتے ہیں جو شعر کے آخر میں آتے ہیں۔ ردیف وہ لفظ یا الفاظ کا مجموعہ ہوتا ہے جو
                         قافیہ کے بعد بار بار دہرایا جاتا ہے۔ اس مڈول میں آپ قافیہ اور ردیف کی اقسام، ان کا استعمال، اور
                         شاعری میں ان کی اہمیت کو مثالوں کے ساتھ سمجھیں گے۔</p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs"></span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs"></span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
                 </article>
                 <article class="card p-4 poetry-info-module-card">
+                    <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Module Thumbnail" class="w-full h-32 object-cover rounded-lg mb-3 poetry-info-thumbnail">
                     <h5
                         class="urdu-text urdu-text-md font-semibold text-amber-700 mb-2 text-right poetry-info-module-title">
                         مڈول 3: عروض کا تعارف</h5>
@@ -1743,8 +2207,17 @@
                         اصولوں کو متعین کرتا ہے۔ اس مڈول میں عروض کی بنیادی اصطلاحات، مختلف بحور، اور شعر کو عروضی ترازو
                         پر پرکھنے کے طریقے کو آسان مثالوں کے ساتھ بیان کیا گیا ہے۔ عروض کی مدد سے آپ صحیح وزن میں شعر
                         کہنا اور موجودہ شاعری کا تجزیہ کرنا سیکھیں گے۔</p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs"></span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs"></span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
                 </article>
                 <article class="card p-4 poetry-info-module-card">
+                    <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Module Thumbnail" class="w-full h-32 object-cover rounded-lg mb-3 poetry-info-thumbnail">
                     <h5
                         class="urdu-text urdu-text-md font-semibold text-rose-700 mb-2 text-right poetry-info-module-title">
                         مڈول 4: استعارہ، تشبیہ اور کنایہ</h5>
@@ -1755,8 +2228,17 @@
                         بڑھ کر کسی چیز کو براہ راست دوسری چیز قرار دینا ہے۔ کنایہ کسی بات کو براہ راست کہنے کی بجائے
                         اشاروں میں بیان کرنا ہے۔ یہ مڈول ان ادبی صنعتوں کی تفصیلات اور شاعری میں ان کے اثرات کو واضح کرے
                         گا۔</p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs"></span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs"></span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
                 </article>
                 <article class="card p-4 poetry-info-module-card">
+                    <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Module Thumbnail" class="w-full h-32 object-cover rounded-lg mb-3 poetry-info-thumbnail">
                     <h5
                         class="urdu-text urdu-text-md font-semibold text-purple-700 mb-2 text-right poetry-info-module-title">
                         مڈول 5: حسنِ تعلیل اور تضاد</h5>
@@ -1767,8 +2249,17 @@
                         کے لیے اسے استعمال کیا جائے۔ تضاد میں دو متضاد یا مخالف معنی والے الفاظ کو ایک ساتھ استعمال کیا
                         جاتا ہے تاکہ مفہوم میں زور اور وضاحت پیدا ہو۔ یہ مڈول ان صنعتوں کے استعمال اور ان کے فنی اثرات
                         کو سمجھنے میں معاون ہوگا۔</p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs"></span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs"></span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
                 </article>
                 <article class="card p-4 poetry-info-module-card">
+                    <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Module Thumbnail" class="w-full h-32 object-cover rounded-lg mb-3 poetry-info-thumbnail">
                     <h5
                         class="urdu-text urdu-text-md font-semibold text-teal-700 mb-2 text-right poetry-info-module-title">
                         مڈول 6: تشبیہات و استعارات کا عملی استعمال</h5>
@@ -1778,6 +2269,13 @@
                         کر یہ واضح کیا جائے گا کہ کس طرح شاعر اپنے جذبات اور افکار کو مؤثر طریقے سے بیان کرنے کے لیے ان
                         ادبی صنعتوں کا سہارا لیتے ہیں۔ یہ مڈول آپ کو اپنی شاعری میں ان صنعتوں کو مؤثر طریقے سے شامل کرنے
                         میں مدد فراہم کرے گا اور آپ کی ادبی سمجھ میں اضافہ کرے گا۔</p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span
+                                class="like-count urdu-text-xs"></span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span
+                                class="view-count urdu-text-xs"></span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
                 </article>
             </div>
         </section>
@@ -1797,9 +2295,98 @@
                     <i class="bi bi-instagram mr-2"></i> Naat Academy انسٹاگرام
                 </a>
                 <p class="urdu-text urdu-text-xs text-gray-500 mt-5 instagram-note">
-                    (یہاں انسٹاگرام فیڈ ایمبیڈ کرنے کے لئے، انسٹاگرام سے ایمbed کوڈ کاپی کرکے پیسٹ کریں)
+                    (یہاں انسٹاگرام فیڈ ایمbed کوڈ کاپی کرکے پیسٹ کریں)
                 </p>
             </div>
+        </section>
+
+        <!-- اہم اسلامی ایام Section -->
+        <section class="mb-10 animate-slideUpFadeIn islamic-events-section" style="animation-delay: 0.25s;">
+            <div class="section-title-container">
+                <h2 class="section-title urdu-text"><span
+                        class="section-title-icon-wrapper gradient-icon-bg-festivals"><i
+                            class="bi bi-calendar-heart-fill section-title-icon"></i></span>اہم اسلامی ایام</h2>
+                <a href="#" class="pill-button urdu-text urdu-text-xs islamic-events-more-link"> مکمل کیلنڈر <i
+                        class="bi bi-arrow-left-short ml-1"></i></a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                <!-- 1. Muharram -->
+                <div class="card p-4 text-center bg-gray-100 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-gray-800">محرم</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۱۰ محرم: یومِ عاشورہ</p>
+                </div>
+
+                <!-- 2. Safar -->
+                <div class="card p-4 text-center bg-indigo-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-indigo-800">صفر</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۲۵ صفر: عرسِ اعلیٰ حضرتؒ</p>
+                </div>
+
+                <!-- 3. Rabi' al-Awwal -->
+                <div class="card p-4 text-center bg-rose-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-rose-800">ربیع الاول</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۱۲ ربیع الاول: عید میلاد النبی ﷺ</p>
+                </div>
+
+                <!-- 4. Rabi' al-Thani -->
+                <div class="card p-4 text-center bg-slate-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-slate-800">ربیع الثانی</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-500">کوئی خاص دن موجود نہیں</p>
+                </div>
+
+                <!-- 5. Jumada al-Awwal -->
+                <div class="card p-4 text-center bg-slate-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-slate-800">جمادی الاول</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-500">کوئی خاص دن موجود نہیں</p>
+                </div>
+
+                <!-- 6. Jumada al-Thani -->
+                <div class="card p-4 text-center bg-slate-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-slate-800">جمادی الثانی</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-500">کوئی خاص دن موجود نہیں</p>
+                </div>
+
+                <!-- 7. Rajab -->
+                <div class="card p-4 text-center bg-sky-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-sky-800">رجب</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۶ رجب: عرسِ خواجہ غریب نوازؒ</p>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۲۷ رجب: شبِ معراج</p>
+                </div>
+
+                <!-- 8. Sha'ban -->
+                <div class="card p-4 text-center bg-purple-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-purple-800">شعبان</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۱۵ شعبان: شبِ برات</p>
+                </div>
+
+                <!-- 9. Ramadan -->
+                <div class="card p-4 text-center bg-green-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-green-800">رمضان المبارک</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">رمضان: روزوں کا مہینہ</p>
+                </div>
+
+                <!-- 10. Shawwal -->
+                <div class="card p-4 text-center bg-red-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-red-800">شوال</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۱ شوال: عید الفطر</p>
+                </div>
+
+                <!-- 11. Dhu al-Qadah -->
+                <div class="card p-4 text-center bg-slate-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-slate-800">ذوالقعدہ</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-500">کوئی خاص دن موجود نہیں</p>
+                </div>
+
+                <!-- 12. Dhu al-Hijjah -->
+                <div class="card p-4 text-center bg-orange-50 islamic-event-card">
+                    <h5 class="urdu-text urdu-text-base font-semibold text-orange-800">ذوالحجہ</h5>
+                    <p class="urdu-text urdu-text-xs text-gray-700">۱۰ ذوالحجہ: عید الاضحی</p>
+                </div>
+
+            </div>
+
+
         </section>
 
         <!-- اوقاتِ نماز اور اسلامی کیلنڈر Section -->
@@ -1842,31 +2429,125 @@
                         class="font-bold mb-3 urdu-text urdu-text-md text-center text-gray-800 islamic-calendar-events-title">
                         اہم اسلامی ایام و تہوار:</h4>
                     <ul class="space-y-2 text-base islamic-calendar-event-list">
+
+                        <!-- Today’s Date -->
                         <li id="islamicDateToday"
                             class="font-medium text-center p-3 bg-white/40 rounded-lg shadow-sm islamic-calendar-today-date">
-                            آج: <span class="font-bold text-teal-800"></span></li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۰ ذوالحجہ:</span> عید
-                            الاضحی</li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱ محرم:</span> اسلامی نیا
-                            سال</li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۰ محرم:</span> یومِ عاشورہ
+                            آج: <span class="font-bold text-teal-800"></span>
                         </li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۲ ربیع الاول:</span> عید
-                            میلاد النبی ﷺ</li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۲۷ رجب:</span> شبِ معراج
+
+                        <!-- 1. Muharram -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">محرم:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>۱ محرم: اسلامی نیا سال</li>
+                                <li>۱۰ محرم: یومِ عاشورہ</li>
+                            </ul>
                         </li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱۵ شعبان:</span> شبِ برات
+
+                        <!-- 2. Safar -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">صفر:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>کوئی خاص دن موجود نہیں</li>
+                            </ul>
                         </li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">رمضان المبارک:</span> روزوں
-                            کا مہینہ</li>
-                        <li class="islamic-calendar-event-item"><span class="font-semibold">۱ شوال:</span> عید الفطر
+
+                        <!-- 3. Rabi' al-Awwal -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">ربیع الاول:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>۱۲ ربیع الاول: عید میلاد النبی ﷺ</li>
+                            </ul>
                         </li>
+
+                        <!-- 4. Rabi' al-Thani -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">ربیع الثانی:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>کوئی خاص دن موجود نہیں</li>
+                            </ul>
+                        </li>
+
+                        <!-- 5. Jumada al-Awwal -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">جمادی الاول:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>کوئی خاص دن موجود نہیں</li>
+                            </ul>
+                        </li>
+
+                        <!-- 6. Jumada al-Thani -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">جمادی الثانی:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>کوئی خاص دن موجود نہیں</li>
+                            </ul>
+                        </li>
+
+                        <!-- 7. Rajab -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">رجب:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>۲۷ رجب: شبِ معراج</li>
+                            </ul>
+                        </li>
+
+                        <!-- 8. Sha'ban -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">شعبان:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>۱۵ شعبان: شبِ برات</li>
+                            </ul>
+                        </li>
+
+                        <!-- 9. Ramadan -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">رمضان المبارک:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>روزوں کا مہینہ</li>
+                            </ul>
+                        </li>
+
+                        <!-- 10. Shawwal -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">شوال:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>۱ شوال: عید الفطر</li>
+                            </ul>
+                        </li>
+
+                        <!-- 11. Dhu al-Qadah -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">ذوالقعدہ:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>کوئی خاص دن موجود نہیں</li>
+                            </ul>
+                        </li>
+
+                        <!-- 12. Dhu al-Hijjah -->
+                        <li class="islamic-calendar-event-item">
+                            <span class="font-semibold">ذوالحجہ:</span>
+                            <ul class="mt-1 space-y-1">
+                                <li>۱۰ ذوالحجہ: عید الاضحی</li>
+                            </ul>
+                        </li>
+
                     </ul>
+
                 </div>
             </div>
         </section>
 
     </main>
+
+    <!-- Centered View More Button at the end -->
+    <div class="text-center mb-12">
+        <button
+            class="pill-button urdu-text urdu-text-base bg-blue-600 hover:bg-blue-700 transition-colors transform hover:scale-105">
+            مزید دیکھیں <i class="bi bi-arrow-left-short ml-1"></i>
+        </button>
+    </div>
 
     <!-- Footer Section -->
     <footer class="footer-bg py-8 text-center shadow-inner">
@@ -1879,7 +2560,7 @@
     </footer>
 
     <!-- WhatsApp FAB -->
-    <a href="https://wa.me/yourphonenumber" target="_blank" class="whatsapp-fab" aria-label="Join WhatsApp Group"><i
+    <a href="https://www.naatacademy.com/Join" target="_blank" class="whatsapp-fab" aria-label="Join WhatsApp Group"><i
             class="bi bi-whatsapp"></i></a>
 
     <!-- Modals -->
@@ -1970,7 +2651,10 @@
     </div>
 
 
-    <script src="./script.js"></script>
+    <!-- Add these before your script -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script type="Module" src="script.js"></script>
     <script>
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -1993,9 +2677,13 @@
             // Populates the Kalaam Modal Slider with placeholder images
             const populateKalaamModalSlider = () => {
                 const kalaamImageSources = [
-                    "https://placehold.co/600x400/d1c4e9/333333?text=Kalaam+Art+1", "https://placehold.co/600x400/c5cae9/333333?text=Kalaam+Art+2",
-                    "https://placehold.co/600x400/b3e5fc/333333?text=Kalaam+Art+3", "https://placehold.co/600x400/dcedc8/333333?text=Kalaam+Art+4",
-                    "https://placehold.co/600x400/f0f4c3/333333?text=Kalaam+Art+5", "https://placehold.co/600x400/fff9c4/333333?text=Kalaam+Art+6"
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919980/naat/ba32c779-6a4f-4075-885a-66b21df81b51.png",
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919968/naat/7d69d7e9-c484-44f9-b7e6-293c5c283c6e.png",
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919957/naat/a8802dfb-5d01-4a20-accf-67fde49af286.png",
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919919/naat/62ea9ec3-4955-4c5d-ac49-619a1c150224.png",
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919900/naat/f7c759d2-0c9f-43eb-b107-55ec4d8937d8.png",
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919845/naat/f89a6783-04fc-4391-929c-73802416fafd.png",
+                    "https://res.cloudinary.com/awescreative/image/upload/v1749919835/naat/507b2475-fcf0-4ea2-8c4f-44bf54545a1d.png"
                 ];
                 wrapper.innerHTML = ''; // Clear existing content
                 kalaamImageSources.forEach(src => {
@@ -2412,6 +3100,53 @@
             // Initial render of prayer calendar and Islamic date
             renderPrayerCalendar(currentDisplayDate);
             updateCurrentIslamicDate();
+
+            // Milad Tabs functionality
+            const miladTabButtons = document.querySelectorAll('.milad-tab-button');
+            const miladTabContents = document.querySelectorAll('.milad-tab-content');
+
+            miladTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove 'active-tab' class from all buttons and hide all content
+                    miladTabButtons.forEach(btn => btn.classList.remove('active-tab', 'bg-purple-300', 'bg-pink-300', 'bg-red-300', 'bg-orange-300'));
+                    miladTabContents.forEach(content => content.classList.add('hidden'));
+
+                    // Add 'active-tab' class to the clicked button and show its content
+                    const targetTabId = button.dataset.tab;
+                    const targetContent = document.getElementById(targetTabId);
+
+                    button.classList.add('active-tab');
+
+                    // Apply specific background color for active tab based on its current color class
+                    if (button.classList.contains('bg-purple-200')) {
+                        button.classList.add('bg-purple-300');
+                    } else if (button.classList.contains('bg-pink-200')) {
+                        button.classList.add('bg-pink-300');
+                    } else if (button.classList.contains('bg-red-200')) {
+                        button.classList.add('bg-red-300');
+                    } else if (button.classList.contains('bg-orange-200')) {
+                        button.classList.add('bg-orange-300');
+                    }
+
+
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Set the first tab as active by default
+            if (miladTabButtons.length > 0) {
+                miladTabButtons[0].click(); // Simulate a click on the first tab
+            }
+
+            // Update total article count
+            const totalArticleCountElement = document.getElementById('totalArticleCount');
+            if (totalArticleCountElement) {
+                const articleCards = document.querySelectorAll('.articles-section .article-card');
+                totalArticleCountElement.textContent = articleCards.length;
+            }
+
         });
     </script>
 </body>

@@ -1035,3 +1035,11 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
+
+.urdu-truncate-single-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  direction: rtl; /* Ensures Urdu truncates correctly */
+}
