@@ -33,13 +33,13 @@ async function loadCategories() {
     const categories = await response.json();
 
     categories.forEach((category) => {
-      const categoryName = category.name || "نامعلوم";
+      const categoryName = category.Name || "نامعلوم";
       const postCount = category.postCount || 25; // Default value if not provided
       const bgcolor = category.Color || '#3712b0';
 
       // Create button
       const button = document.createElement("button");
-      button.className = `category-tag urdu-text-xs category-${categoryName} bg-[${bgcolor}] text-black text-shadow-2xl header-category-tag`;
+      button.className = `category-tag urdu-text-xs category-${categoryName} bg-[${bgcolor}] text-gray text-shadow-2xl header-category-tag`;
       button.setAttribute("data-category", categoryName);
 
       // Inner span structure
