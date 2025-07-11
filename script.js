@@ -144,56 +144,95 @@ loadMiladPoetryArticles();
 
 
 
-async function loadwritersCards() {
-  try {
-    // Reference to your poets collection in Firestore
-    const poetsRef = collection(db, "writers");
-    const querySnapshot = await getDocs(poetsRef);
+// async function loadwritersCards() {
+//   try {
+//     // Reference to your poets collection in Firestore
+//     const poetsRef = collection(db, "writers");
+//     const querySnapshot = await getDocs(poetsRef);
     
-    // Get the container where cards will be inserted
-    const container = document.getElementById("poets-container"); // You'll need to add this ID to your HTML
+//     // Get the container where cards will be inserted
+//     const container = document.getElementById("poets-container"); // You'll need to add this ID to your HTML
     
-    // Clear existing content if needed
-    container.innerHTML = '';
+//     // Clear existing content if needed
+//     container.innerHTML = '';
     
-    // Loop through each poet document
-    querySnapshot.forEach((doc) => {
-      const poet = doc.data();
+//     // Loop through each poet document
+//     querySnapshot.forEach((doc) => {
+//       const poet = doc.data();
       
-      // Create a new card element
-      const card = document.createElement("article");
-      card.className = "card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50";
+//       // Create a new card element
+//       const card = document.createElement("article");
+//       card.className = "card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50";
       
-      // Set the card's inner HTML using the poet data
-      card.innerHTML = `
-        <div class="poet-icon-container poet-icon-gradient-1">
-          <img src="${poet.imageUrl || 'https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg'}" 
-               alt="${poet.writerName} Icon" class="poet-icon-image">
-        </div>
-        <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">${poet.writerName}</h5>
-        <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: 1856 - وفات: 1921</p>
-        <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description line-clamp-1">${poet.aboutWriter}</p>
-        <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 200+</p>
-        <div class="stats-bar justify-center poet-stats-bar">
-          <span><i class="bi bi-heart-fill text-red-500"></i> 
-            <span class="like-count urdu-text-xs">20</span>
-          </span>
-          <span><i class="bi bi-eye-fill text-blue-500"></i> 
-            <span class="view-count urdu-text-xs">100</span>
-          </span>
-          <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
-        </div>
-      `;
+//       // Set the card's inner HTML using the poet data
+//       card.innerHTML = `
+//         <div class="poet-icon-container poet-icon-gradient-1">
+//           <img src="${poet.imageUrl || 'https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg'}" 
+//                alt="${poet.writerName} Icon" class="poet-icon-image">
+//         </div>
+//         <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">${poet.writerName}</h5>
+//         <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: 1856 - وفات: 1921</p>
+//         <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description line-clamp-1">${poet.aboutWriter}</p>
+//         <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 200+</p>
+//         <div class="stats-bar justify-center poet-stats-bar">
+//           <span><i class="bi bi-heart-fill text-red-500"></i> 
+//             <span class="like-count urdu-text-xs">20</span>
+//           </span>
+//           <span><i class="bi bi-eye-fill text-blue-500"></i> 
+//             <span class="view-count urdu-text-xs">100</span>
+//           </span>
+//           <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+//         </div>
+//       `;
       
-      // Add the card to the container
-      container.appendChild(card);
-    });
+//       // Add the card to the container
+//       container.appendChild(card);
+//     });
     
-  } catch (error) {
-    console.error("Error loading poet cards:", error);
-  }
-}
+//   } catch (error) {
+//     console.error("Error loading poet cards:", error);
+//   }
+// }
 
+
+
+ async function loadwritersCards() {
+    try {
+      const response = await fetch("https://updated-naatacademy.onrender.com/api/writers");
+      const writers = await response.json();
+
+      const container = document.getElementById("poets-container");
+      container.innerHTML = "";
+
+      writers.forEach((poet) => {
+       const id = poet.WriterID;
+        const card = document.createElement("article");
+        card.className = "card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50";
+        card.dataset.id = id;
+
+        card.innerHTML = `
+          <div class="poet-icon-container poet-icon-gradient-1 ">
+            <img src="${poet.imageUrl || 'https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg'}" 
+                 alt="${poet.Name} Icon" class="poet-icon-image">
+          </div>
+          <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800">${poet.Name}</h5>
+          <p class="urdu-text urdu-text-xs text-gray-600 mb-1">ولادت: 1856 - وفات: 1921</p>
+          <p class="urdu-text urdu-text-xs text-gray-700 leading-snug line-clamp-1">${poet.Bio}</p>
+          <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold">کلام: 200+</p>
+        `;
+
+        card.addEventListener("click", () => {
+          window.location.href = `poet.html?id=${id}`;
+        });
+
+        container.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error("Failed to load writers:", error);
+      document.getElementById("poets-container").innerHTML = "<p>Error loading poets.</p>";
+    }
+  }
 
 
 async function loadKalamSnippets() {

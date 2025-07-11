@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1. UPDATE SEO CONTENT HERE -->
+    <title>حدائق بخشش - امام احمد رضا خان بریلوی | نعتیہ کلام، نعت، منقبت، سلام</title>
+    <meta name="description" content="امام احمد رضا خان بریلوی رحمۃ اللہ علیہ کے شہرہ آفاق نعتیہ دیوان 'حدائق بخشش' کا مکمل کلام پڑھیں۔ نعتیں، مناقب، سلام، قصائد اور رباعیات کا سب سے بڑا آن لائن مجموعہ۔">
+    <meta name="keywords" content="حدائق بخشش, امام احمد رضا, نعت, منقبت, سلام, قصیدہ, رباعیات, اسلامی شاعری, اردو ادب, اعلیٰ حضرت, فرہنگ">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'NaatFont';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf') format('truetype');
+            font-weight: normal; font-style: normal; font-display: swap;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #f7f8fa; color: #374151; }
+        .urdu-text { font-family: 'NaatFont', 'Noto Nastaliq Urdu', serif; line-height: 2.3; font-size: 1.15rem; }
+        .urdu-text-xl { font-size: 2.2rem; }
+        .urdu-text-lg { font-size: 1.8rem; }
+        .urdu-text-md { font-size: 1.4rem; }
+        .urdu-text-base { font-size: 1.15rem; }
+        .urdu-text-sm { font-size: 1rem; }
+        .urdu-text-xs { font-size: 0.8rem; letter-spacing: normal; }
+        
+        .header-gradient { background: linear-gradient(to bottom, #f0fdfa, #f7f8fa); }
+        .card { background-color: white; border-radius: 1.25rem; box-shadow: 0 4px 10px -2px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #eef2f7; }
+        
+        .page-header { background-color: transparent; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .header-title-container { background-color: #e0f2f1; color: #0f766e; border-radius: 9999px; padding: 0.5rem 2rem; }
+        .header-icon { width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: white; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 1.2rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .header-icon:hover { background-color: #f1f5f9; transform: scale(1.05); }
+        
+        .writer-details-section { text-align: center; background-color: #fcfcfd; padding: 2rem 1.5rem; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+        .writer-avatar-wrapper { display: inline-block; width: 6rem; height: 6rem; border-radius: 50%; padding: 0.25rem; background: linear-gradient(45deg, #a5b4fc, #c4b5fd); }
+        .writer-avatar-wrapper img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid white; }
+        .follow-button { background-color: #14b8a6; color: white; padding: 0.5rem 1.25rem; border-radius: 9999px; transition: background-color 0.2s; display: inline-block; margin-top: 0.75rem; cursor: pointer; }
+        .follow-button:hover { background-color: #0d9488; }
+        
+        .sticky-filters { position: sticky; top: 0; background-color: rgba(247, 248, 250, 0.9); backdrop-filter: blur(8px); z-index: 40; padding-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eef2f7; }
+        .filter-tab { padding: 0.6rem 1.75rem; border-radius: 9999px; border: 1px solid #e2e8f0; background-color: white; transition: all 0.2s ease; cursor: pointer; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+        .filter-tab.active { background-color: #334155; color: white; border-color: #334155; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(51, 65, 85, 0.15); }
+        
+        .alphabet-button { width: 2.5rem; height: 2.5rem; border-radius: 50%; transition: all 0.2s ease; font-weight: bold; }
+        .alphabet-button.available { background-color: #eef2ff; color: #4338ca; cursor: pointer; }
+        .alphabet-button.available:hover { background-color: #e0e7ff; transform: scale(1.1); }
+        .alphabet-button.unavailable { background-color: #f8fafc; color: #cbd5e1; cursor: not-allowed; }
+        
+        .poetry-item { padding: 1rem; border-bottom: 1px solid #f1f5f9; transition: all 0.2s; border-right: 4px solid transparent; }
+        .poetry-item:hover { background-color: #f8fafc; border-right-color: #818cf8; }
+        .poetry-stats { display: flex; align-items: center; gap: 0.75rem; color: #94a3b8; }
+        
+        .category-badge { font-family: 'Playpen Sans', sans-serif; padding: 0.2rem 0.8rem; border-radius: 9999px; font-weight: 600; line-height: 1.5; font-size: 0.75rem; }
+        .badge-نعت { background-color: #e0f2f1; color: #0d9488; }
+        .badge-منقبت { background-color: #f3e8ff; color: #7e22ce; }
+        .badge-سلام { background-color: #e0f2fe; color: #0369a1; }
+        .badge-مناجات { background-color: #dbeafe; color: #1e40af; }
+        .badge-اصلاحی { background-color: #fee2e2; color: #991b1b; }
+        .badge-شجرہ { background-color: #fefce8; color: #a16207; }
+        .badge-قصیدہ { background-color: #ede9fe; color: #5b21b6; }
+        .badge-رباعیات { background-color: #fce7f3; color: #9d174d; }
+        .badge-غزل { background-color: #e5e7eb; color: #374151; }
+
+        .poetry-section-header { text-align: center; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+        .poetry-section-header span { display: inline-block; background-color: #f1f5f9; color: #4b5563; width: 2rem; height: 2rem; line-height: 2rem; border-radius: 50%; font-weight: bold; }
+
+        .footer-bg { background-color: #1e293b; color: #94a3b8; }
+        
+        .sidebar-section { margin-bottom: 2rem; }
+        .sidebar-title { font-weight: bold; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e2e8f0; }
+        .chip-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .chip { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; border-radius: 9999px; font-size: 0.9rem; transition: all 0.2s ease; cursor: pointer; border: 1px solid transparent; }
+        .chip i { font-size: 1rem; }
+        .chip-summary { background-color: #f5f3ff; color: #5b21b6; border-color: #ddd6fe; }
+        .chip-summary:hover { background-color: #ede9fe; border-color: #c4b5fd; }
+        .chip-topic { background-color: #f0fdfa; color: #0f766e; border-color: #ccfbf1; }
+        .chip-topic:hover { background-color: #ccfbf1; border-color: #99f6e4; }
+        .icon-topic { color: #a7f3d0; }
+        
+        .glossary-chip { background-color: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+        .glossary-chip:hover { background-color: #e2e8f0; border-color: #cbd5e1; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(30, 41, 59, 0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #ffffff; margin: 5% auto; padding: 2.5rem; border-radius: 1rem; width: 90%; max-width: 800px; position: relative; animation: slideDown 0.4s ease-out; }
+        @keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-close-button { position: absolute; top: 1rem; left: 1.5rem; font-size: 2rem; color: #94a3b8; cursor: pointer; background: none; border: none; }
+        
+        .fab { position: fixed; bottom: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease; z-index: 900; }
+        .fab:hover { transform: scale(1.1) rotate(10deg); box-shadow: 0 6px 12px rgba(0,0,0,0.3); }
+        .back-to-top { right: 1.5rem; background-color: #475569; display: none; }
+        .whatsapp-channel { left: 1.5rem; background-color: #25d366; font-size: 1.5rem; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <header class="header-gradient py-3 shadow-sm">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/" aria-label="Naat Academy Home"><img src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png" alt="Naat Academy Logo" class="h-16 md:h-20"></a>
+            <nav class="flex items-center space-x-4 space-x-reverse">
+                <a href="#" class="text-gray-700 hover:text-teal-600 urdu-text urdu-text-sm font-medium">صفحہ اول</a>
+                <a href="#" class="text-gray-700 hover:text-teal-600 urdu-text urdu-text-sm font-medium">کلام</a>
+                <a href="#" class="text-gray-700 hover:text-teal-600 urdu-text urdu-text-sm font-medium">شعراء</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2">
+                <div class="card overflow-hidden">
+                    <div class="writer-details-section" id="poet-detail">
+                        <div>
+                            <!-- 2. UPDATE WRITER'S AVATAR HERE -->
+                            <div class="writer-avatar-wrapper mx-auto">
+                                <img src="https://naatacademy.com/media/poets/ahmed-raza-khan.png" alt="امام احمد رضا خان">
+                            </div>
+                            <div class="writer-info-text mt-4">
+                                <!-- 2. UPDATE WRITER'S NAME & TITLE HERE -->
+                                <h1 class="urdu-text urdu-text-md">امام احمد رضا خان <span class="urdu-text-sm">رحمۃ اللہ علیہ</span></h1>
+                                <p class="urdu-text urdu-text-sm text-gray-500">مجموعہ: حدائق بخشش</p>
+                            </div>
+                            <button id="viewProfileBtn" class="follow-button urdu-text urdu-text-sm">پروفائل دیکھیں</button>
+                        </div>
+                    </div>
+                    
+                    <div class="sticky-filters" id="stickyFilters">
+                        <div class="container mx-auto">
+                            <div class="flex justify-center flex-wrap gap-3 mb-6" id="filterTabs">
+                                <button class="filter-tab urdu-text urdu-text-sm" data-filter="tahajji">حروفِ تہجی</button>
+                                <button class="filter-tab active urdu-text urdu-text-sm" data-filter="radif">حروفِ ردیف</button>
+                                <button class="filter-tab urdu-text urdu-text-sm" data-filter="favorite">پسندیدہ</button>
+                            </div>
+                            <div class="flex justify-center flex-wrap gap-2" id="alphabetNavContainer"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="px-4 md:px-6 py-4" id="poetryList"></div>
+                </div>
+            </div>
+
+            <aside class="lg:col-span-1">
+                <div class="sticky top-28 space-y-8">
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-title urdu-text urdu-text-md text-slate-800">کتاب کا خلاصہ</h2>
+                        <div class="chip-container" id="summary-list"></div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-title urdu-text urdu-text-md text-slate-800">موضوعات</h2>
+                        <div class="chip-container" id="topics-list"></div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-title urdu-text urdu-text-md text-slate-800">نعت اکیڈمی فرہنگ</h2>
+                        <div class="chip-container" id="glossary-list"></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer-bg py-8 text-center shadow-inner mt-12">
+        <div class="container mx-auto px-4">
+            <p class="urdu-text urdu-text-lg mb-2 font-bold text-slate-200">نعتیہ اکیڈمی®</p>
+            <p class="text-sm text-slate-400">کاپی رائٹ © <span id="currentYear"></span> نعتیہ اکیڈمی۔ جملہ حقوق محفوظ ہیں۔</p>
+        </div>
+    </footer>
+
+    <a href="#" id="backToTopBtn" class="fab back-to-top"><i class="bi bi-arrow-up text-xl"></i></a>
+    <a href="https://wa.me/yourwhatsappchannel" target="_blank" class="fab whatsapp-channel"><i class="bi bi-whatsapp"></i></a>
+
+    <!-- 2. UPDATE WRITER'S DETAILED PROFILE HERE -->
+    <div id="profileModal" class="modal"><div class="modal-content"><button id="closeProfileModal" class="modal-close-button">×</button><div class="urdu-text text-gray-700 leading-loose"><h2 class="urdu-text-lg font-bold text-center mb-6">اعلیٰ حضرت امام احمد رضا خان فاضل بریلوی رحمۃ اللہ علیہ</h2><p class="mb-4">اعلیٰ حضرت امام احمد رضا خان فاضل بریلوی رحمۃ اللہ علیہ (1856–1921) برصغیر پاک و ہند کے عظیم مجدد، فقیہ، محدث، صوفی اور عاشقِ رسول ﷺ تھے۔ علم و عمل، عشق و معرفت، فقہ و فتویٰ، تفسیر و حدیث، اور سائنس و فلسفہ میں اُن کی گراں قدر خدمات مسلم الثبوت ہیں، لیکن جس چیز نے آپ کے قلب و قلم کو سب سے زیادہ زندگی عطا کی، وہ عشقِ رسول ﷺ تھا، جس کا والہانہ مظہر آپ کی نعتیہ شاعری ہے۔</p><h3 class="urdu-text-md font-bold mt-6 mb-3 text-teal-700">نعت میں امام احمد رضا کی امتیازی شان</h3><p class="mb-4">اعلیٰ حضرت کی نعت گوئی محض ایک شاعر کا اظہارِ عقیدت نہیں، بلکہ ایک عاشقِ صادق کا وجدانی و روحانی نغمہ ہے، جس میں علم، ادب، عشق اور عرفان کی بلندیاں یکجا ہو گئی ہیں۔</p><h3 class="urdu-text-md font-bold mt-6 mb-3 text-teal-700">مشہور نعتیہ کلام</h3><ul class="list-disc list-inside space-y-2 mb-4"><li>"وُہ سُــــوۓ لالہ زار پھرتے ہیں"</li><li>"مصطفٰے جانِ رحمت پہ لاکھوں سلام"</li><li>"کعبے کے بدر الدجیٰ، تم پہ کروڑوں درود"</li></ul></div></div></div>
+
+
+    <script src="Poet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 3. UPDATE MAIN POETRY DATA HERE
+            // The entire page will automatically update based on this array.
+            const poetryData = [
+                { letter: 'و', misra: 'واہ کیا جود و کرم ہے شہ بطحا تیرا', type: 'نعت', topic: 'شانِ کرم' }, { letter: 'و', misra: 'واہ کیا مرتبہ اے غوث ہے بالا تیرا', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'ت', misra: 'تو ہے وہ غوث کہ ہر غوث ہے شیدا تیرا', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'ا', misra: 'الاماں قہر ہے اے غوث وہ تیکھا تیرا', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'ہ', misra: 'ہم خاک ہیں اور خاک ہی ماوا ہے ہمارا', type: 'نعت', topic: 'عاجزی و انکساری' }, { letter: 'غ', misra: 'غم ہو گئے بے شمار آقا', type: 'سلام', topic: 'استغاثہ' }, { letter: 'م', misra: 'محمد مظہر کامل ہے حق کی شان عزت کا', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'ل', misra: 'لطف ان کا عام ہو ہی جائے گا', type: 'نعت', topic: 'امیدِ شفاعت' }, { letter: 'ل', misra: 'لم یات نظیرک فی نظر مثل تو نہ شد پیدا جانا', type: 'نعت', topic: 'شانِ بے مثالی' }, { letter: 'ن', misra: 'نہ آسمان کو یوں سر کشیدہ ہونا تھا', type: 'نعت', topic: 'معراج' }, { letter: 'ش', misra: 'شور مہ نو سن کر تجھ تک میں دواں آیا', type: 'نعت', topic: 'اشتیاق' }, { letter: 'خ', misra: 'خراب حال کیا دل کو پُر ملال کیا', type: 'نعت', topic: 'عشقِ رسول' }, { letter: 'ب', misra: 'بندہ ملنے کو قریب حضرت قادر گیا', type: 'نعت', topic: 'حاضریِ مدینہ' }, { letter: 'ن', misra: 'نعمتیں بانٹتا جس سمت وہ ذیشان گیا', type: 'نعت', topic: 'شانِ عطا' }, { letter: 'ت', misra: 'تاب مرآت سحر گرد بیابان عرب', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'پ', misra: 'پھراٹھا ولولہ یاد مغیلان عرب', type: 'نعت', topic: 'یادِ مدینہ' }, { letter: 'ج', misra: 'جو بنوں پر ہے بہار چمن آرائی دوست', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'ط', misra: 'طوبےٰ میں جو سب سے اونچی نازک سیدھی نکلی شاخ', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'ز', misra: 'زہے عزت و اعتلائے محمد', type: 'نعت', topic: 'شانِ محمدی' }, { letter: 'ا', misra: 'اے شافع امم شہ ذی جاہ لے خبر', type: 'نعت', topic: 'استغاثہ' }, { letter: 'ب', misra: 'بندہ قادر کا بھی قادر بھی ہے عبد القادر', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'گ', misra: 'گزرے جس راہ سے وہ سیدِ والا ہو کر', type: 'نعت', topic: 'شانِ مصطفٰی' }, { letter: 'ن', misra: 'نارِ دوزخ کو چمن کر دے بہارِ عارض', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'ت', misra: 'تمہارے ذرے کے پرتو ستار ہائے فلک', type: 'نعت', topic: 'عظمتِ مصطفٰی' }, { letter: 'ک', misra: 'کیا ٹھیک ہو رُخِ نبوی پر مثالِ گل', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'س', misra: 'سر تا بقدم ہے تن سلطان ِ زمن پھول', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'ہ', misra: 'ہے کلام الہی میں شمس و ضحی ترے چہرہ ءِ نور فزا کی قسم', type: 'نعت', topic: 'شانِ قرآنی' }, { letter: 'ی', misra: 'یا الٰہی ہر جگہ تیری عطا کا ساتھ ہو', type: 'مناجات', topic: 'دعا' }, { letter: 'ک', misra: 'کیا ہی ذوق افزا شفاعت ہے تمہاری واہ واہ', type: 'نعت', topic: 'شفاعت' }, { letter: 'س', misra: 'سب سے اَولٰی و اعلٰی ہمارا نبی', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'د', misra: 'دل کو اُن سے خدا جدا نہ کرے', type: 'نعت', topic: 'عشقِ رسول' }, { letter: 'ا', misra: 'اللہ، اللہ کے نبی سے', type: 'اصلاحی', topic: 'عقائد' }, { letter: 'ی', misra: 'یا الٰہی رحم فرما مصطفٰے کے واسطے', type: 'شجرہ', topic: 'وسیلہ' }, { letter: 'ع', misra: 'عرشِ حق ہے مسندِ رفعت رسولُ اللہ کی', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'ک', misra: 'کعبے کے بدرالدجٰی تم پہ کروڑوں درود', type: 'سلام', topic: 'درود و سلام' }, { letter: 'م', misra: 'مصطفٰے جانِ رحمت پہ لاکھوں سلام', type: 'سلام', topic: 'درود و سلام' }, { letter: 'ل', misra: 'لحد میں عشقِ رُخِ شہ کا داغ لے کے چلے', type: 'نعت', topic: 'عشقِ رسول' },
+            ];
+
+            // --- END OF DATA ---
+
+            const fullAlphabet = ['ا', 'آ', 'ب', 'بھ', 'پ', 'ت', 'ث', 'ج', 'چ', 'ح', 'خ', 'د', 'ڈ', 'ذ', 'ر', 'ڑ', 'ز', 'ژ', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ک', 'گ', 'ل', 'م', 'ن', 'و', 'ہ', 'ی'];
+            
+            const alphabetNavContainer = document.getElementById('alphabetNavContainer');
+            const poetryListContainer = document.getElementById('poetryList');
+            const summaryList = document.getElementById('summary-list');
+            const topicsList = document.getElementById('topics-list');
+            const glossaryList = document.getElementById('glossary-list');
+            const filterTabsContainer = document.getElementById('filterTabs');
+            const profileModal = document.getElementById('profileModal');
+            const viewProfileBtn = document.getElementById('viewProfileBtn');
+            const closeProfileModalBtn = document.getElementById('closeProfileModal');
+            const currentYearSpan = document.getElementById('currentYear');
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            function renderPoetryList(data, groupByLetter = true) {
+                poetryListContainer.innerHTML = '';
+                if (data.length === 0) {
+                    poetryListContainer.innerHTML = `<p class="text-center text-gray-500 urdu-text urdu-text-base">اس زمرے میں کوئی کلام موجود نہیں۔</p>`;
+                    return;
+                }
+                let currentLetter = '';
+                data.forEach(item => {
+                    if (groupByLetter && item.letter !== currentLetter) {
+                        currentLetter = item.letter;
+                        const headerDiv = document.createElement('div');
+                        headerDiv.id = `letter-${currentLetter}`;
+                        headerDiv.className = 'poetry-section-header';
+                        headerDiv.innerHTML = `<span>${currentLetter}</span>`;
+                        poetryListContainer.appendChild(headerDiv);
+                    }
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'poetry-item';
+                    const views = `${Math.floor(Math.random() * 20) + 5}K`;
+                    const likes = `${Math.floor(Math.random() * 10) + 1}K`;
+                    const badgeClass = `badge-${item.type}`;
+                    itemDiv.innerHTML = `<div><p class="urdu-text urdu-text-md font-medium text-slate-700 mb-1">${item.misra}</p><div class="flex items-center gap-4 mt-2"><span class="category-badge ${badgeClass} urdu-text-xs">${item.type}</span><div class="poetry-stats"><span class="stats-item flex items-center gap-1 urdu-text-xs"><i class="bi bi-eye-fill"></i>${views}</span><span class="stats-item flex items-center gap-1 urdu-text-xs"><i class="bi bi-heart-fill"></i>${likes}</span></div></div></div>`;
+                    poetryListContainer.appendChild(itemDiv);
+                });
+            }
+
+            function renderSidebar() {
+                const counts = poetryData.reduce((acc, item) => {
+                    acc[item.type] = (acc[item.type] || 0) + 1; return acc;
+                }, {});
+                const topics = [...new Set(poetryData.map(item => item.topic))];
+                const glossaryTerms = ['شانِ رسالت', 'جمالِ مصطفٰی', 'عشقِ رسول', 'ادبِ رسول', 'معراج', 'شفاعت', 'استغاثہ', 'وسیلہ', 'درود و سلام', 'مظہرِ کامل', 'ذیشان', 'شمس و ضحٰی'];
+                
+                summaryList.innerHTML = `<div class="chip chip-summary"><i class="bi bi-moon-stars-fill"></i><span class="urdu-text urdu-text-xs font-medium">نعتیں: ${counts['نعت'] || 0}</span></div><div class="chip chip-summary"><i class="bi bi-person-check-fill"></i><span class="urdu-text urdu-text-xs font-medium">مناقب: ${counts['منقبت'] || 0}</span></div><div class="chip chip-summary"><i class="bi bi-peace-fill"></i><span class="urdu-text urdu-text-xs font-medium">سلام: ${counts['سلام'] || 0}</span></div>`;
+                topicsList.innerHTML = '';
+                topics.forEach(topic => {
+                    topicsList.innerHTML += `<div class="chip chip-topic"><i class="bi bi-tag-fill icon-topic"></i><span class="urdu-text urdu-text-xs">${topic}</span></div>`;
+                });
+                glossaryList.innerHTML = '';
+                glossaryTerms.forEach(term => {
+                    glossaryList.innerHTML += `<div class="chip glossary-chip"><span class="urdu-text urdu-text-xs">${term}</span></div>`;
+                });
+            }
+            
+            function setupEventListeners() {
+                const availableLetters = new Set(poetryData.map(p => p.letter));
+                alphabetNavContainer.innerHTML = ''; 
+                fullAlphabet.forEach(char => {
+                    const button = document.createElement('button');
+                    button.className = 'alphabet-button flex items-center justify-center urdu-text urdu-text-lg';
+                    button.textContent = char;
+                    if (availableLetters.has(char)) {
+                        button.classList.add('available');
+                        button.addEventListener('click', () => {
+                            const section = document.getElementById(`letter-${char}`);
+                            if (section) {
+                                const stickyHeaderHeight = document.getElementById('stickyFilters').offsetHeight;
+                                const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - stickyHeaderHeight - 10;
+                                window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                            }
+                        });
+                    } else {
+                        button.classList.add('unavailable');
+                    }
+                    alphabetNavContainer.appendChild(button);
+                });
+                
+                filterTabsContainer.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'BUTTON') {
+                        this.querySelector('.active').classList.remove('active');
+                        e.target.classList.add('active');
+                        const filter = e.target.dataset.filter;
+                        const poetryByTahajji = [...poetryData].sort((a, b) => a.misra.localeCompare(b.misra, 'ur'));
+                        const poetryByFavorite = poetryData.slice(0, 10).sort(() => 0.5 - Math.random());
+                        alphabetNavContainer.style.display = (filter === 'favorite') ? 'none' : 'flex';
+                        if (filter === 'radif') renderPoetryList(poetryData, true);
+                        else if (filter === 'tahajji') renderPoetryList(poetryByTahajji, true);
+                        else if (filter === 'favorite') renderPoetryList(poetryByFavorite, false);
+                    }
+                });
+
+                viewProfileBtn.addEventListener('click', () => profileModal.style.display = 'block');
+                closeProfileModalBtn.addEventListener('click', () => profileModal.style.display = 'none');
+                window.addEventListener('click', (e) => {
+                    if (e.target == profileModal) profileModal.style.display = 'none';
+                });
+
+                window.addEventListener('scroll', () => {
+                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                        backToTopBtn.style.display = "flex";
+                    } else {
+                        backToTopBtn.style.display = "none";
+                    }
+                });
+                
+                backToTopBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            function init() {
+                renderPoetryList(poetryData, true);
+                renderSidebar();
+                setupEventListeners();
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>
