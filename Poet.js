@@ -24,7 +24,7 @@ async function loadPoetDetail() {
           <img src="${imageUrl}" alt="${name}">
         </div>
         <div class="writer-info-text mt-4">
-          <h1 class="urdu-text urdu-text-md">${name} <span class="urdu-text-sm">رحمۃ اللہ علیہ</span></h1>
+          <h1 class="urdu-text urdu-text-md">${name} <span class="urdu-text-sm"></span></h1>
           <p class="urdu-text urdu-text-sm text-gray-500">گروپ: ${collection}</p>
         </div>
         <button id="viewProfileBtn" class="follow-button urdu-text urdu-text-sm">پروفائل دیکھیں</button>

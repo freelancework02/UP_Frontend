@@ -235,6 +235,196 @@ loadMiladPoetryArticles();
   }
 
 
+
+  async function fetchKalaam() {
+    const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+    const data = await response.json();
+
+    const kalamContainer = document.getElementById("kalampost");
+    kalamContainer.innerHTML = ""; // Clear existing
+
+    data.forEach((item, index) => {
+        const titleColorClass = ["amber", "blue", "rose"][index % 3]; // cycle through colors
+
+        const card = `
+            <article class="card p-4 hover:bg-${titleColorClass}-50 transition-colors duration-300 poetry-types-card">
+                <div class="flex justify-between items-center mb-3 poetry-type-title-group">
+                    <h3 class="text-xl urdu-text urdu-text-md font-bold text-${titleColorClass}-700 poetry-type-title">
+                        ${item.CategoryName}
+                    </h3>
+                    <a href="#" class="text-sm text-${titleColorClass}-600 hover:text-${titleColorClass}-800 urdu-text urdu-text-xs font-medium transition-colors poetry-type-collection-link">
+                        مجموعہ <i class="bi bi-arrow-left-short"></i>
+                    </a>
+                </div>
+                <img src="https://img.freepik.com/free-photo/books-imagination-still-life_23-2149082172.jpg"
+                    alt="${item.Title}"
+                    class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
+                    onerror="this.onerror=null;this.src='https://placehold.co/300x150?text=Kalaam';">
+                <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed poetry-type-description">
+                    ${item.ContentUrdu.split('\n').slice(0, 2).join('<br>')}
+                </p>
+                <div class="stats-bar poetry-type-stats-bar">
+                    <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.2k</span></span>
+                    <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.0k</span></span>
+                    <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                </div>
+            </article>
+        `;
+        kalamContainer.innerHTML += card;
+    });
+}
+
+
+
+
+async function fetchmuntakhibKalaam() {
+    try {
+        const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+        const data = await response.json();
+
+        // If the response is a single object, wrap it in an array
+        const kalaamList = Array.isArray(data) ? data : [data];
+
+        const container = document.getElementById('kalaam-container');
+        container.innerHTML = ''; // Clear existing content
+
+        kalaamList.forEach(item => {
+            // Split content into lines and take only the first 2
+            const firstTwoLines = item.ContentUrdu
+                ? item.ContentUrdu.split('\n').slice(0, 2).join('<br>')
+                : '';
+
+            const kalaamHTML = `
+                <article class="card p-4 bg-white selected-kalaam-card">
+                    <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
+                        ${item.SectionName}
+                    </h4>
+                    <p class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
+                        ${firstTwoLines}
+                    </p>
+                    <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">
+                        شاعر: ${item.WriterName}
+                    </p>
+                    <div class="stats-bar selected-kalaam-stats-bar">
+                        <span><i class="bi bi-heart-fill text-red-500"></i>
+                            <span class="like-count urdu-text-xs">0</span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> 
+                            <span class="view-count urdu-text-xs">0</span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
+                    <div class="mt-4 flex justify-start items-center">
+                        <span class="category-tag urdu-text-xs selected-kalaam-category-tag">${item.CategoryName}</span>
+                    </div>
+                </article>`;
+            
+            container.insertAdjacentHTML('beforeend', kalaamHTML);
+        });
+    } catch (error) {
+        console.error('Error fetching Kalaam:', error);
+    }
+}
+
+// JavaScript function to fetch 3 kalaams and show only 2 lines from each
+async function Naatkebolfunction() {
+    try {
+        const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+        const data = await response.json();
+
+        const kalaamList = Array.isArray(data) ? data.slice(0, 3) : [data]; // Limit to first 3
+
+        const container = document.getElementById('naat-bol-container');
+        container.innerHTML = ''; // Clear old content
+
+        kalaamList.forEach((item, index) => {
+            // Get first two lines from ContentUrdu
+            const firstTwoLines = item.ContentUrdu
+                ? item.ContentUrdu.split('\n').slice(0, 1).join('<br>')
+                : '';
+
+            const isHiddenClass = index === 2 ? 'hidden md:block' : '';
+
+            const cardHTML = `
+                <article class="card p-4 text-right naat-lyrics-card ${isHiddenClass}">
+                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">
+                        ${item.SectionName}
+                    </h5>
+                    <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">
+                        ${firstTwoLines}
+                    </p>
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> 
+                            <span class="like-count urdu-text-xs">400</span>
+                        </span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> 
+                            <span class="view-count urdu-text-xs">230</span>
+                        </span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
+                </article>`;
+            
+            container.insertAdjacentHTML('beforeend', cardHTML);
+        });
+    } catch (error) {
+        console.error("Error fetching Naat Kalaam:", error);
+    }
+}
+
+
+// async function Naatetalim() {
+//     try {
+//         const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+//         const data = await response.json();
+
+//         const kalaamList = Array.isArray(data) ? data : [data];
+
+//         // Optional: Filter by education-related category (e.g., CategoryName includes "تعلیم")
+//         const educationKalaams = kalaamList
+//             .filter(item => item.CategoryName && item.CategoryName.includes("تعلیم"))
+//             .slice(0, 3); // Take only first 3
+
+//         const container = document.getElementById('naat-education-container');
+//         container.innerHTML = '';
+
+//         educationKalaams.forEach((item, index) => {
+//             const firstTwoLines = item.ContentUrdu
+//                 ? item.ContentUrdu.split('\n').slice(0, 2).join('<br>')
+//                 : '';
+
+//             const isHiddenClass = index === 2 ? 'hidden md:block' : '';
+
+//             const cardHTML = `
+//                 <article class="card p-4 text-right naat-education-card ${isHiddenClass}">
+//                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">
+//                         ${item.Title}
+//                     </h5>
+//                     <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">
+//                         ${firstTwoLines}
+//                     </p>
+//                     <div class="stats-bar">
+//                         <span><i class="bi bi-heart text-gray-500"></i> 
+//                             <span class="like-count urdu-text-xs">0</span>
+//                         </span>
+//                         <span><i class="bi bi-eye-fill text-blue-500"></i> 
+//                             <span class="view-count urdu-text-xs">0</span>
+//                         </span>
+//                         <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+//                     </div>
+//                 </article>`;
+            
+//             container.insertAdjacentHTML('beforeend', cardHTML);
+//         });
+//     } catch (error) {
+//         console.error("Error fetching education kalaams:", error);
+//     }
+// }
+
+
+
+fetchKalaam()
+fetchmuntakhibKalaam()
+Naatkebolfunction()
+// Naatetalim()
+
 async function loadKalamSnippets() {
   try {
     const kalamPostsRef = collection(db, "kalamPosts");
