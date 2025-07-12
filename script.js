@@ -277,25 +277,24 @@ loadMiladPoetryArticles();
 
 
 
+// In your main page's JavaScript (where you fetch the kalaam list)
 async function fetchmuntakhibKalaam() {
     try {
         const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
         const data = await response.json();
 
-        // If the response is a single object, wrap it in an array
         const kalaamList = Array.isArray(data) ? data : [data];
-
         const container = document.getElementById('kalaam-container');
-        container.innerHTML = ''; // Clear existing content
+        container.innerHTML = '';
 
         kalaamList.forEach(item => {
-            // Split content into lines and take only the first 2
             const firstTwoLines = item.ContentUrdu
                 ? item.ContentUrdu.split('\n').slice(0, 2).join('<br>')
                 : '';
 
             const kalaamHTML = `
-                <article class="card p-4 bg-white selected-kalaam-card">
+                <article class="card p-4 bg-white selected-kalaam-card cursor-pointer" 
+                         onclick="window.location.href='lyrics.html?id=${item.KalaamID}'">
                     <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
                         ${item.SectionName}
                     </h4>
@@ -323,6 +322,8 @@ async function fetchmuntakhibKalaam() {
         console.error('Error fetching Kalaam:', error);
     }
 }
+
+
 
 // JavaScript function to fetch 3 kalaams and show only 2 lines from each
 async function Naatkebolfunction() {
