@@ -515,7 +515,7 @@ async function Naatkebolfunction() {
       const isHiddenClass = index === 2 ? "hidden md:block" : "";
 
       const cardHTML = `
-                <article class="card p-4 text-right naat-lyrics-card ${isHiddenClass}">
+                <article class="card p-4 text-right naat-lyrics-card ${isHiddenClass}" onclick="window.location.href='lyrics.html?id=${item.KalaamID}>
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">
                         ${item.SectionName}
                     </h5>
