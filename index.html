@@ -16,6 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="index.css"></script>
     <style>
         /* Custom Font for Urdu Text */
         @font-face {
@@ -35,6 +36,16 @@
             font-size: 1.125rem;
             /* Adjusted base font size */
         }
+
+       .one-line-ellipsis {
+  direction: rtl;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
         /* Urdu Text Specific Styles */
         .urdu-text {
@@ -1239,6 +1250,9 @@
             gap: 0.5rem;
         }
 
+       
+
+
     </style>
 </head>
 
@@ -1344,8 +1358,8 @@
                     class="milad-tab-button urdu-text urdu-text-sm bg-orange-200 text-orange-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-orange-300">واقعات</button>
             </div>
 
-            <div class="milad-tab-content-wrapper">
-                <div id="milad-seerat" class="milad-tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="milad-tab-content-wrapper cursor-pointer">
+                <div id="milad-seerat" class=" milad-tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     <article class="card p-4">
                         <h5 class="urdu-text urdu-text-md font-semibold text-purple-700 mb-2 text-right">نبی اکرم ﷺ کی
                             پیدائش</h5>
@@ -1864,7 +1878,7 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs naat-education-more-link"> مزید تعلیمی مواد <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div id="naat-education-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="naat-education-container" class="cursor-pointer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 text-right naat-education-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت گوئی کے اصول
                     </h5>
@@ -1908,7 +1922,7 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs naat-literature-more-link"> مزید ادبی پہلو <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="naatContainer" class="cursor-pointer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 text-right naat-literature-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">نعتیہ ادب کی
                         خصوصیات</h5>
@@ -1953,7 +1967,7 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs durood-salam-more-link"> مزید درود شریف <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="durood-container"  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 text-right durood-salam-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ ابراہیمی
                     </h5>
@@ -1996,7 +2010,7 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs hamd-more-link"> مزید حمدیں <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="Hamdbari" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 text-right hamd-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 hamd-title">کوئی تو ہے جو نظامِ ہستی
                     </h5>
@@ -2039,7 +2053,7 @@
                 <a href="#" class="pill-button urdu-text urdu-text-xs famous-manqabat-more-link"> تمام منقبتیں <i
                         class="bi bi-arrow-left-short ml-1"></i></a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="mankabat" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 text-right famous-manqabat-card">
                     <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 famous-manqabat-title">منقبتِ غوثِ
                         اعظم</h5>
@@ -2154,7 +2168,7 @@
             </div>
             <p class="urdu-text urdu-text-base text-gray-700 text-center mb-6 poetry-info-subtitle">شاعری کی گہرائیوں کو
                 سمجھنے کے لیے ایک جامع نصاب</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div id="group-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <article class="card p-4 poetry-info-module-card">
                     <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
