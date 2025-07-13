@@ -466,7 +466,7 @@ async function fetchmuntakhibKalaam() {
                 <article class="card p-4 bg-white selected-kalaam-card cursor-pointer" 
                          onclick="window.location.href='lyrics.html?id=${item.KalaamID}'">
                     <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
-                        ${item.SectionName}
+                        ${item.CategoryName}
                     </h4>
                     <p class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
                         ${firstTwoLines}
@@ -499,11 +499,17 @@ async function Naatkebolfunction() {
     const response = await fetch(
       "https://updated-naatacademy.onrender.com/api/kalaam"
     );
+    if (!response.ok) throw new Error("Network response was not ok");
+    
     const data = await response.json();
-
     const kalaamList = Array.isArray(data) ? data.slice(0, 3) : [data]; // Limit to first 3
 
     const container = document.getElementById("naat-bol-container");
+    if (!container) {
+      console.error("Container not found!");
+      return;
+    }
+
     container.innerHTML = ""; // Clear old content
 
     kalaamList.forEach((item, index) => {
@@ -513,30 +519,57 @@ async function Naatkebolfunction() {
         : "";
 
       const isHiddenClass = index === 2 ? "hidden md:block" : "";
+      const id = item._id || item.KalaamID; // Use _id if available, fallback to KalaamID
+      const title = encodeURIComponent(item.Title || item.SectionName || "نعت");
 
       const cardHTML = `
-                <article class="card p-4 text-right naat-lyrics-card ${isHiddenClass}" onclick="window.location.href='lyrics.html?id=${item.KalaamID}>
-                    <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">
-                        ${item.SectionName}
-                    </h5>
-                    <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">
-                        ${firstTwoLines}
-                    </p>
-                    <div class="stats-bar">
-                        <span><i class="bi bi-heart text-gray-500"></i> 
-                            <span class="like-count urdu-text-xs">400</span>
-                        </span>
-                        <span><i class="bi bi-eye-fill text-blue-500"></i> 
-                            <span class="view-count urdu-text-xs">230</span>
-                        </span>
-                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
-                    </div>
-                </article>`;
+        <article class="card p-4 text-right naat-lyrics-card ${isHiddenClass}" 
+                 onclick="window.location.href='lyrics.html?id=${id}&title=${title}'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">
+            ${item.Title || item.Title || "نعت"}
+          </h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">
+            ${firstTwoLines}
+          </p>
+          <div class="stats-bar">
+            <span>
+              <i class="bi bi-heart text-gray-500"></i> 
+              <span class="like-count urdu-text-xs">${item.likes || "400"}</span>
+            </span>
+            <span>
+              <i class="bi bi-eye-fill text-blue-500"></i> 
+              <span class="view-count urdu-text-xs">${item.views || "230"}</span>
+            </span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('${id}', '${item.Title || item.SectionName || "نعت"}')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
+        </article>`;
 
       container.insertAdjacentHTML("beforeend", cardHTML);
     });
   } catch (error) {
     console.error("Error fetching Naat Kalaam:", error);
+    // Fallback content with proper links
+    const container = document.getElementById("naat-bol-container");
+    if (container) {
+      container.innerHTML = `
+        <article class="card p-4 text-right naat-lyrics-card" onclick="window.location.href='lyrics.html?id=1&title=نعت'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-lyrics-title">
+            نعت شریف
+          </h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 naat-lyrics-preview">
+            حضور اکرم صلی اللہ علیہ وسلم کی شان میں نعت
+          </p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">400</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">230</span></span>
+            <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+          </div>
+        </article>
+        <!-- Add more fallback cards if needed -->
+      `;
+    }
   }
 }
 
@@ -545,10 +578,15 @@ async function NaatEtalim() {
     const response = await fetch(
       "https://updated-naatacademy.onrender.com/api/kalaam"
     );
+    if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
 
     // Get the container element
     const container = document.getElementById("naat-education-container");
+    if (!container) {
+      console.error("Container not found!");
+      return;
+    }
 
     // Clear existing content
     container.innerHTML = "";
@@ -557,17 +595,23 @@ async function NaatEtalim() {
     data.forEach((item) => {
       const card = document.createElement("article");
       card.className = "card p-4 text-right naat-education-card";
+      
+      // Make card clickable
+      card.style.cursor = "pointer";
+      const id = item._id || item.KalaamID;
+      const title = encodeURIComponent(item.Title || "عنوان");
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${id}&title=${title}`;
+      });
 
       // Create title
-      const title = document.createElement("h5");
-      title.className =
-        "urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title";
-      title.textContent = item.Title || "عنوان";
+      const titleElement = document.createElement("h5");
+      titleElement.className = "urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title";
+      titleElement.textContent = item.Title || "عنوان";
 
       // Create description - get only first line
       const description = document.createElement("p");
-      description.className =
-        "urdu-text urdu-text-sm text-gray-700 naat-education-description";
+      description.className = "urdu-text urdu-text-sm text-gray-700 naat-education-description";
 
       // Extract first line from ContentUrdu
       const fullContent = item.ContentUrdu || "تفصیل";
@@ -599,6 +643,10 @@ async function NaatEtalim() {
       const shareButton = document.createElement("button");
       shareButton.className = "share-icon-button";
       shareButton.innerHTML = '<i class="bi bi-share-fill"></i>';
+      shareButton.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent triggering card click
+        shareKalaam(id, item.Title || "عنوان");
+      });
 
       // Append elements to stats bar
       statsBar.appendChild(likes);
@@ -606,7 +654,7 @@ async function NaatEtalim() {
       statsBar.appendChild(shareButton);
 
       // Append all elements to card
-      card.appendChild(title);
+      card.appendChild(titleElement);
       card.appendChild(description);
       card.appendChild(statsBar);
 
@@ -615,27 +663,48 @@ async function NaatEtalim() {
     });
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default content if API fails
+    // Fallback to default content with proper links
     const container = document.getElementById("naat-education-container");
-    container.innerHTML = `
-      <article class="cursor-pointer card p-4 text-right naat-education-card">
-        <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت گوئی کے اصول</h5>
-        <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کہنے کے بنیادی اصول اور رہنما ہدایات۔</p>
-        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
-      </article>
-      <article class="card p-4 text-right naat-education-card">
-        <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">تاریخِ نعت</h5>
-        <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کی تاریخی پس منظر اور ارتقاء۔</p>
-        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
-      </article>
-      <article class="card p-4 text-right hidden md:block naat-education-card">
-        <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت کی اہمیت</h5>
-        <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">اسلام میں نعت کی فضیلت اور اہمیت۔</p>
-        <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
-      </article>
-    `;
+    if (container) {
+      container.innerHTML = `
+        <article class="card p-4 text-right naat-education-card" onclick="window.location.href='lyrics.html?id=1&title=نعت گوئی کے اصول'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت گوئی کے اصول</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کہنے کے بنیادی اصول اور رہنما ہدایات۔</p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('1', 'نعت گوئی کے اصول')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
+        </article>
+        <article class="card p-4 text-right naat-education-card" onclick="window.location.href='lyrics.html?id=2&title=تاریخِ نعت'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">تاریخِ نعت</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کی تاریخی پس منظر اور ارتقاء۔</p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('2', 'تاریخِ نعت')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
+        </article>
+        <article class="card p-4 text-right hidden md:block naat-education-card" onclick="window.location.href='lyrics.html?id=3&title=نعت کی اہمیت'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت کی اہمیت</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">اسلام میں نعت کی فضیلت اور اہمیت۔</p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('3', 'نعت کی اہمیت')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
+        </article>
+      `;
+    }
   }
 }
+
 
 async function NaatEAdab() {
   try {
@@ -659,6 +728,15 @@ async function NaatEAdab() {
       card.className = `card p-4 text-right naat-literature-card cursor-pointer ${
         index >= 2 ? "hidden md:block" : ""
       }`;
+
+      // Get the kalaam ID and title
+      const kalaamId = item._id || item.KalaamID;
+      const kalaamTitle = encodeURIComponent(item.Title || item.title || "عنوان");
+
+      // Make the card clickable
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
+      });
 
       const title = document.createElement("h5");
       title.className =
@@ -689,6 +767,23 @@ async function NaatEAdab() {
       const shareButton = document.createElement("button");
       shareButton.className = "share-icon-button";
       shareButton.innerHTML = '<i class="bi bi-share-fill"></i>';
+      shareButton.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent card click when sharing
+        const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: `${item.Title || item.title || "عنوان"} | Naat Academy`,
+            text: `یہ نعتیہ ادب پڑھیں: ${item.Title || item.title || "عنوان"}`,
+            url: shareUrl
+          }).catch(err => console.log('Error sharing:', err));
+        } else {
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+            `یہ نعتیہ ادب پڑھیں: ${item.Title || item.title || "عنوان"}\n${shareUrl}`
+          )}`;
+          window.open(whatsappUrl, '_blank');
+        }
+      });
 
       statsBar.appendChild(likes);
       statsBar.appendChild(views);
@@ -704,12 +799,40 @@ async function NaatEAdab() {
     console.error("Error fetching data:", error);
 
     const fallbackHTML = `
-        <article class="card p-4 text-right naat-literature-card cursor-pointer">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">نعتیہ ادب کی خصوصیات</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعتیہ شاعری کی ممتاز خصوصیات پر ایک نظر۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
-        </article>
-      `;
+      <article class="card p-4 text-right naat-literature-card cursor-pointer" onclick="window.location.href='lyrics.html?id=1&title=نعتیہ ادب کی خصوصیات'">
+        <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">نعتیہ ادب کی خصوصیات</h5>
+        <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعتیہ شاعری کی ممتاز خصوصیات پر ایک نظر۔</p>
+        <div class="stats-bar">
+          <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+          <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+          <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ نعتیہ ادب پڑھیں: نعتیہ ادب کی خصوصیات\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=1&title=نعتیہ ادب کی خصوصیات')}', '_blank')">
+            <i class="bi bi-share-fill"></i>
+          </button>
+        </div>
+      </article>
+      <article class="card p-4 text-right naat-literature-card cursor-pointer" onclick="window.location.href='lyrics.html?id=2&title=نعتیہ ادب کی تاریخ'">
+        <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">نعتیہ ادب کی تاریخ</h5>
+        <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">نعتیہ ادب کی تاریخی ارتقاء کا جائزہ۔</p>
+        <div class="stats-bar">
+          <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+          <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+          <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ نعتیہ ادب پڑھیں: نعتیہ ادب کی تاریخ\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=2&title=نعتیہ ادب کی تاریخ')}', '_blank')">
+            <i class="bi bi-share-fill"></i>
+          </button>
+        </div>
+      </article>
+      <article class="card p-4 text-right hidden md:block naat-literature-card cursor-pointer" onclick="window.location.href='lyrics.html?id=3&title=نعتیہ ادب کی اہمیت'">
+        <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title">نعتیہ ادب کی اہمیت</h5>
+        <p class="urdu-text urdu-text-sm text-gray-700 naat-literature-description">اسلامی ادب میں نعتیہ شاعری کا مقام۔</p>
+        <div class="stats-bar">
+          <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+          <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+          <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ نعتیہ ادب پڑھیں: نعتیہ ادب کی اہمیت\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=3&title=نعتیہ ادب کی اہمیت')}', '_blank')">
+            <i class="bi bi-share-fill"></i>
+          </button>
+        </div>
+      </article>
+    `;
 
     const container = document.getElementById("naatContainer");
     if (container) container.innerHTML = fallbackHTML;
@@ -742,9 +865,18 @@ async function duroodsalam() {
     data.slice(0, 3).forEach((item, index) => {
       // Only show first 3 items
       const card = document.createElement("article");
-      card.className = `card p-4 text-right durood-salam-card ${
+      card.className = `card p-4 text-right durood-salam-card cursor-pointer ${
         index >= 2 ? "hidden md:block" : ""
       }`;
+
+      // Get kalaam ID and title
+      const kalaamId = item._id || item.KalaamID;
+      const kalaamTitle = encodeURIComponent(item.Title || item.title || "درود شریف");
+
+      // Make card clickable
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
+      });
 
       // Title
       const title = document.createElement("h5");
@@ -776,6 +908,26 @@ async function duroodsalam() {
         <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
       `;
 
+      // Add share functionality
+      const shareBtn = statsBar.querySelector(".share-icon-button");
+      shareBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent card click
+        const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: `${item.Title || item.title || "درود شریف"} | Naat Academy`,
+            text: `یہ درود شریف پڑھیں: ${item.Title || item.title || "درود شریف"}`,
+            url: shareUrl
+          }).catch(err => console.log('Error sharing:', err));
+        } else {
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+            `یہ درود شریف پڑھیں: ${item.Title || item.title || "درود شریف"}\n${shareUrl}`
+          )}`;
+          window.open(whatsappUrl, '_blank');
+        }
+      });
+
       card.appendChild(title);
       card.appendChild(description);
       card.appendChild(statsBar);
@@ -783,26 +935,42 @@ async function duroodsalam() {
     });
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default content
-    const container = document.querySelector(
-      ".grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8"
-    );
+    // Fallback to default content with proper links
+    const container = document.getElementById("durood-container");
     if (container) {
       container.innerHTML = `
-        <article class="card p-4 text-right durood-salam-card">
+        <article class="card p-4 text-right durood-salam-card cursor-pointer" onclick="window.location.href='lyrics.html?id=1&title=درودِ ابراہیمی'">
           <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ ابراہیمی</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">نماز میں پڑھا جانے والا مشہور درود۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ درود شریف پڑھیں: درودِ ابراہیمی\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=1&title=درودِ ابراہیمی')}', '_blank')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
         </article>
-        <article class="card p-4 text-right durood-salam-card">
+        <article class="card p-4 text-right durood-salam-card cursor-pointer" onclick="window.location.href='lyrics.html?id=2&title=درودِ تاج'">
           <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ تاج</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">ایک معروف اور بابرکت درود شریف۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ درود شریف پڑھیں: درودِ تاج\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=2&title=درودِ تاج')}', '_blank')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
         </article>
-        <article class="card p-4 text-right hidden md:block durood-salam-card">
+        <article class="card p-4 text-right hidden md:block durood-salam-card cursor-pointer" onclick="window.location.href='lyrics.html?id=3&title=فضائلِ درود'">
           <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">فضائلِ درود</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">درود شریف پڑھنے کے فضائل و برکات۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ درود شریف پڑھیں: فضائلِ درود\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=3&title=فضائلِ درود')}', '_blank')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
         </article>
       `;
     }
@@ -883,7 +1051,7 @@ async function Fetchgroupcontainer() {
     if (container) {
       container.innerHTML = `
         <!-- Your original HTML content here as fallback -->
-        <article class="card p-4 poetry-info-module-card">
+        <article class="card p-4 poetry-info-module-card" onclick="window.location.href='lyrics.html?id=${item.KalaamID}>
           <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
           <h5 class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">
@@ -928,6 +1096,12 @@ async function Hamdbari() {
       card.className = `card p-4 text-right durood-salam-card ${
         index >= 2 ? "hidden md:block" : ""
       }`;
+      
+      // Make the entire card clickable
+      card.style.cursor = "pointer";
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${item._id || item.KalaamID}&title=${encodeURIComponent(item.Title || item.title)}`;
+      });
 
       // Title
       const title = document.createElement("h5");
@@ -959,6 +1133,13 @@ async function Hamdbari() {
         <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
       `;
 
+      // Prevent share button click from triggering card click
+      const shareBtn = statsBar.querySelector(".share-icon-button");
+      shareBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        shareKalaam(item._id || item.KalaamID, item.Title || item.title);
+      });
+
       card.appendChild(title);
       card.appendChild(description);
       card.appendChild(statsBar);
@@ -966,23 +1147,23 @@ async function Hamdbari() {
     });
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default content
+    // Fallback to default content with proper links
     const container = document.querySelector(
       ".grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8"
     );
     if (container) {
       container.innerHTML = `
-        <article class="card p-4 text-right durood-salam-card">
+        <article class="card p-4 text-right durood-salam-card" onclick="window.location.href='lyrics.html?id=1&title=درودِ ابراہیمی'">
           <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ ابراہیمی</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">نماز میں پڑھا جانے والا مشہور درود۔</p>
           <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
         </article>
-        <article class="card p-4 text-right durood-salam-card">
+        <article class="card p-4 text-right durood-salam-card" onclick="window.location.href='lyrics.html?id=2&title=درودِ تاج'">
           <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ تاج</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">ایک معروف اور بابرکت درود شریف۔</p>
           <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
         </article>
-        <article class="card p-4 text-right hidden md:block durood-salam-card">
+        <article class="card p-4 text-right hidden md:block durood-salam-card" onclick="window.location.href='lyrics.html?id=3&title=فضائلِ درود'">
           <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">فضائلِ درود</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">درود شریف پڑھنے کے فضائل و برکات۔</p>
           <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
@@ -991,6 +1172,7 @@ async function Hamdbari() {
     }
   }
 }
+
 
 // Call the function when page loads
 document.addEventListener("DOMContentLoaded", Hamdbari);
@@ -1016,15 +1198,24 @@ async function mankabat() {
     data.slice(0, 3).forEach((item, index) => {
       // Only show first 3 items
       const card = document.createElement("article");
-      card.className = `card p-4 text-right durood-salam-card ${
+      card.className = `card p-4 text-right durood-salam-card cursor-pointer ${
         index >= 2 ? "hidden md:block" : ""
       }`;
+
+      // Get kalaam ID and title
+      const kalaamId = item._id || item.KalaamID;
+      const kalaamTitle = encodeURIComponent(item.Title || item.title || "منقبت");
+
+      // Make card clickable
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
+      });
 
       // Title
       const title = document.createElement("h5");
       title.className =
         "urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title";
-      title.textContent = item.Title || item.title || "درود شریف";
+      title.textContent = item.Title || item.title || "منقبت";
 
       // Description (first line only)
       const description = document.createElement("p");
@@ -1034,7 +1225,7 @@ async function mankabat() {
         item.ContentUrdu ||
         item.description ||
         item.content ||
-        "درود شریف کی تفصیل";
+        "منقبت کی تفصیل";
       description.textContent = descText.split("\n")[0].substring(0, 50); // Limit to first line/50 chars
 
       // Stats bar
@@ -1050,6 +1241,26 @@ async function mankabat() {
         <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
       `;
 
+      // Add share functionality
+      const shareBtn = statsBar.querySelector(".share-icon-button");
+      shareBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent card click when sharing
+        const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: `${item.Title || item.title || "منقبت"} | Naat Academy`,
+            text: `یہ منقبت پڑھیں: ${item.Title || item.title || "منقبت"}`,
+            url: shareUrl
+          }).catch(err => console.log('Error sharing:', err));
+        } else {
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+            `یہ منقبت پڑھیں: ${item.Title || item.title || "منقبت"}\n${shareUrl}`
+          )}`;
+          window.open(whatsappUrl, '_blank');
+        }
+      });
+
       card.appendChild(title);
       card.appendChild(description);
       card.appendChild(statsBar);
@@ -1057,26 +1268,42 @@ async function mankabat() {
     });
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default content
-    const container = document.querySelector(
-      ".grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8"
-    );
+    // Fallback to default content with proper links
+    const container = document.getElementById("mankabat");
     if (container) {
       container.innerHTML = `
-        <article class="card p-4 text-right durood-salam-card">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ ابراہیمی</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">نماز میں پڑھا جانے والا مشہور درود۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+        <article class="card p-4 text-right durood-salam-card cursor-pointer" onclick="window.location.href='lyrics.html?id=1&title=منقبتِ حضور'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">منقبتِ حضور</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">حضور اکرم صلی اللہ علیہ وسلم کی شان میں منقبت۔</p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ منقبت پڑھیں: منقبتِ حضور\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=1&title=منقبتِ حضور')}', '_blank')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
         </article>
-        <article class="card p-4 text-right durood-salam-card">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">درودِ تاج</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">ایک معروف اور بابرکت درود شریف۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+        <article class="card p-4 text-right durood-salam-card cursor-pointer" onclick="window.location.href='lyrics.html?id=2&title=منقبتِ غوثِ اعظم'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">منقبتِ غوثِ اعظم</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">حضرت غوث الاعظم رضی اللہ عنہ کی شان میں منقبت۔</p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ منقبت پڑھیں: منقبتِ غوثِ اعظم\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=2&title=منقبتِ غوثِ اعظم')}', '_blank')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
         </article>
-        <article class="card p-4 text-right hidden md:block durood-salam-card">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">فضائلِ درود</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">درود شریف پڑھنے کے فضائل و برکات۔</p>
-          <div class="stats-bar"><span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span><span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span><button class="share-icon-button"><i class="bi bi-share-fill"></i></button></div>
+        <article class="card p-4 text-right hidden md:block durood-salam-card cursor-pointer" onclick="window.location.href='lyrics.html?id=3&title=منقبتِ مدینہ'">
+          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title">منقبتِ مدینہ</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 durood-salam-description">مدینہ منورہ کی شان میں منقبت۔</p>
+          <div class="stats-bar">
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
+            <button class="share-icon-button" onclick="event.stopPropagation(); window.open('https://wa.me/?text=${encodeURIComponent('یہ منقبت پڑھیں: منقبتِ مدینہ\nhttps://freelancework02.github.io/UP_Frontend/lyrics.html?id=3&title=منقبتِ مدینہ')}', '_blank')">
+              <i class="bi bi-share-fill"></i>
+            </button>
+          </div>
         </article>
       `;
     }
@@ -1094,45 +1321,46 @@ Naatkebolfunction();
 
 async function loadKalamSnippets() {
   try {
-    const kalamPostsRef = collection(db, "kalamPosts");
-    const kalamQuery = query(kalamPostsRef, limit(4));
-    const querySnapshot = await getDocs(kalamQuery);
+    // Fetch data from API
+    const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+    if (!response.ok) throw new Error("Network response was not ok");
+    const data = await response.json();
 
-    const articleCards = document.querySelectorAll(
-      "#kalampost .poetry-types-card"
-    );
+    const articleCards = document.querySelectorAll("#kalampost .poetry-types-card");
 
-    let index = 0;
-    querySnapshot.forEach((doc) => {
-      if (index >= articleCards.length) return;
+    // Process first 4 items or available cards
+    const itemsToShow = Math.min(data.length, articleCards.length, 4);
 
-      const post = doc.data();
-      const urduKalam = post.postUrdu || "";
-      const tag = post.tags || "کلام"; // fallback if tag not found
+    for (let i = 0; i < itemsToShow; i++) {
+      const post = data[i];
+      const urduKalam = post.ContentUrdu || "";
+      const tag = post.SectionName || post.category || "کلام";
 
       // Extract two meaningful lines
       const lines = urduKalam
         .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)
-        .map((line) => line.trim())
-        .filter((line) => line.length > 0);
+        .map(line => line.trim())
+        .filter(line => line.length > 0);
 
       const couplet = lines.slice(0, 2).join("<br>");
 
       // Update DOM elements
-      const targetCard = articleCards[index];
+      const card = articleCards[i];
+      
+      const pTag = card.querySelector(".poetry-type-description");
+      if (pTag) pTag.innerHTML = couplet;
 
-      const pTag = targetCard.querySelector(".poetry-type-description");
-      if (pTag) {
-        pTag.innerHTML = couplet;
-      }
+      const titleTag = card.querySelector(".poetry-type-title");
+      if (titleTag) titleTag.textContent = tag;
 
-      const titleTag = targetCard.querySelector(".poetry-type-title");
-      if (titleTag) {
-        titleTag.textContent = tag;
-      }
-
-      index++;
-    });
+      // Make card clickable
+      const kalamId = post._id || post.KalaamID;
+      const kalamTitle = encodeURIComponent(post.Title || tag);
+      card.style.cursor = "pointer";
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${kalamId}&title=${kalamTitle}`;
+      });
+    }
   } catch (error) {
     console.error("❌ Error loading kalam snippets:", error);
   }
@@ -1140,40 +1368,52 @@ async function loadKalamSnippets() {
 
 async function loadSelectedKalamSnippets() {
   try {
-    const kalamPostsRef = collection(db, "kalamPosts");
-    const kalamQuery = query(kalamPostsRef, limit(4));
-    const querySnapshot = await getDocs(kalamQuery);
+    // Fetch data from API
+    const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+    if (!response.ok) throw new Error("Network response was not ok");
+    const data = await response.json();
 
     const selectedCards = document.querySelectorAll(".selected-kalaam-card");
 
-    let index = 0;
-    querySnapshot.forEach((doc) => {
-      if (index >= selectedCards.length) return;
+    // Process first 4 items or available cards
+    const itemsToShow = Math.min(data.length, selectedCards.length, 4);
 
-      const post = doc.data();
-      const urduKalam = post.postUrdu || "";
+    for (let i = 0; i < itemsToShow; i++) {
+      const post = data[i];
+      const urduKalam = post.ContentUrdu || "";
 
       // Break into lines
       const lines = urduKalam
         .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)
-        .map((line) => line.trim())
-        .filter((line) => line.length > 0);
+        .map(line => line.trim())
+        .filter(line => line.length > 0);
 
       const couplet = lines.slice(0, 2).join("<br>");
 
-      const card = selectedCards[index];
+      // Update DOM
+      const card = selectedCards[i];
       const coupletP = card.querySelector(".selected-kalaam-couplet");
+      if (coupletP) coupletP.innerHTML = couplet;
 
-      if (coupletP) {
-        coupletP.innerHTML = couplet;
-      }
-
-      index++;
-    });
+      // Make card clickable
+      const kalamId = post._id || post.KalaamID;
+      const kalamTitle = encodeURIComponent(post.Title || "کلام");
+      card.style.cursor = "pointer";
+      card.addEventListener("click", () => {
+        window.location.href = `lyrics.html?id=${kalamId}&title=${kalamTitle}`;
+      });
+    }
   } catch (error) {
     console.error("❌ Error loading selected kalaam snippets:", error);
   }
 }
+
+// Call both functions when page loads
+document.addEventListener("DOMContentLoaded", () => {
+  loadKalamSnippets();
+  loadSelectedKalamSnippets();
+});
+
 
 async function loadBlogCards() {
   try {
@@ -1209,7 +1449,7 @@ async function loadBlogCards() {
       card.className = "card p-4 relative article-card h-48"; // Fixed height
 
       card.innerHTML = `
-        <div class="flex flex-col h-full cursor-pointer">
+        <div class="flex flex-col h-full cursor-pointer" >
           <span class="article-category-tag bg-teal-100 text-teal-600 urdu-text text-xs font-medium mb-2">${
             article.category || "نعت"
           }</span>
@@ -1287,6 +1527,7 @@ async function loadBlogCards() {
     `;
   }
 }
+
 
 function shareArticle(article) {
   if (navigator.share) {

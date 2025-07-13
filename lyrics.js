@@ -235,23 +235,22 @@ function initializeCopyButtons() {
   });
 }
 
+// Update the initializeShareButtons function
+// Update the initializeShareButtons function
 function initializeShareButtons() {
   const shareButton = document.getElementById("shareButton");
+  const whatsappButton = document.querySelector(".whatsapp-button");
   const shareBahrButton = document.getElementById("shareBahrButton");
 
-  if (shareButton && navigator.share) {
-    shareButton.addEventListener("click", async () => {
-      try {
-        await navigator.share({
-          title: document.title,
-          text: `یہ خوبصورت کلام پڑھیں: ${document
-            .querySelector(".kalaam-header h1")
-            .textContent.trim()}`,
-          url: window.location.href,
-        });
-      } catch (e) {
-        console.error("Share failed:", e);
-      }
+  if (shareButton) {
+    shareButton.addEventListener("click", shareKalaam);
+  }
+
+  // Add specific WhatsApp sharing functionality
+  if (whatsappButton) {
+    whatsappButton.addEventListener("click", function(e) {
+      e.preventDefault();
+      shareOnWhatsApp();
     });
   }
 
@@ -270,26 +269,103 @@ function initializeShareButtons() {
   }
 }
 
-function shareKalaam() {
-  if (navigator.share) {
-    navigator
-      .share({
-        title: document.title,
-        text: "یہ خوبصورت کلام دیکھیں",
-        url: window.location.href,
-      })
-      .catch((error) => console.log("Error sharing:", error));
-  } else {
-    // Fallback for browsers that don't support Web Share API
-    const url = window.location.href;
-    const tempInput = document.createElement("input");
-    tempInput.value = url;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
+// Specific function for WhatsApp sharing
+function shareOnWhatsApp() {
+  const kalaamTitle = document.getElementById("kalamTitle").textContent.trim();
+  const urlParams = new URLSearchParams(window.location.search);
+  const kalaamId = urlParams.get("id");
+  
+  // Create share URL with both ID and title
+  const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&kalam=${encodeURIComponent(kalaamTitle)}`;
+  
+  // Create WhatsApp share link
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+    `یہ خوبصورت کلام پڑھیں: ${kalaamTitle}\n${shareUrl}`
+  )}`;
+  
+  // Open in new tab
+  window.open(whatsappUrl, '_blank');
+}
 
-    alert("لنک کاپی ہو گیا ہے: " + url);
+// Updated shareKalaam function (general sharing)
+function shareKalaam() {
+  const kalaamTitle = document.getElementById("kalamTitle").textContent.trim();
+  const urlParams = new URLSearchParams(window.location.search);
+  const kalaamId = urlParams.get("id");
+  
+  // Create share URL with both ID and title
+  const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&kalam=${(kalaamTitle)}`;
+
+  if (navigator.share) {
+    // Web Share API (for mobile devices)
+    navigator.share({
+      title: `${kalaamTitle} | Naat Academy`,
+      text: `یہ خوبصورت کلام پڑھیں: ${kalaamTitle}`,
+      url: shareUrl,
+    }).catch(error => console.log('Error sharing:', error));
+  } else {
+    // Fallback for desktop and browsers without Web Share API
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+      `یہ خوبصورت کلام پڑھیں: ${kalaamTitle}\n${shareUrl}`
+    )}`;
+    
+    // Create a share menu
+    const shareMenu = document.createElement('div');
+    shareMenu.className = 'share-menu';
+    shareMenu.innerHTML = `
+      <div class="share-menu-content">
+        <h4 class="urdu-text">شیئر کریں</h4>
+        <div class="share-options">
+          <a href="${whatsappUrl}" target="_blank" class="share-option whatsapp">
+            <i class="bi bi-whatsapp"></i>
+            <span class="urdu-text">WhatsApp</span>
+          </a>
+          <button class="share-option copy-link">
+            <i class="bi bi-link-45deg"></i>
+            <span class="urdu-text">لنک کاپی کریں</span>
+          </button>
+        </div>
+      </div>
+    `;
+    
+    // Style the share menu
+    shareMenu.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    `;
+    
+    shareMenu.querySelector('.share-menu-content').style.cssText = `
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      max-width: 300px;
+      width: 90%;
+    `;
+    
+    // Add copy functionality
+    shareMenu.querySelector('.copy-link').addEventListener('click', () => {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        alert('لنک کاپی ہو گیا ہے!');
+        document.body.removeChild(shareMenu);
+      });
+    });
+    
+    // Close on click outside
+    shareMenu.addEventListener('click', (e) => {
+      if (e.target === shareMenu) {
+        document.body.removeChild(shareMenu);
+      }
+    });
+    
+    document.body.appendChild(shareMenu);
   }
 }
 
