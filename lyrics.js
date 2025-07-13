@@ -35,6 +35,12 @@ async function loadKalaamDetail(kalaamId) {
     try {
         // Show loading state
         const container = document.getElementById('poetryTextContainer');
+        container.innerHTML = `
+            <div class="text-center py-8">
+                <i class="bi bi-arrow-repeat animate-spin text-teal-500 text-4xl"></i>
+                <p class="urdu-text mt-4">کلام لوڈ ہو رہا ہے...</p>
+            </div>
+        `;
         
         // Fetch kalaam details
         const response = await fetch(`https://updated-naatacademy.onrender.com/api/kalaam/${kalaamId}`);
@@ -45,7 +51,8 @@ async function loadKalaamDetail(kalaamId) {
         
         // Update the page title and header
         document.title = `${kalaam.Title} | Naat Academy`;
-        document.querySelector('.kalaam-header h1').textContent = kalaam.Title;
+        document.getElementById('kalamTitle').textContent = kalaam.Title;
+        document.getElementById('breadcrumbKalamTitle').textContent = kalaam.Title;
         
         // Update meta info
         document.querySelector('.meta-info-item .meta-value.urdu-text').textContent = kalaam.WriterName || 'نامعلوم';
@@ -54,7 +61,7 @@ async function loadKalaamDetail(kalaamId) {
 
         // Format the content into couplets
         const urduLines = kalaam.ContentUrdu ? kalaam.ContentUrdu.split('\n') : [];
-        const romanLines = kalaam.ContentEnglish ? kalaam.ContentEnglish.split('\n') : [];
+        const romanLines = kalaam.ContentRomanUrdu ? kalaam.ContentRomanUrdu.split('\n') : [];
         const englishLines = kalaam.ContentEnglish ? kalaam.ContentEnglish.split('\n') : [];
         
         let coupletsHTML = '';
@@ -67,24 +74,27 @@ async function loadKalaamDetail(kalaamId) {
             const englishLine1 = englishLines[i] || 'Translation not available';
             const englishLine2 = englishLines[i+1] || '';
             
-            coupletsHTML += `
-                <div class="couplet">
-                    <p class="misra" data-ur="${urduLine1}" data-ro="${romanLine1}" data-en="${englishLine1}">${urduLine1}</p>
-                    ${urduLine2 ? `<p class="misra" data-ur="${urduLine2}" data-ro="${romanLine2}" data-en="${englishLine2}">${urduLine2}</p>` : ''}
-                    <div class="translation-content">
-                        <div class="copy-box box-roman">
-                            <h4 class="roman-text">Roman Urdu</h4>
-                            <p class="roman-text">${romanLine1}${romanLine2 ? '<br>' + romanLine2 : ''}</p>
-                            <span class="copy-feedback">Copied!</span>
-                        </div>
-                        <div class="copy-box box-meaning">
-                            <h4 class="urdu-text">English Translation</h4>
-                            <p class="urdu-text">${englishLine1}${englishLine2 ? '<br>' + englishLine2 : ''}</p>
-                            <span class="copy-feedback">کاپی ہوگیا!</span>
+            // Only create couplet if at least one line exists
+            if (urduLine1 || urduLine2) {
+                coupletsHTML += `
+                    <div class="couplet">
+                        ${urduLine1 ? `<p class="misra urdu-text" data-ur="${urduLine1}" data-ro="${romanLine1}" data-en="${englishLine1}">${urduLine1}</p>` : ''}
+                        ${urduLine2 ? `<p class="misra urdu-text" data-ur="${urduLine2}" data-ro="${romanLine2}" data-en="${englishLine2}">${urduLine2}</p>` : ''}
+                        <div class="translation-content">
+                            <div class="copy-box box-roman">
+                                <h4 class="roman-text">Roman Urdu</h4>
+                                <p class="roman-text">${romanLine1}${romanLine2 ? '<br>' + romanLine2 : ''}</p>
+                                <span class="copy-feedback">Copied!</span>
+                            </div>
+                            <div class="copy-box box-meaning">
+                                <h4 class="urdu-text">English Translation</h4>
+                                <p class="urdu-text">${englishLine1}${englishLine2 ? '<br>' + englishLine2 : ''}</p>
+                                <span class="copy-feedback">کاپی ہوگیا!</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
         }
         
         container.innerHTML = coupletsHTML;
@@ -112,6 +122,7 @@ async function loadKalaamDetail(kalaamId) {
     }
 }
 
+// Rest of the JavaScript functions remain the same...
 function initializeLanguageToggle() {
     const languageToggle = document.getElementById('languageToggle');
     const misraElements = document.querySelectorAll('.misra');
@@ -273,4 +284,74 @@ document.getElementById('likeButton')?.addEventListener('click', function() {
     }
     
     countElement.textContent = count >= 1000 ? (count/1000).toFixed(1) + 'k' : count;
+});
+
+
+async function loadRelatedKalaam() {
+    try {
+        const response = await fetch('https://updated-naatacademy.onrender.com/api/kalaam');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const allKalaam = await response.json();
+        
+        // Get the current kalaam ID from URL to exclude it from related
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentKalaamId = urlParams.get('id');
+        
+        // Filter out the current kalaam and get random 4 kalaams
+        const filteredKalaam = allKalaam.filter(k => k._id !== currentKalaamId);
+        const shuffled = filteredKalaam.sort(() => 0.5 - Math.random());
+        const selectedKalaam = shuffled.slice(0, 4);
+        
+        // Generate HTML for related kalaam
+        const relatedContainer = document.querySelector('.related-posts-section .grid');
+        relatedContainer.innerHTML = '';
+        
+        selectedKalaam.forEach(kalaam => {
+            // Get first line of the kalaam
+            const firstLine = kalaam.ContentUrdu ? 
+                kalaam.ContentUrdu.split('\n')[0].trim() : 
+                'کلام کا متن دستیاب نہیں';
+            
+            // Truncate if too long
+            const displayLine = firstLine.length > 30 ? 
+                firstLine.substring(0, 30) + '...' : 
+                firstLine;
+            
+            const cardHTML = `
+                <a href="lyrics.html?id=${kalaam.KalaamID}" class="card">
+                    <h3 class="urdu-text font-bold text-teal-700">${kalaam.Title || 'بلا عنوان'}</h3>
+                    <p class="urdu-text text-gray-600">${displayLine}</p>
+                    <div class="related-post-stats">
+                        <span><i class="bi bi-heart-fill"></i>${formatNumber(kalaam.Likes || 2.4)}k</span>
+                        <span><i class="bi bi-eye-fill"></i>${formatNumber(kalaam.Views || 3.2)}k</span>
+                    </div>
+                </a>
+            `;
+            
+            relatedContainer.innerHTML += cardHTML;
+        });
+        
+    } catch (error) {
+        console.error('Error loading related kalaam:', error);
+        // Fallback to default content if API fails
+        document.querySelector('.related-posts-section').innerHTML = `
+            <div class="text-center py-4">
+                <i class="bi bi-exclamation-triangle-fill text-yellow-500 text-2xl"></i>
+                <p class="urdu-text mt-2">متعلقہ کلام لوڈ کرنے میں مسئلہ پیش آیا</p>
+                <p class="urdu-text text-sm">اصل کلام دیکھنے کے لیے مرکزی صفحہ پر جائیں</p>
+            </div>
+        `;
+    }
+}
+
+// Helper function to format numbers (1,000 => 1k)
+function formatNumber(num) {
+    return num >= 1000 ? (num/1000).toFixed(1) + 'k' : num;
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadRelatedKalaam();
 });

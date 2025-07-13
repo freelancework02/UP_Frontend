@@ -1,115 +1,581 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مصطفیٰ جانِ رحمت پہ لاکھوں سلام - امام احمد رضا خان | Naat Academy</title>
-    <meta name="description" content="امام احمد رضا خان کا شہرہ آفاق سلام 'مصطفیٰ جانِ رحمت پہ لاکھوں سلام' مکمل متن، رومن اردو، ترجمہ، اور شرح کے ساتھ پڑھیں۔">
+    <meta name="description"
+        content="امام احمد رضا خان کا شہرہ آفاق سلام 'مصطفیٰ جانِ رحمت پہ لاکھوں سلام' مکمل متن، رومن اردو، ترجمہ، اور شرح کے ساتھ پڑھیں۔">
     <meta name="keywords" content="مصطفیٰ جانِ رحمت, سلام, امام احمد رضا خان, Roman Urdu, Naat Academy">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+
     <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
-        @font-face { font-family: 'NaatFont'; src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf') format('truetype'); font-display: swap; }
-        @font-face { font-family: 'Aslam'; src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749290688/Aslam.ttf') format('truetype'); font-display: swap; }
-        @font-face { font-family: 'Meher'; src: url('https://res.cloudinary.com/awescreative/raw/upload/v1750275812/Awes/Meher-Nastaliq-Web-Regular.ttf') format('truetype'); font-display: swap; }
+        @font-face {
+            font-family: 'NaatFont';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf') format('truetype');
+            font-display: swap;
+        }
 
-        body { font-family: 'Inter', sans-serif; background-color: #f0f2f5; color: #333; }
-        .urdu-text { font-family: 'NaatFont', 'Noto Nastaliq Urdu', serif; line-height: 2.2; font-size: 1.125rem; }
-        
+        @font-face {
+            font-family: 'Aslam';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749290688/Aslam.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Meher';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1750275812/Awes/Meher-Nastaliq-Web-Regular.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .urdu-text {
+            font-family: 'NaatFont', 'Noto Nastaliq Urdu', serif;
+            line-height: 2.2;
+            font-size: 1.125rem;
+        }
+
         /* Specific font for Roman Text */
-        .roman-text { font-family: 'Instrument Serif', serif; direction: ltr; text-align: left; }
+        .roman-text {
+            font-family: 'Instrument Serif', serif;
+            direction: ltr;
+            text-align: left;
+        }
 
-        .header-gradient { background: linear-gradient(to bottom, #d2f4f2, #ffffff); }
-        .footer-bg { background-color: #2a415a; color: #cbd5e1; }
-        .breadcrumb-nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; margin-bottom: 1.5rem; }
-        .breadcrumb-nav a { color: #10b981; text-decoration: none; }
-        .kalaam-detail-container { background-color: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 8px 25px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto; }
-        @media (min-width: 640px) { .kalaam-detail-container { padding: 2rem; } }
-        .kalaam-header h1 { font-family: 'Aslam', 'NaatFont', serif; font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem); color: #2a415a; margin-bottom: 1rem; text-align: center; }
-        .meta-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; margin: 1rem auto 2rem auto; }
-        .meta-info-item { display: flex; align-items: center; gap: 0.5rem; background-color: #f8f9fa; border-radius: 9999px; padding: 0.3rem 0.8rem; border: 1px solid #e2e8f0; transition: all 0.2s ease; }
-        .meta-info-item.clickable { cursor: pointer; }
-        .meta-info-item.clickable:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.07); }
-        .meta-icon { width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
-        .author-icon { background-image: linear-gradient(45deg, #10b981, #34d399); }
-        .bahr-icon { background-image: linear-gradient(45deg, #3b82f6, #60a5fa); }
-        .category-icon { background-image: linear-gradient(45deg, #a78bfa, #8b5cf6); }
-        .meta-info p { margin: 0; line-height: 1.3; }
-        .meta-label { font-size: 0.8rem; font-weight: 600; }
-        .meta-value { font-size: 0.75rem; }
-        .bahr-value { font-size: 0.8rem; }
-        @media (min-width: 1024px) { .poetry-content-area { padding: 0 20%; } }
-        .couplet { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e2e8f0; cursor: pointer; }
-        .misra { font-family: 'Meher', 'NaatFont', serif; font-size: 1.8rem; line-height: 2.2; text-align-last: justify; transition: font-family 0.3s ease; }
-        .translation-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-        .couplet.active .translation-content { max-height: 500px; }
-        .copy-box { position: relative; padding: 1rem; border-radius: 0.75rem; border: 2px solid; cursor: pointer; transition: all 0.2s ease; }
-        .copy-box:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-        .copy-box h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; text-align: right; }
-        .copy-box p { font-size: 0.9rem; line-height: 1.7; margin: 0; }
-        .box-roman { background-color: #eef2ff; border-color: #c7d2fe; } .box-roman h4 { color: #4338ca; }
-        .box-meaning { background-color: #f0fdf4; border-color: #bbf7d0; } .box-meaning h4 { color: #15803d; }
-        .box-explanation { background-color: #fffbeb; border-color: #fde68a; } .box-explanation h4 { color: #b45309; }
-        .copy-feedback { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7); color: white; padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-size: 0.8rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-        .copy-box.copied .copy-feedback { opacity: 1; }
-        .action-bar { text-align: center; margin-top: 2.5rem; }
-        .action-group { display: inline-flex; border: 1px solid #e2e8f0; border-radius: 9999px; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; }
-        .action-button { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border: none; background-color: transparent; cursor: pointer; transition: background-color 0.2s ease; text-decoration: none; color: #4b5563; }
-        .action-button:not(:last-child) { border-left: 1px solid #e2e8f0; }
-        .action-button:hover { background-color: #f8f9fa; }
-        .like-button.liked i { font-weight: 900; color: #ef4444; }
-        @media (max-width: 767px) { .action-button .action-label { display: none; } .action-button { padding: 0.6rem 1rem; } }
-        .related-posts-section .card { display: flex; flex-direction: column; padding: 0.75rem !important; text-decoration: none; }
-        .related-post-stats { display: flex; align-items: center; gap: 0.75rem; margin-top: auto; padding-top: 0.5rem; font-size: 0.75rem; color: #9ca3af; }
-        .modal { display: none; position: fixed; z-index: 1050; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.6); }
-        .modal-content { background-color: #fff; margin: 10% auto; padding: 2.5rem; border-radius: 1.5rem; width: 90%; max-width: 500px; text-align: center; position: relative; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .language-toggle-container { text-align: center; margin-bottom: 1rem; }
-        .language-toggle { display: inline-flex; align-items: center; padding: 0.2rem; background-color: #e2e8f0; border-radius: 9999px; cursor: pointer; }
-        .toggle-option { padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; transition: all 0.3s ease; }
-        .toggle-option.active { background-color: #ffffff; color: #10b981; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header-gradient {
+            background: linear-gradient(to bottom, #d2f4f2, #ffffff);
+        }
+
+        .footer-bg {
+            background-color: #2a415a;
+            color: #cbd5e1;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb-nav a {
+            color: #10b981;
+            text-decoration: none;
+        }
+
+        .kalaam-detail-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .kalaam-detail-container {
+                padding: 2rem;
+            }
+        }
+
+        .kalaam-header h1 {
+            font-family: 'Aslam', 'NaatFont', serif;
+            font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem);
+            color: #2a415a;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .meta-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem auto 2rem auto;
+        }
+
+        .meta-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 9999px;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .meta-info-item.clickable {
+            cursor: pointer;
+        }
+
+        .meta-info-item.clickable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+        }
+
+        .meta-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .author-icon {
+            background-image: linear-gradient(45deg, #10b981, #34d399);
+        }
+
+        .bahr-icon {
+            background-image: linear-gradient(45deg, #3b82f6, #60a5fa);
+        }
+
+        .category-icon {
+            background-image: linear-gradient(45deg, #a78bfa, #8b5cf6);
+        }
+
+        .meta-info p {
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .meta-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .meta-value {
+            font-size: 0.75rem;
+        }
+
+        .bahr-value {
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 1024px) {
+            .poetry-content-area {
+                padding: 0 20%;
+            }
+        }
+
+        .couplet {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #e2e8f0;
+            cursor: pointer;
+        }
+
+        .misra {
+            font-family: 'Meher', 'NaatFont', serif;
+            font-size: 1.8rem;
+            line-height: 2.2;
+            text-align-last: justify;
+            transition: font-family 0.3s ease;
+        }
+
+        .translation-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .couplet.active .translation-content {
+            max-height: 500px;
+        }
+
+        .copy-box {
+            position: relative;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .copy-box h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-align: right;
+        }
+
+        .copy-box p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .box-roman {
+            background-color: #eef2ff;
+            border-color: #c7d2fe;
+        }
+
+        .box-roman h4 {
+            color: #4338ca;
+        }
+
+        .box-meaning {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .box-meaning h4 {
+            color: #15803d;
+        }
+
+        .box-explanation {
+            background-color: #fffbeb;
+            border-color: #fde68a;
+        }
+
+        .box-explanation h4 {
+            color: #b45309;
+        }
+
+        .copy-feedback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .copy-box.copied .copy-feedback {
+            opacity: 1;
+        }
+
+        .action-bar {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .action-group {
+            display: inline-flex;
+            border: 1px solid #e2e8f0;
+            border-radius: 9999px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: #4b5563;
+        }
+
+        .action-button:not(:last-child) {
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .action-button:hover {
+            background-color: #f8f9fa;
+        }
+
+        .like-button.liked i {
+            font-weight: 900;
+            color: #ef4444;
+        }
+
+        @media (max-width: 767px) {
+            .action-button .action-label {
+                display: none;
+            }
+
+            .action-button {
+                padding: 0.6rem 1rem;
+            }
+        }
+
+        .related-posts-section .card {
+            display: flex;
+            flex-direction: column;
+            padding: 0.75rem !important;
+            text-decoration: none;
+        }
+
+        .related-post-stats {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: auto;
+            padding-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .language-toggle-container {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .language-toggle {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem;
+            background-color: #e2e8f0;
+            border-radius: 9999px;
+            cursor: pointer;
+        }
+
+        .toggle-option {
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-option.active {
+            background-color: #ffffff;
+            color: #10b981;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
+
 <body class="bg-gray-100">
 
-    <header class="header-gradient py-4 shadow-md"><div class="container mx-auto px-4"><div class="flex justify-between items-center"><a href="index.html"><img src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png" alt="لوگو" class="h-16 md:h-20"></a><nav class="flex items-center space-x-4 space-x-reverse"><a href="index.html" class="text-gray-700 hover:text-green-700 urdu-text text-sm font-medium">مرکزی صفحہ</a><a href="#" class="text-gray-700 hover:text-green-700 urdu-text text-sm font-medium">کتب</a><a href="#" class="text-gray-700 hover:text-green-700 urdu-text text-sm font-medium">رابطہ</a></nav></div></div></header>
+    <header class="header-gradient py-4 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center"><a href="index.html"><img
+                        src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png"
+                        alt="لوگو" class="h-16 md:h-20"></a>
+                <nav class="flex items-center space-x-4 space-x-reverse"><a href="index.html"
+                        class="text-gray-700 hover:text-green-700 urdu-text text-sm font-medium">مرکزی صفحہ</a><a
+                        href="#" class="text-gray-700 hover:text-green-700 urdu-text text-sm font-medium">کتب</a><a
+                        href="#" class="text-gray-700 hover:text-green-700 urdu-text text-sm font-medium">رابطہ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <main class="container mx-auto px-4 py-8">
-        <nav class="breadcrumb-nav urdu-text"><a href="index.html">مرکزی صفحہ</a><span class="separator"><i class="bi bi-chevron-left"></i></span><a href="#">منتخب کلام</a><span class="separator"><i class="bi bi-chevron-left"></i></span><span>مصطفیٰ جانِ رحمت پہ لاکھوں سلام</span></nav>
-        <div class="kalaam-detail-container">
-            <div class="language-toggle-container"><div id="languageToggle" class="language-toggle"><span class="toggle-option active urdu-text" data-lang="ur">اردو</span><span class="toggle-option roman-text" data-lang="ro">Roman</span></div></div>
-            <header class="kalaam-header"><h1>مصطفیٰ جانِ رحمت پہ لاکھوں سلام</h1></header>
-            <div class="meta-info-grid">
-                <div id="authorBoxTrigger" class="meta-info-item clickable"><div class="meta-icon author-icon"><i class="bi bi-pen-fill"></i></div><div class="meta-info text-right"><p class="meta-label urdu-text">شاعر</p><p class="meta-value urdu-text">امام احمد رضا خان</p></div></div>
-                <div id="bahrBoxTrigger" class="meta-info-item clickable"><div class="meta-icon bahr-icon"><i class="bi bi-music-note-beamed"></i></div><div class="meta-info text-right"><p class="meta-label urdu-text">بحر: متدارک مثمن</p><p class="meta-value urdu-text bahr-value">فعلن فعلن فعلن فعلن</p></div></div>
-                <div class="meta-info-item"><div class="meta-icon category-icon"><i class="bi bi-tag-fill"></i></div><div class="meta-info text-right"><p class="meta-label urdu-text">صنف: سلام</p><p class="meta-value urdu-text">کل پوسٹس: <span class="meta-count">128</span></p></div></div>
+    <nav class="breadcrumb-nav urdu-text">
+        <a href="index.html">مرکزی صفحہ</a>
+        <span class="separator"><i class="bi bi-chevron-left"></i></span>
+        <a href="index.html">منتخب کلام</a>
+        <span class="separator"><i class="bi bi-chevron-left"></i></span>
+        <span id="breadcrumbKalamTitle">مصطفیٰ جانِ رحمت پہ لاکھوں سلام</span>
+    </nav>
+    <div class="kalaam-detail-container">
+        <div class="language-toggle-container">
+            <div id="languageToggle" class="language-toggle">
+                <span class="toggle-option active urdu-text" data-lang="ur">اردو</span>
+                <span class="toggle-option roman-text" data-lang="ro">Roman</span>
             </div>
-            
-            <div id="poetryTextContainer" class="poetry-content-area">
-                <div class="couplet"><p class="misra" data-ur="مصطفیٰ جانِ رحمت پہ لاکھوں سلام" data-ro="Mustafa Jaan-e-Rehmat Pe Laakhon Salaam">مصطفیٰ جانِ رحمت پہ لاکھوں سلام</p><p class="misra" data-ur="شمعِ بزمِ ہدایت پہ لاکھوں سلام" data-ro="Sham-e-Bazm-e-Hidayat Pe Laakhon Salaam">شمعِ بزمِ ہدایت پہ لاکھوں سلام</p>
-                    <div class="translation-content"><div class="copy-box box-roman"><h4 class="roman-text">Roman Urdu</h4><p class="roman-text">Mustafa Jaan-e-Rehmat Pe Laakhon Salaam<br>Sham-e-Bazm-e-Hidayat Pe Laakhon Salaam</p><span class="copy-feedback">Copied!</span></div><div class="copy-box box-meaning"><h4 class="urdu-text">ترجمہ</h4><p class="urdu-text">جو پیکرِ رحمت ہیں، ان مصطفیٰ ﷺ پر لاکھوں سلام ہوں۔ جو ہدایت کی محفل کی شمع ہیں، ان پر لاکھوں سلام ہوں۔</p><span class="copy-feedback">کاپی ہوگیا!</span></div><div class="copy-box box-explanation"><h4 class="urdu-text">اردو شرح</h4><p class="urdu-text">اس شعر میں امام احمد رضا خان، حضور نبی اکرم ﷺ کی ذاتِ اقدس کو "رحمت کی جان" اور "ہدایت کی محفل کا چراغ" قرار دیتے ہوئے اپنی عقیدت کا اظہار کر رہے ہیں۔ یہ القابات آپ ﷺ کی شان کو بیان کرتے ہیں کہ آپ ہی تمام رحمتوں کا سرچشمہ اور انسانیت کے لیے رہنمائی کا مرکز ہیں۔</p><span class="copy-feedback">کاپی ہوگیا!</span></div></div>
-                </div>
-                <div class="couplet"><p class="misra" data-ur="مہرِ چرخِ نبوت پہ روشن درود" data-ro="Mehr-e-Charkh-e-Nabuwat Pe Roshan Durood">مہرِ چرخِ نبوت پہ روشن درود</p><p class="misra" data-ur="گلِ باغِ رسالت پہ لاکھوں سلام" data-ro="Gul-e-Baagh-e-Risalat Pe Laakhon Salaam">گلِ باغِ رسالت پہ لاکھوں سلام</p>
-                    <div class="translation-content"><div class="copy-box box-roman"><h4 class="roman-text">Roman Urdu</h4><p class="roman-text">Mehr-e-Charkh-e-Nabuwat Pe Roshan Durood<br>Gul-e-Baagh-e-Risalat Pe Laakhon Salaam</p><span class="copy-feedback">Copied!</span></div><div class="copy-box box-meaning"><h4 class="urdu-text">ترجمہ</h4><p class="urdu-text">جو نبوت کے آسمان کے سورج ہیں، ان پر روشن درود ہوں۔ جو رسالت کے باغ کے پھول ہیں، ان پر لاکھوں سلام ہوں۔</p><span class="copy-feedback">کاپی ہوگیا!</span></div><div class="copy-box box-explanation"><h4 class="urdu-text">اردو شرح</h4><p class="urdu-text">یہاں نبی کریم ﷺ کی شان کو دو خوبصورت استعاروں سے بیان کیا گیا ہے۔ پہلا، آپ ﷺ نبوت کے آسمان کے وہ سورج ہیں جس نے پوری کائنات کو منور کیا۔ دوسرا، آپ ﷺ رسالت کے اس باغ کا سب سے حسین پھول ہیں جس کی خوشبو سے عالم مہک رہا ہے۔</p><span class="copy-feedback">کاپی ہوگیا!</span></div></div>
-                </div>
-            </div>
-            
-            <div class="action-bar"><div class="action-group"><button id="likeButton" class="action-button like-button"><i class="bi bi-heart"></i><span class="action-label urdu-text text-xs">پسند</span><span class="count" data-initial-count="18256">18.3k</span></button><button id="shareButton" class="action-button share-button"><i class="bi bi-share"></i><span class="action-label urdu-text text-xs">شیئر</span></button><a href="https://whatsapp.com/channel/YOUR_CHANNEL_ID" target="_blank" class="action-button whatsapp-button"><i class="bi bi-whatsapp"></i><span class="action-label urdu-text text-xs">چینل</span></a></div></div>
         </div>
-        <section class="related-posts-section mt-12"><div class="section-title-container max-w-5xl mx-auto"><h2 class="section-title urdu-text"><span style="display:flex;align-items:center;justify-content:center;width:3.2rem;height:3.2rem;border-radius:50%;margin-right:0.8rem;background-image:linear-gradient(45deg,#26a69a,#80cbc4);"><i class="bi bi-collection-fill" style="font-size:1.6rem;color:white;"></i></span>اسی شاعر کا مزید کلام</h2></div><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"><a href="#" class="card"><h3 class="urdu-text font-bold text-teal-700">سب سے اولیٰ و اعلیٰ</h3><p class="urdu-text text-gray-600">سب سے بالا و والا ہمارا نبی...</p><div class="related-post-stats"><span><i class="bi bi-heart-fill"></i>2.1k</span><span><i class="bi bi-eye-fill"></i>5.8k</span></div></a><a href="#" class="card"><h3 class="urdu-text font-bold text-teal-700">یا الٰہی ہر جگہ</h3><p class="urdu-text text-gray-600">جب پڑے مشکل شہِ مشکل کشا...</p><div class="related-post-stats"><span><i class="bi bi-heart-fill"></i>1.8k</span><span><i class="bi bi-eye-fill"></i>4.2k</span></div></a><a href="#" class="card"><h3 class="urdu-text font-bold text-teal-700">لم یات نظیرک</h3><p class="urdu-text text-gray-600">مثل تو نہ شد پیدا جانا...</p><div class="related-post-stats"><span><i class="bi bi-heart-fill"></i>3.5k</span><span><i class="bi bi-eye-fill"></i>7.1k</span></div></a><a href="#" class="card"><h3 class="urdu-text font-bold text-teal-700">وہ کمالِ حسنِ حضور ہے</h3><p class="urdu-text text-gray-600">کہ گمانِ نقص جہاں نہیں...</p><div class="related-post-stats"><span><i class="bi bi-heart-fill"></i>4.0k</span><span><i class="bi bi-eye-fill"></i>9.3k</span></div></a></div></section>
-    </main>
-    <footer class="footer-bg py-8 text-center shadow-inner mt-12"><div class="container mx-auto px-4"><p class="urdu-text text-lg mb-2 font-bold text-white/90">نعتیہ اکیڈمی®</p><p class="text-sm text-gray-300">کاپی رائٹ © <span id="currentYear"></span> نعتیہ اکیڈمی۔ جملہ حقوق محفوظ ہیں۔</p><p class="text-xs mt-2 opacity-80 text-gray-400">ڈیزائن از القلم آرٹس - اویس رضوی</p></div></footer>
-    <div id="authorDetailModal" class="modal"><div class="modal-content"><button id="closeAuthorModal" class="modal-close-button">×</button><div class="modal-icon" style="background-image: linear-gradient(45deg, #10b981, #34d399);"><i class="bi bi-pen-fill"></i></div><h2 class="urdu-text text-2xl font-bold text-gray-800 mb-2">امام احمد رضا خان قادری</h2><h3 class="urdu-text text-lg text-green-600 mb-4">(اعلیٰ حضرت)</h3><p class="urdu-text text-base text-gray-700 leading-relaxed text-right">امام احمد رضا خان (1856ء - 1921ء)...</p></div></div>
-    <div id="bahrDetailModal" class="modal"><div class="modal-content"><button id="closeBahrModal" class="modal-close-button">×</button><div class="modal-icon" style="background-image: linear-gradient(45deg, #3b82f6, #60a5fa);"><i class="bi bi-music-note-beamed"></i></div><h2 class="urdu-text text-2xl font-bold text-gray-800 mb-2">بحرِ متدارک</h2><p class="urdu-text text-base text-gray-700 leading-relaxed text-right">بحر متدارک ایک خوش آہنگ اور رواں بحر ہے۔ اس کی موسیقی اور ترنم کی وجہ سے اسے "بحرِ زمزمہ" بھی کہا جاتا ہے۔ یہ نعت اور سلام میں کثرت سے استعمال ہوتی ہے۔</p><hr class="my-4"><div class="text-right"><h4 class="urdu-text font-bold">ارکان:</h4><p class="urdu-text text-lg">فعلن فعلن فعلن فعلن</p><p class="urdu-text text-sm text-gray-600">اس بحر میں کل <span class="font-bold text-blue-600">35</span> کلام موجود ہیں۔</p></div><button id="shareBahrButton" class="modal-share-button"><i class="bi bi-share-fill"></i><span class="urdu-text">بحر کا صفحہ شیئر کریں</span></button></div></div>
+        <header class="kalaam-header">
+            <h1 id="kalamTitle">مصطفیٰ جانِ رحمت پہ لاکھوں سلام</h1>
+        </header>
+        <div class="meta-info-grid">
+            <div id="authorBoxTrigger" class="meta-info-item clickable">
+                <div class="meta-icon author-icon"><i class="bi bi-pen-fill"></i></div>
+                <div class="meta-info text-right">
+                    <p class="meta-label urdu-text">شاعر</p>
+                    <p class="meta-value urdu-text">امام احمد رضا خان</p>
+                </div>
+            </div>
+            <div id="bahrBoxTrigger" class="meta-info-item clickable">
+                <div class="meta-icon bahr-icon"><i class="bi bi-music-note-beamed"></i></div>
+                <div class="meta-info text-right">
+                    <p class="meta-label urdu-text">بحر: متدارک مثمن</p>
+                    <p class="meta-value urdu-text bahr-value">فعلن فعلن فعلن فعلن</p>
+                </div>
+            </div>
+            <div class="meta-info-item">
+                <div class="meta-icon category-icon"><i class="bi bi-tag-fill"></i></div>
+                <div class="meta-info text-right">
+                    <p class="meta-label urdu-text">صنف: سلام</p>
+                    <p class="meta-value urdu-text">کل پوسٹس: <span class="meta-count">128</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="poetryTextContainer" class="poetry-content-area">
+            <!-- Content will be loaded dynamically -->
+        </div>
+
+        <div class="action-bar">
+            <div class="action-group">
+                <button id="likeButton" class="action-button like-button">
+                    <i class="bi bi-heart"></i>
+                    <span class="action-label urdu-text text-xs">پسند</span>
+                    <span class="count" data-initial-count="18256">18.3k</span>
+                </button>
+                <button id="shareButton" class="action-button share-button">
+                    <i class="bi bi-share"></i>
+                    <span class="action-label urdu-text text-xs">شیئر</span>
+                </button>
+                <a href="https://whatsapp.com/channel/YOUR_CHANNEL_ID" target="_blank" class="action-button whatsapp-button">
+                    <i class="bi bi-whatsapp"></i>
+                    <span class="action-label urdu-text text-xs">چینل</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <section class="related-posts-section mt-12">
+        <div class="section-title-container max-w-5xl mx-auto">
+            <h2 class="section-title urdu-text">
+                <span style="display:flex;align-items:center;justify-content:center;width:3.2rem;height:3.2rem;border-radius:50%;margin-right:0.8rem;background-image:linear-gradient(45deg,#26a69a,#80cbc4);">
+                    <i class="bi bi-collection-fill" style="font-size:1.6rem;color:white;"></i>
+                </span>اسی شاعر کا مزید کلام
+            </h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <a href="#" class="card">
+                <h3 class="urdu-text font-bold text-teal-700">سب سے اولیٰ و اعلیٰ</h3>
+                <p class="urdu-text text-gray-600">سب سے بالا و والا ہمارا نبی...</p>
+                <div class="related-post-stats">
+                    <span><i class="bi bi-heart-fill"></i>2.1k</span>
+                    <span><i class="bi bi-eye-fill"></i>5.8k</span>
+                </div>
+            </a>
+            <a href="#" class="card">
+                <h3 class="urdu-text font-bold text-teal-700">یا الٰہی ہر جگہ</h3>
+                <p class="urdu-text text-gray-600">جب پڑے مشکل شہِ مشکل کشا...</p>
+                <div class="related-post-stats">
+                    <span><i class="bi bi-heart-fill"></i>1.8k</span>
+                    <span><i class="bi bi-eye-fill"></i>4.2k</span>
+                </div>
+            </a>
+            <a href="#" class="card">
+                <h3 class="urdu-text font-bold text-teal-700">لم یات نظیرک</h3>
+                <p class="urdu-text text-gray-600">مثل تو نہ شد پیدا جانا...</p>
+                <div class="related-post-stats">
+                    <span><i class="bi bi-heart-fill"></i>3.5k</span>
+                    <span><i class="bi bi-eye-fill"></i>7.1k</span>
+                </div>
+            </a>
+            <a href="#" class="card">
+                <h3 class="urdu-text font-bold text-teal-700">وہ کمالِ حسنِ حضور ہے</h3>
+                <p class="urdu-text text-gray-600">کہ گمانِ نقص جہاں نہیں...</p>
+                <div class="related-post-stats">
+                    <span><i class="bi bi-heart-fill"></i>4.0k</span>
+                    <span><i class="bi bi-eye-fill"></i>9.3k</span>
+                </div>
+            </a>
+        </div>
+    </section>
+</main>
+    <footer class="footer-bg py-8 text-center shadow-inner mt-12">
+        <div class="container mx-auto px-4">
+            <p class="urdu-text text-lg mb-2 font-bold text-white/90">نعتیہ اکیڈمی®</p>
+            <p class="text-sm text-gray-300">کاپی رائٹ © <span id="currentYear"></span> نعتیہ اکیڈمی۔ جملہ حقوق محفوظ
+                ہیں۔</p>
+            <p class="text-xs mt-2 opacity-80 text-gray-400">ڈیزائن از القلم آرٹس - اویس رضوی</p>
+        </div>
+    </footer>
+    <div id="authorDetailModal" class="modal">
+        <div class="modal-content"><button id="closeAuthorModal" class="modal-close-button">×</button>
+            <div class="modal-icon" style="background-image: linear-gradient(45deg, #10b981, #34d399);"><i
+                    class="bi bi-pen-fill"></i></div>
+            <h2 class="urdu-text text-2xl font-bold text-gray-800 mb-2">امام احمد رضا خان قادری</h2>
+            <h3 class="urdu-text text-lg text-green-600 mb-4">(اعلیٰ حضرت)</h3>
+            <p class="urdu-text text-base text-gray-700 leading-relaxed text-right">امام احمد رضا خان (1856ء - 1921ء)...
+            </p>
+        </div>
+    </div>
+    <div id="bahrDetailModal" class="modal">
+        <div class="modal-content"><button id="closeBahrModal" class="modal-close-button">×</button>
+            <div class="modal-icon" style="background-image: linear-gradient(45deg, #3b82f6, #60a5fa);"><i
+                    class="bi bi-music-note-beamed"></i></div>
+            <h2 class="urdu-text text-2xl font-bold text-gray-800 mb-2">بحرِ متدارک</h2>
+            <p class="urdu-text text-base text-gray-700 leading-relaxed text-right">بحر متدارک ایک خوش آہنگ اور رواں بحر
+                ہے۔ اس کی موسیقی اور ترنم کی وجہ سے اسے "بحرِ زمزمہ" بھی کہا جاتا ہے۔ یہ نعت اور سلام میں کثرت سے
+                استعمال ہوتی ہے۔</p>
+            <hr class="my-4">
+            <div class="text-right">
+                <h4 class="urdu-text font-bold">ارکان:</h4>
+                <p class="urdu-text text-lg">فعلن فعلن فعلن فعلن</p>
+                <p class="urdu-text text-sm text-gray-600">اس بحر میں کل <span class="font-bold text-blue-600">35</span>
+                    کلام موجود ہیں۔</p>
+            </div><button id="shareBahrButton" class="modal-share-button"><i class="bi bi-share-fill"></i><span
+                    class="urdu-text">بحر کا صفحہ شیئر کریں</span></button>
+        </div>
+    </div>
     <script src="lyrics.js"></script>
     <script>
-        document.getElementById('currentYear').textContent=new Date().getFullYear();document.addEventListener('DOMContentLoaded',()=>{const e=(e,t,o)=>{const a=document.getElementById(e),n=document.getElementById(t),s=document.getElementById(o);a&&n&&s&&(n.addEventListener('click',()=>a.style.display='block'),s.addEventListener('click',()=>a.style.display='none'),window.addEventListener('click',e=>{e.target==a&&(a.style.display='none')}))};e('authorDetailModal','authorBoxTrigger','closeAuthorModal'),e('bahrDetailModal','bahrBoxTrigger','closeBahrModal');const t=document.querySelectorAll('.couplet');t.forEach(e=>{e.addEventListener('click',()=>{e.classList.contains('active')?e.classList.remove('active'):(t.forEach(e=>e.classList.remove('active')),e.classList.add('active'))})});const o=document.getElementById('likeButton');o&&(()=>{const e=o.querySelector('i'),t=o.querySelector('.count');let a=parseInt(t.dataset.initialCount,10);const n=e=>e>=1e3?(e/1e3).toFixed(1)+'k':n;o.addEventListener('click',()=>{o.classList.toggle('liked'),o.classList.contains('liked')?(e.classList.replace('bi-heart','bi-heart-fill'),a++):(e.classList.replace('bi-heart-fill','bi-heart'),a--),t.textContent=n(a)})})();document.querySelectorAll('.copy-box').forEach(e=>{e.addEventListener('click',t=>{t.stopPropagation();const o=e.querySelector('p').innerText;navigator.clipboard.writeText(o).then(()=>{e.classList.add('copied'),setTimeout(()=>{e.classList.remove('copied')},2e3)})})});const a=document.getElementById('languageToggle'),n=document.querySelectorAll('.misra'),s=document.querySelectorAll('.box-roman'),l=document.querySelectorAll('.box-meaning');const c=e=>{n.forEach(t=>{t.textContent=t.dataset[e],'ro'===e?(t.classList.add('roman-text'),t.classList.remove('urdu-text')):(t.classList.remove('roman-text'),t.classList.add('urdu-text'))});s.forEach(t=>t.style.display='ro'===e?'none':'grid');l.forEach(t=>t.style.display='ur'===e?'none':'grid');a.querySelector('.active').classList.remove('active'),a.querySelector(`[data-lang="${e}"]`).classList.add('active')};a.addEventListener('click',e=>{e.target.classList.contains('toggle-option')&&!e.target.classList.contains('active')&&c(e.target.dataset.lang)}),s.forEach(e=>e.style.display='none');const i=document.getElementById('shareButton'),r=document.getElementById('shareBahrButton');i&&navigator.share&&i.addEventListener('click',async()=>{try{await navigator.share({title:document.title,text:`یہ خوبصورت کلام پڑھیں: ${document.querySelector('.kalaam-header h1').textContent.trim()}`,url:window.location.href})}catch(e){console.error('Share failed:',e)}}),r&&navigator.share&&r.addEventListener('click',async()=>{try{await navigator.share({title:"بحرِ متدارک - Naat Academy",text:"علمِ عروض میں بحرِ متدارک کے بارے میں جانیں",url:"https://naat.academy/bahr/mutadarik"})}catch(e){console.error('Share failed:',e)}})});
+        document.getElementById('currentYear').textContent = new Date().getFullYear(); document.addEventListener('DOMContentLoaded', () => { const e = (e, t, o) => { const a = document.getElementById(e), n = document.getElementById(t), s = document.getElementById(o); a && n && s && (n.addEventListener('click', () => a.style.display = 'block'), s.addEventListener('click', () => a.style.display = 'none'), window.addEventListener('click', e => { e.target == a && (a.style.display = 'none') })) }; e('authorDetailModal', 'authorBoxTrigger', 'closeAuthorModal'), e('bahrDetailModal', 'bahrBoxTrigger', 'closeBahrModal'); const t = document.querySelectorAll('.couplet'); t.forEach(e => { e.addEventListener('click', () => { e.classList.contains('active') ? e.classList.remove('active') : (t.forEach(e => e.classList.remove('active')), e.classList.add('active')) }) }); const o = document.getElementById('likeButton'); o && (() => { const e = o.querySelector('i'), t = o.querySelector('.count'); let a = parseInt(t.dataset.initialCount, 10); const n = e => e >= 1e3 ? (e / 1e3).toFixed(1) + 'k' : n; o.addEventListener('click', () => { o.classList.toggle('liked'), o.classList.contains('liked') ? (e.classList.replace('bi-heart', 'bi-heart-fill'), a++) : (e.classList.replace('bi-heart-fill', 'bi-heart'), a--), t.textContent = n(a) }) })(); document.querySelectorAll('.copy-box').forEach(e => { e.addEventListener('click', t => { t.stopPropagation(); const o = e.querySelector('p').innerText; navigator.clipboard.writeText(o).then(() => { e.classList.add('copied'), setTimeout(() => { e.classList.remove('copied') }, 2e3) }) }) }); const a = document.getElementById('languageToggle'), n = document.querySelectorAll('.misra'), s = document.querySelectorAll('.box-roman'), l = document.querySelectorAll('.box-meaning'); const c = e => { n.forEach(t => { t.textContent = t.dataset[e], 'ro' === e ? (t.classList.add('roman-text'), t.classList.remove('urdu-text')) : (t.classList.remove('roman-text'), t.classList.add('urdu-text')) }); s.forEach(t => t.style.display = 'ro' === e ? 'none' : 'grid'); l.forEach(t => t.style.display = 'ur' === e ? 'none' : 'grid'); a.querySelector('.active').classList.remove('active'), a.querySelector(`[data-lang="${e}"]`).classList.add('active') }; a.addEventListener('click', e => { e.target.classList.contains('toggle-option') && !e.target.classList.contains('active') && c(e.target.dataset.lang) }), s.forEach(e => e.style.display = 'none'); const i = document.getElementById('shareButton'), r = document.getElementById('shareBahrButton'); i && navigator.share && i.addEventListener('click', async () => { try { await navigator.share({ title: document.title, text: `یہ خوبصورت کلام پڑھیں: ${document.querySelector('.kalaam-header h1').textContent.trim()}`, url: window.location.href }) } catch (e) { console.error('Share failed:', e) } }), r && navigator.share && r.addEventListener('click', async () => { try { await navigator.share({ title: "بحرِ متدارک - Naat Academy", text: "علمِ عروض میں بحرِ متدارک کے بارے میں جانیں", url: "https://naat.academy/bahr/mutadarik" }) } catch (e) { console.error('Share failed:', e) } }) });
     </script>
 </body>
+
 </html>

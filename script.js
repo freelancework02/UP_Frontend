@@ -512,54 +512,130 @@ async function loadSelectedKalamSnippets() {
 
 
 async function loadBlogCards() {
-  const kalamPostsRef = collection(db, "articlePosts");
-  const kalamQuery = query(kalamPostsRef, limit(10));
-  const snapshot = await getDocs(kalamQuery);
+  try {
+    const response = await fetch('https://updated-naatacademy.onrender.com/api/articles');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const articles = await response.json();
 
-  const container = document.getElementById("blogCardsContainer"); // Add this div in your HTML
-  container.innerHTML = "";
+    const container = document.getElementById("blogCardsContainer");
+    container.innerHTML = "";
 
-  snapshot.forEach((doc) => {
-    const post = doc.data();
-    const title = post.title || "بدون عنوان"; // You can change field name if needed
-    const postUrdu = post.BlogText || post.BlogText?.urdu ;
-    
-    const descriptionLines = postUrdu
-      .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)
-      .map(line => line.trim())
-      .filter(line => line.length > 0)
-      .slice(0, 7)
-      .join("۔ ");
+    // Shuffle articles to show different ones each time
+    const shuffledArticles = articles.sort(() => 0.5 - Math.random());
+    const selectedArticles = shuffledArticles.slice(0, 10); // Get first 10 after shuffle
 
-    const card = document.createElement("article");
-    card.className = "card p-4 relative article-card";
+    selectedArticles.forEach((article) => {
+      const title = article.Title || "بدون عنوان";
+      const postUrdu = article.ContentUrdu || article.ContentUrdu || "";
+      
+      // Process the content to create a preview (max 1 line)
+      const descriptionLines = postUrdu
+        .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)[0] || ""; // Take only first segment
+      
+      const truncatedDescription = descriptionLines.length > 50 ? 
+        descriptionLines.substring(0, 50) + "..." : 
+        descriptionLines;
 
-    card.innerHTML = `
-      <span class="article-category-tag bg-teal-100 text-teal-600 urdu-text urdu-text-xs font-medium">نعت</span>
-      <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-teal-700 mb-2 mt-9 text-right article-title">
-        ${title}
-      </h4>
-      <p class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-700 leading-relaxed mb-4 text-right article-preview-text"
-        style="max-height: 10.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
-        ${descriptionLines}
-      </p>
-      <div class="flex items-center justify-end mt-3 pt-3 border-t border-gray-100 article-meta-row">
-        <p class="urdu-text urdu-text-xs text-gray-600 article-writer-info">>شعر کا مفہوم: اے غوث اعظم...</p>
-        <div class="writer-icon-container writer-icon-bg-1 article-writer-icon-container">
-          <img src="${post.writerImage || 'https://res.cloudinary.com/awescreative/image/upload/v1749154741/Awes/User_icon.svg'}"
-               alt="Writer Icon" class="article-writer-icon">
+      const card = document.createElement("article");
+      card.className = "card p-4 relative article-card h-48"; // Fixed height
+
+      card.innerHTML = `
+        <div class="flex flex-col h-full cursor-pointer">
+          <span class="article-category-tag bg-teal-100 text-teal-600 urdu-text text-xs font-medium mb-2">${article.category || "نعت"}</span>
+          
+          <h4 class="urdu-text text-md font-semibold text-teal-700 mb-2 text-right line-clamp-2" 
+              style="height: 3em; overflow: hidden;">
+            ${title}
+          </h4>
+          
+          <p class="urdu-text text-sm  text-right line-clamp-2 " 
+             >
+            ${truncatedDescription}
+          </p>
+          
+          <div class="flex items-center justify-end mt-auto pt-3 border-t border-gray-100">
+            <p class="urdu-text text-xs text-gray-600 mr-2 truncate" style="max-width: 120px;">
+              ${article.WriterName || "شعر کا مفہوم: اے غوث اعظم..."}
+            </p>
+            <div class="w-8 h-8 rounded-full overflow-hidden">
+              <img src="${article.writerImage || 'https://res.cloudinary.com/awescreative/image/upload/v1749154741/Awes/User_icon.svg'}"
+                   alt="Writer Icon" class="w-full h-full object-cover">
+            </div>
+          </div>
+          
+          <div class="stats-bar flex justify-between items-center mt-2">
+            <span class="flex items-center">
+              <i class="bi bi-heart-fill text-red-500 text-xs"></i>
+              <span class="like-count urdu-text text-xs mr-1">${formatNumber(article.likes || 0)}</span>
+            </span>
+            <span class="flex items-center">
+              <i class="bi bi-eye-fill text-blue-500 text-xs"></i>
+              <span class="view-count urdu-text text-xs mr-1">${formatNumber(article.views || 0)}</span>
+            </span>
+            <button class="share-icon-button text-gray-500">
+              <i class="bi bi-share-fill text-xs"></i>
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="stats-bar article-stats-bar">
-        <span><i class="bi bi-heart-fill text-red-500"></i> <span class="like-count urdu-text-xs">${post.likes || "1.9k"}</span></span>
-        <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">${post.views || "2.6k"}</span></span>
-        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+      `;
+
+      // Add click event to navigate to article detail page
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.share-icon-button')) {
+          window.location.href = `article-detail.html?id=${article._id || article.id}`;
+        }
+      });
+
+      // Add share functionality
+      const shareBtn = card.querySelector('.share-icon-button');
+      shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        shareArticle(article);
+      });
+
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error('Error loading blog cards:', error);
+    const container = document.getElementById("blogCardsContainer");
+    container.innerHTML = `
+      <div class="text-center py-8">
+        <i class="bi bi-exclamation-triangle-fill text-yellow-500 text-4xl"></i>
+        <h3 class="urdu-text text-xl mt-4">مقالات لوڈ کرنے میں مسئلہ پیش آیا</h3>
+        <p class="urdu-text mt-2">${error.message}</p>
       </div>
     `;
-
-    container.appendChild(card);
-  });
+  }
 }
+
+function shareArticle(article) {
+  if (navigator.share) {
+    navigator.share({
+      title: article.title,
+      text: article.content?.substring(0, 100) || '',
+      url: window.location.origin + `/article-detail.html?id=${article._id || article.id}`
+    }).catch(err => console.log('Error sharing:', err));
+  } else {
+    // Fallback for browsers without Web Share API
+    const url = window.location.origin + `/article-detail.html?id=${article._id || article.id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      alert('لنک کاپی ہو گیا ہے: ' + url);
+    });
+  }
+}
+
+// Helper function to format numbers (1000 => 1k)
+function formatNumber(num) {
+  return num >= 1000 ? (num/1000).toFixed(1) + 'k' : num;
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  loadBlogCards();
+});
 
 // Load on page
 loadBlogCards();
