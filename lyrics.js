@@ -31,6 +31,34 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeShareButtons();
 });
 
+document.addEventListener('DOMContentLoaded', async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const kalaamId = urlParams.get('id');
+
+  if (kalaamId) {
+    try {
+      const response = await fetch(`https://updated-naatacademy.onrender.com/api/kalaam/${kalaamId}`);
+      const kalaam = await response.json();
+      document.title = `${kalaam.Title} | Naat Academy`;
+
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+      if (descriptionMeta) {
+        descriptionMeta.setAttribute('content', kalaam.ContentUrdu.split('\n')[0].trim());
+      }
+
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', kalaam.Title);
+
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', kalaam.ContentUrdu.split('\n')[0].trim());
+
+    } catch (error) {
+      console.error('Error fetching kalaam:', error);
+    }
+  }
+});
+
+
 async function loadKalaamDetail(kalaamId) {
   try {
     // Show loading state

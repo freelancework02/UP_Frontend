@@ -98,7 +98,7 @@ function renderPoetryList(data) {
     itemDiv.className = 'poetry-item';
     itemDiv.innerHTML = `
       <div>
-        <p class="urdu-text urdu-text-md font-medium text-slate-700 mb-1">${item.Title}</p>
+        <p class="urdu-text urdu-text-md font-medium text-slate-700 mb-1 cursor-pointer"  onclick="window.location.href='lyrics.html?id=${item.KalaamID}'">${item.Title}</p>
         <div class="flex items-center gap-4 mt-2">
           <span class="category-badge ${badgeClass} urdu-text-xs">${item.CategoryName}</span>
           <div class="poetry-stats">
