@@ -135,9 +135,9 @@
                     <div class="sticky-filters" id="stickyFilters">
                         <div class="container mx-auto">
                             <div class="flex justify-center flex-wrap gap-3 mb-6" id="filterTabs">
-                                <button class="filter-tab urdu-text urdu-text-sm" data-filter="tahajji">حروفِ تہجی</button>
-                                <button class="filter-tab active urdu-text urdu-text-sm" data-filter="radif">حروفِ ردیف</button>
-                                <button class="filter-tab urdu-text urdu-text-sm" data-filter="favorite">پسندیدہ</button>
+                                <!-- <button class="filter-tab urdu-text urdu-text-sm" data-filter="tahajji">حروفِ تہجی</button> -->
+                                <button class="filter-tab active urdu-text urdu-text-sm" data-filter="radif" onclick=location.reload()>حروفِ ردیف</button>
+                                <!-- <button class="filter-tab urdu-text urdu-text-sm" data-filter="favorite">پسندیدہ</button> -->
                             </div>
                             <div class="flex justify-center flex-wrap gap-2" id="alphabetNavContainer"></div>
                         </div>
@@ -185,9 +185,46 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 3. UPDATE MAIN POETRY DATA HERE
             // The entire page will automatically update based on this array.
-            const poetryData = [
-                { letter: 'و', misra: 'واہ کیا جود و کرم ہے شہ بطحا تیرا', type: 'نعت', topic: 'شانِ کرم' }, { letter: 'و', misra: 'واہ کیا مرتبہ اے غوث ہے بالا تیرا', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'ت', misra: 'تو ہے وہ غوث کہ ہر غوث ہے شیدا تیرا', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'ا', misra: 'الاماں قہر ہے اے غوث وہ تیکھا تیرا', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'ہ', misra: 'ہم خاک ہیں اور خاک ہی ماوا ہے ہمارا', type: 'نعت', topic: 'عاجزی و انکساری' }, { letter: 'غ', misra: 'غم ہو گئے بے شمار آقا', type: 'سلام', topic: 'استغاثہ' }, { letter: 'م', misra: 'محمد مظہر کامل ہے حق کی شان عزت کا', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'ل', misra: 'لطف ان کا عام ہو ہی جائے گا', type: 'نعت', topic: 'امیدِ شفاعت' }, { letter: 'ل', misra: 'لم یات نظیرک فی نظر مثل تو نہ شد پیدا جانا', type: 'نعت', topic: 'شانِ بے مثالی' }, { letter: 'ن', misra: 'نہ آسمان کو یوں سر کشیدہ ہونا تھا', type: 'نعت', topic: 'معراج' }, { letter: 'ش', misra: 'شور مہ نو سن کر تجھ تک میں دواں آیا', type: 'نعت', topic: 'اشتیاق' }, { letter: 'خ', misra: 'خراب حال کیا دل کو پُر ملال کیا', type: 'نعت', topic: 'عشقِ رسول' }, { letter: 'ب', misra: 'بندہ ملنے کو قریب حضرت قادر گیا', type: 'نعت', topic: 'حاضریِ مدینہ' }, { letter: 'ن', misra: 'نعمتیں بانٹتا جس سمت وہ ذیشان گیا', type: 'نعت', topic: 'شانِ عطا' }, { letter: 'ت', misra: 'تاب مرآت سحر گرد بیابان عرب', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'پ', misra: 'پھراٹھا ولولہ یاد مغیلان عرب', type: 'نعت', topic: 'یادِ مدینہ' }, { letter: 'ج', misra: 'جو بنوں پر ہے بہار چمن آرائی دوست', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'ط', misra: 'طوبےٰ میں جو سب سے اونچی نازک سیدھی نکلی شاخ', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'ز', misra: 'زہے عزت و اعتلائے محمد', type: 'نعت', topic: 'شانِ محمدی' }, { letter: 'ا', misra: 'اے شافع امم شہ ذی جاہ لے خبر', type: 'نعت', topic: 'استغاثہ' }, { letter: 'ب', misra: 'بندہ قادر کا بھی قادر بھی ہے عبد القادر', type: 'منقبت', topic: 'شانِ غوث اعظم' }, { letter: 'گ', misra: 'گزرے جس راہ سے وہ سیدِ والا ہو کر', type: 'نعت', topic: 'شانِ مصطفٰی' }, { letter: 'ن', misra: 'نارِ دوزخ کو چمن کر دے بہارِ عارض', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'ت', misra: 'تمہارے ذرے کے پرتو ستار ہائے فلک', type: 'نعت', topic: 'عظمتِ مصطفٰی' }, { letter: 'ک', misra: 'کیا ٹھیک ہو رُخِ نبوی پر مثالِ گل', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'س', misra: 'سر تا بقدم ہے تن سلطان ِ زمن پھول', type: 'نعت', topic: 'جمالِ مصطفٰی' }, { letter: 'ہ', misra: 'ہے کلام الہی میں شمس و ضحی ترے چہرہ ءِ نور فزا کی قسم', type: 'نعت', topic: 'شانِ قرآنی' }, { letter: 'ی', misra: 'یا الٰہی ہر جگہ تیری عطا کا ساتھ ہو', type: 'مناجات', topic: 'دعا' }, { letter: 'ک', misra: 'کیا ہی ذوق افزا شفاعت ہے تمہاری واہ واہ', type: 'نعت', topic: 'شفاعت' }, { letter: 'س', misra: 'سب سے اَولٰی و اعلٰی ہمارا نبی', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'د', misra: 'دل کو اُن سے خدا جدا نہ کرے', type: 'نعت', topic: 'عشقِ رسول' }, { letter: 'ا', misra: 'اللہ، اللہ کے نبی سے', type: 'اصلاحی', topic: 'عقائد' }, { letter: 'ی', misra: 'یا الٰہی رحم فرما مصطفٰے کے واسطے', type: 'شجرہ', topic: 'وسیلہ' }, { letter: 'ع', misra: 'عرشِ حق ہے مسندِ رفعت رسولُ اللہ کی', type: 'نعت', topic: 'شانِ رسالت' }, { letter: 'ک', misra: 'کعبے کے بدرالدجٰی تم پہ کروڑوں درود', type: 'سلام', topic: 'درود و سلام' }, { letter: 'م', misra: 'مصطفٰے جانِ رحمت پہ لاکھوں سلام', type: 'سلام', topic: 'درود و سلام' }, { letter: 'ل', misra: 'لحد میں عشقِ رُخِ شہ کا داغ لے کے چلے', type: 'نعت', topic: 'عشقِ رسول' },
-            ];
+           const poetryData = [
+  { type: 'نعت', topic: 'شانِ کرم' },
+  { type: 'منقبت', topic: 'شانِ غوث اعظم' },
+  { type: 'منقبت', topic: 'شانِ غوث اعظم' },
+  { type: 'منقبت', topic: 'شانِ غوث اعظم' },
+  { type: 'نعت', topic: 'عاجزی و انکساری' },
+  { type: 'سلام', topic: 'استغاثہ' },
+  { type: 'نعت', topic: 'شانِ رسالت' },
+  { type: 'نعت', topic: 'امیدِ شفاعت' },
+  { type: 'نعت', topic: 'شانِ بے مثالی' },
+  { type: 'نعت', topic: 'معراج' },
+  { type: 'نعت', topic: 'اشتیاق' },
+  { type: 'نعت', topic: 'عشقِ رسول' },
+  { type: 'نعت', topic: 'حاضریِ مدینہ' },
+  { type: 'نعت', topic: 'شانِ عطا' },
+  { type: 'نعت', topic: 'جمالِ مصطفٰی' },
+  { type: 'نعت', topic: 'یادِ مدینہ' },
+  { type: 'نعت', topic: 'جمالِ مصطفٰی' },
+  { type: 'نعت', topic: 'شانِ رسالت' },
+  { type: 'نعت', topic: 'شانِ محمدی' },
+  { type: 'نعت', topic: 'استغاثہ' },
+  { type: 'منقبت', topic: 'شانِ غوث اعظم' },
+  { type: 'نعت', topic: 'شانِ مصطفٰی' },
+  { type: 'نعت', topic: 'جمالِ مصطفٰی' },
+  { type: 'نعت', topic: 'عظمتِ مصطفٰی' },
+  { type: 'نعت', topic: 'جمالِ مصطفٰی' },
+  { type: 'نعت', topic: 'جمالِ مصطفٰی' },
+  { type: 'نعت', topic: 'شانِ قرآنی' },
+  { type: 'مناجات', topic: 'دعا' },
+  { type: 'نعت', topic: 'شفاعت' },
+  { type: 'نعت', topic: 'شانِ رسالت' },
+  { type: 'نعت', topic: 'عشقِ رسول' },
+  { type: 'اصلاحی', topic: 'عقائد' },
+  { type: 'شجرہ', topic: 'وسیلہ' },
+  { type: 'نعت', topic: 'شانِ رسالت' },
+  { type: 'سلام', topic: 'درود و سلام' },
+  { type: 'سلام', topic: 'درود و سلام' },
+  { type: 'نعت', topic: 'عشقِ رسول' }
+];
+
 
             // --- END OF DATA ---
 
