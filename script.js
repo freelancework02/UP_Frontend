@@ -306,55 +306,8 @@ loadMiladArticles();
 //   }
 // };
 
-// async function loadwritersCards() {
-//   try {
-//     // Reference to your poets collection in Firestore
-//     const poetsRef = collection(db, "writers");
-//     const querySnapshot = await getDocs(poetsRef);
 
-//     // Get the container where cards will be inserted
-//     const container = document.getElementById("poets-container"); // You'll need to add this ID to your HTML
-
-//     // Clear existing content if needed
-//     container.innerHTML = '';
-
-//     // Loop through each poet document
-//     querySnapshot.forEach((doc) => {
-//       const poet = doc.data();
-
-//       // Create a new card element
-//       const card = document.createElement("article");
-//       card.className = "card p-5 poet-card transform transition-all hover:scale-105 bg-gray-50";
-
-//       // Set the card's inner HTML using the poet data
-//       card.innerHTML = `
-//         <div class="poet-icon-container poet-icon-gradient-1">
-//           <img src="${poet.imageUrl || 'https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg'}"
-//                alt="${poet.writerName} Icon" class="poet-icon-image">
-//         </div>
-//         <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800 poet-name">${poet.writerName}</h5>
-//         <p class="urdu-text urdu-text-xs text-gray-600 mb-1 poet-lifespan">ولادت: 1856 - وفات: 1921</p>
-//         <p class="urdu-text urdu-text-xs text-gray-700 leading-snug poet-description line-clamp-1">${poet.aboutWriter}</p>
-//         <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold poet-kalaam-count">کلام: 200+</p>
-//         <div class="stats-bar justify-center poet-stats-bar">
-//           <span><i class="bi bi-heart-fill text-red-500"></i>
-//             <span class="like-count urdu-text-xs">20</span>
-//           </span>
-//           <span><i class="bi bi-eye-fill text-blue-500"></i>
-//             <span class="view-count urdu-text-xs">100</span>
-//           </span>
-//           <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
-//         </div>
-//       `;
-
-//       // Add the card to the container
-//       container.appendChild(card);
-//     });
-
-//   } catch (error) {
-//     console.error("Error loading poet cards:", error);
-//   }
-// }
+let writerdata = []; // Store fetched writers data globally
 
 async function loadwritersCards() {
   try {
@@ -362,8 +315,14 @@ async function loadwritersCards() {
       "https://updated-naatacademy.onrender.com/api/writers"
     );
     const writers = await response.json();
+    writerdata = writers; // Save data globally
 
     const container = document.getElementById("poets-container");
+    if (!container) {
+      console.error("Container #poets-container not found");
+      return;
+    }
+
     container.innerHTML = "";
 
     writers.forEach((poet) => {
@@ -374,22 +333,22 @@ async function loadwritersCards() {
       card.dataset.id = id;
 
       card.innerHTML = `
-          <div class="poet-icon-container poet-icon-gradient-1 ">
-            <img src="${
-              poet.imageUrl ||
-              "https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg"
-            }" 
-                 alt="${poet.Name} Icon" class="poet-icon-image">
-          </div>
-          <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800">${
-            poet.Name
-          }</h5>
-          <p class="urdu-text urdu-text-xs text-gray-600 mb-1">ولادت: 1856 - وفات: 1921</p>
-          <p class="urdu-text urdu-text-xs text-gray-700 leading-snug line-clamp-1">${
-            poet.Bio
-          }</p>
-          <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold">کلام: 200+</p>
-        `;
+        <div class="poet-icon-container poet-icon-gradient-1">
+          <img src="${
+            poet.imageUrl ||
+            "https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg"
+          }" 
+               alt="${poet.Name} Icon" class="poet-icon-image">
+        </div>
+        <h5 class="urdu-text urdu-text-base sm:urdu-text-md font-semibold text-gray-800">
+          ${poet.Name}
+        </h5>
+        <p class="urdu-text urdu-text-xs text-gray-600 mb-1">ولادت: 1856 - وفات: 1921</p>
+        <p class="urdu-text urdu-text-xs text-gray-700 leading-snug line-clamp-1">
+          ${poet.Bio}
+        </p>
+        <p class="urdu-text urdu-text-xs text-green-600 mt-2 font-semibold">کلام: 200+</p>
+      `;
 
       card.addEventListener("click", () => {
         window.location.href = `poet.html?id=${id}`;
@@ -399,10 +358,15 @@ async function loadwritersCards() {
     });
   } catch (error) {
     console.error("Failed to load writers:", error);
-    document.getElementById("poets-container").innerHTML =
-      "<p>Error loading poets.</p>";
+    const container = document.getElementById("poets-container");
+    if (container) {
+      container.innerHTML = "<p>Error loading poets.</p>";
+    }
   }
 }
+
+
+
 
 async function fetchKalaam() {
   const response = await fetch(
@@ -446,52 +410,60 @@ async function fetchKalaam() {
 }
 
 // In your main page's JavaScript (where you fetch the kalaam list)
+ // Global variable (if not already defined)
+ let muntakhibKalaam = null;
+
 async function fetchmuntakhibKalaam() {
   try {
-    const response = await fetch(
-      "https://updated-naatacademy.onrender.com/api/kalaam"
-    );
-    const data = await response.json();
+    // Use global data if already loaded, otherwise fetch
+    if (!muntakhibKalaam) {
+      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+      if (!response.ok) throw new Error("Failed to fetch kalaam data");
+      muntakhibKalaam = await response.json();
+    }
 
-    const kalaamList = Array.isArray(data) ? data : [data];
+    const kalaamList = Array.isArray(muntakhibKalaam) ? muntakhibKalaam.slice(5, 11) : [muntakhibKalaam];
     const container = document.getElementById("kalaam-container");
-    container.innerHTML = "";
+    container.innerHTML = ""; // Clear previous content
 
     kalaamList.forEach((item) => {
       const firstTwoLines = item.ContentUrdu
-        ? item.ContentUrdu.split("\n").slice(0, 2).join("<br>")
+        ? item.ContentUrdu.split(/\r?\n/).slice(0, 2).join("<br>")
         : "";
 
       const kalaamHTML = `
-                <article class="card p-4 bg-white selected-kalaam-card cursor-pointer" 
-                         onclick="window.location.href='lyrics.html?id=${item.KalaamID}'">
-                    <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
-                        ${item.CategoryName}
-                    </h4>
-                    <p class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
-                        ${firstTwoLines}
-                    </p>
-                    <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">
-                        شاعر: ${item.WriterName}
-                    </p>
-                    <div class="stats-bar selected-kalaam-stats-bar">
-                        <span><i class="bi bi-heart-fill text-red-500"></i>
-                            <span class="like-count urdu-text-xs">0</span></span>
-                        <span><i class="bi bi-eye-fill text-blue-500"></i> 
-                            <span class="view-count urdu-text-xs">0</span></span>
-                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
-                    </div>
-                    <div class="mt-4 flex justify-start items-center">
-                        <span class="category-tag urdu-text-xs selected-kalaam-category-tag">${item.CategoryName}</span>
-                    </div>
-                </article>`;
+        <article class="card p-4 bg-white selected-kalaam-card cursor-pointer" 
+                 onclick="window.location.href='lyrics.html?id=${item.KalaamID || item._id}'">
+          <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
+              ${item.CategoryName || item.SectionName || "کلام"}
+          </h4>
+          <p class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
+              ${firstTwoLines}
+          </p>
+          <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">
+              شاعر: ${item.WriterName || "نامعلوم"}
+          </p>
+          <div class="stats-bar selected-kalaam-stats-bar">
+              <span><i class="bi bi-heart-fill text-red-500"></i>
+                  <span class="like-count urdu-text-xs">0</span></span>
+              <span><i class="bi bi-eye-fill text-blue-500"></i> 
+                  <span class="view-count urdu-text-xs">0</span></span>
+              <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+          </div>
+          <div class="mt-4 flex justify-start items-center">
+              <span class="category-tag urdu-text-xs selected-kalaam-category-tag">
+                ${item.CategoryName || item.SectionName || "کلام"}
+              </span>
+          </div>
+        </article>`;
 
       container.insertAdjacentHTML("beforeend", kalaamHTML);
     });
   } catch (error) {
-    console.error("Error fetching Kalaam:", error);
+    console.error("❌ Error fetching Muntakhib Kalaam:", error);
   }
 }
+
 
 // JavaScript function to fetch 3 kalaams and show only 2 lines from each
 async function Naatkebolfunction() {
@@ -573,149 +545,115 @@ async function Naatkebolfunction() {
   }
 }
 
+
+let naatetalim = null; // ✅ Global variable to cache data
+
 async function NaatEtalim() {
   try {
-    const response = await fetch(
-      "https://updated-naatacademy.onrender.com/api/kalaam"
-    );
-    if (!response.ok) throw new Error("Network response was not ok");
-    const data = await response.json();
+    // ✅ Use cached data if available
+    if (!naatetalim) {
+      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+      if (!response.ok) throw new Error("Network response was not ok");
+      naatetalim = await response.json();
+    }
 
-    // Get the container element
+    // ✅ Limit to 3 items
+    const dataToShow = Array.isArray(naatetalim) ? naatetalim.slice(14, 17) : [naatetalim];
+
+    // ✅ Get the container element
     const container = document.getElementById("naat-education-container");
     if (!container) {
       console.error("Container not found!");
       return;
     }
 
-    // Clear existing content
+    // ✅ Clear existing content
     container.innerHTML = "";
 
-    // Create and append cards for each item in the data
-    data.forEach((item) => {
+    // ✅ Create and append cards for the first 3 items
+    dataToShow.forEach((item) => {
       const card = document.createElement("article");
       card.className = "card p-4 text-right naat-education-card";
-      
-      // Make card clickable
       card.style.cursor = "pointer";
+
       const id = item._id || item.KalaamID;
       const title = encodeURIComponent(item.Title || "عنوان");
+
+      // ✅ Card click navigation
       card.addEventListener("click", () => {
         window.location.href = `lyrics.html?id=${id}&title=${title}`;
       });
 
-      // Create title
+      // ✅ Title
       const titleElement = document.createElement("h5");
       titleElement.className = "urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title";
       titleElement.textContent = item.Title || "عنوان";
 
-      // Create description - get only first line
+      // ✅ Description (first line only)
       const description = document.createElement("p");
       description.className = "urdu-text urdu-text-sm text-gray-700 naat-education-description";
-
-      // Extract first line from ContentUrdu
       const fullContent = item.ContentUrdu || "تفصیل";
-      const firstLine = fullContent.split("\n")[0]; // Split by newline and take first part
+      const firstLine = fullContent.split("\n")[0];
       description.textContent = firstLine;
-
-      // Add CSS to ensure single line display with ellipsis if overflow
       description.style.whiteSpace = "nowrap";
       description.style.overflow = "hidden";
       description.style.textOverflow = "ellipsis";
 
-      // Create stats bar
+      // ✅ Stats Bar
       const statsBar = document.createElement("div");
       statsBar.className = "stats-bar";
 
-      // Likes
       const likes = document.createElement("span");
-      likes.innerHTML = `<i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">${
-        item.likes || "1.4k"
-      }</span>`;
+      likes.innerHTML = `<i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">${item.likes || "1.4k"}</span>`;
 
-      // Views
       const views = document.createElement("span");
-      views.innerHTML = `<i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">${
-        item.views || "2.2k"
-      }</span>`;
+      views.innerHTML = `<i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">${item.views || "2.2k"}</span>`;
 
-      // Share button
       const shareButton = document.createElement("button");
       shareButton.className = "share-icon-button";
       shareButton.innerHTML = '<i class="bi bi-share-fill"></i>';
       shareButton.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevent triggering card click
+        e.stopPropagation();
         shareKalaam(id, item.Title || "عنوان");
       });
 
-      // Append elements to stats bar
       statsBar.appendChild(likes);
       statsBar.appendChild(views);
       statsBar.appendChild(shareButton);
 
-      // Append all elements to card
+      // ✅ Append all elements
       card.appendChild(titleElement);
       card.appendChild(description);
       card.appendChild(statsBar);
-
-      // Append card to container
       container.appendChild(card);
     });
+
   } catch (error) {
-    console.error("Error fetching data:", error);
-    // Fallback to default content with proper links
+    console.error("❌ Error fetching data:", error);
+
     const container = document.getElementById("naat-education-container");
     if (container) {
       container.innerHTML = `
-        <article class="card p-4 text-right naat-education-card" onclick="window.location.href='lyrics.html?id=1&title=نعت گوئی کے اصول'">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت گوئی کے اصول</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کہنے کے بنیادی اصول اور رہنما ہدایات۔</p>
-          <div class="stats-bar">
-            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
-            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
-            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('1', 'نعت گوئی کے اصول')">
-              <i class="bi bi-share-fill"></i>
-            </button>
-          </div>
-        </article>
-        <article class="card p-4 text-right naat-education-card" onclick="window.location.href='lyrics.html?id=2&title=تاریخِ نعت'">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">تاریخِ نعت</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">نعت کی تاریخی پس منظر اور ارتقاء۔</p>
-          <div class="stats-bar">
-            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
-            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
-            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('2', 'تاریخِ نعت')">
-              <i class="bi bi-share-fill"></i>
-            </button>
-          </div>
-        </article>
-        <article class="card p-4 text-right hidden md:block naat-education-card" onclick="window.location.href='lyrics.html?id=3&title=نعت کی اہمیت'">
-          <h5 class="urdu-text urdu-text-md font-semibold text-gray-800 naat-education-title">نعت کی اہمیت</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 naat-education-description">اسلام میں نعت کی فضیلت اور اہمیت۔</p>
-          <div class="stats-bar">
-            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.4k</span></span>
-            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.2k</span></span>
-            <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('3', 'نعت کی اہمیت')">
-              <i class="bi bi-share-fill"></i>
-            </button>
-          </div>
-        </article>
+        <p class="text-red-600">کلام لوڈ کرنے میں مسئلہ پیش آیا۔ براہ کرم بعد میں کوشش کریں۔</p>
       `;
     }
   }
 }
 
 
+
+let naateadab = null; // ✅ Global variable to cache data
+
 async function NaatEAdab() {
   try {
-    const response = await fetch(
-      "https://updated-naatacademy.onrender.com/api/kalaam"
-    );
-    if (!response.ok) throw new Error("Network response was not ok");
+    // ✅ Use cached data if already fetched
+    if (!naateadab) {
+      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+      if (!response.ok) throw new Error("Network response was not ok");
+      naateadab = await response.json();
+    }
 
-    const data = await response.json();
     const container = document.getElementById("naatContainer");
-
     if (!container) {
       console.error("Container not found!");
       return;
@@ -723,24 +661,24 @@ async function NaatEAdab() {
 
     container.innerHTML = "";
 
-    data.forEach((item, index) => {
+    // ✅ Limit to first 3 items
+    const dataToShow = Array.isArray(naateadab) ? naateadab.slice(20, 23) : [naateadab];
+
+    dataToShow.forEach((item, index) => {
       const card = document.createElement("article");
       card.className = `card p-4 text-right naat-literature-card cursor-pointer ${
         index >= 2 ? "hidden md:block" : ""
       }`;
 
-      // Get the kalaam ID and title
       const kalaamId = item._id || item.KalaamID;
       const kalaamTitle = encodeURIComponent(item.Title || item.title || "عنوان");
 
-      // Make the card clickable
       card.addEventListener("click", () => {
         window.location.href = `lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
       });
 
       const title = document.createElement("h5");
-      title.className =
-        "urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title";
+      title.className = "urdu-text urdu-text-md font-semibold text-gray-800 naat-literature-title";
       title.textContent = item.Title || item.title || "عنوان";
 
       const description = document.createElement("p");
@@ -768,20 +706,22 @@ async function NaatEAdab() {
       shareButton.className = "share-icon-button";
       shareButton.innerHTML = '<i class="bi bi-share-fill"></i>';
       shareButton.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevent card click when sharing
+        e.stopPropagation(); // Prevent card navigation
+
         const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&title=${kalaamTitle}`;
-        
+        const shareText = `یہ نعتیہ ادب پڑھیں: ${item.Title || item.title || "عنوان"}`;
+
         if (navigator.share) {
-          navigator.share({
-            title: `${item.Title || item.title || "عنوان"} | Naat Academy`,
-            text: `یہ نعتیہ ادب پڑھیں: ${item.Title || item.title || "عنوان"}`,
-            url: shareUrl
-          }).catch(err => console.log('Error sharing:', err));
+          navigator
+            .share({
+              title: `${item.Title || item.title || "عنوان"} | Naat Academy`,
+              text: shareText,
+              url: shareUrl,
+            })
+            .catch((err) => console.log("Error sharing:", err));
         } else {
-          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
-            `یہ نعتیہ ادب پڑھیں: ${item.Title || item.title || "عنوان"}\n${shareUrl}`
-          )}`;
-          window.open(whatsappUrl, '_blank');
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;
+          window.open(whatsappUrl, "_blank");
         }
       });
 
@@ -838,6 +778,8 @@ async function NaatEAdab() {
     if (container) container.innerHTML = fallbackHTML;
   }
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   NaatEAdab();
@@ -1073,6 +1015,8 @@ async function Fetchgroupcontainer() {
 // Call the function when page loads
 document.addEventListener("DOMContentLoaded", Fetchgroupcontainer);
 
+let Hamdebaritala = []; // Store fetched kalaam data here
+
 async function Hamdbari() {
   try {
     const response = await fetch(
@@ -1081,6 +1025,7 @@ async function Hamdbari() {
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
+    Hamdebaritala = data; // Save fetched data to global variable
 
     const container = document.getElementById("Hamdbari");
     if (!container) {
@@ -1091,25 +1036,21 @@ async function Hamdbari() {
     container.innerHTML = ""; // Clear existing content
 
     data.slice(0, 3).forEach((item, index) => {
-      // Only show first 3 items
       const card = document.createElement("article");
       card.className = `card p-4 text-right durood-salam-card ${
         index >= 2 ? "hidden md:block" : ""
       }`;
-      
-      // Make the entire card clickable
       card.style.cursor = "pointer";
+
       card.addEventListener("click", () => {
         window.location.href = `lyrics.html?id=${item._id || item.KalaamID}&title=${encodeURIComponent(item.Title || item.title)}`;
       });
 
-      // Title
       const title = document.createElement("h5");
       title.className =
         "urdu-text urdu-text-md font-semibold text-gray-800 durood-salam-title";
       title.textContent = item.Title || item.title || "درود شریف";
 
-      // Description (first line only)
       const description = document.createElement("p");
       description.className =
         "urdu-text urdu-text-sm text-gray-700 durood-salam-description";
@@ -1118,9 +1059,8 @@ async function Hamdbari() {
         item.description ||
         item.content ||
         "درود شریف کی تفصیل";
-      description.textContent = descText.split("\n")[0].substring(0, 50); // Limit to first line/50 chars
+      description.textContent = descText.split("\n")[0].substring(0, 50);
 
-      // Stats bar
       const statsBar = document.createElement("div");
       statsBar.className = "stats-bar";
       statsBar.innerHTML = `
@@ -1133,11 +1073,23 @@ async function Hamdbari() {
         <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
       `;
 
-      // Prevent share button click from triggering card click
       const shareBtn = statsBar.querySelector(".share-icon-button");
       shareBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        shareKalaam(item._id || item.KalaamID, item.Title || item.title);
+        const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${item._id || item.KalaamID}&title=${encodeURIComponent(item.Title || item.title)}`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: `${item.Title || item.title} | Naat Academy`,
+            text: `یہ درود شریف پڑھیں: ${item.Title || item.title}`,
+            url: shareUrl
+          }).catch(err => console.log('Error sharing:', err));
+        } else {
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+            `یہ درود شریف پڑھیں: ${item.Title || item.title}\n${shareUrl}`
+          )}`;
+          window.open(whatsappUrl, '_blank');
+        }
       });
 
       card.appendChild(title);
@@ -1147,7 +1099,7 @@ async function Hamdbari() {
     });
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default content with proper links
+
     const container = document.querySelector(
       ".grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8"
     );
@@ -1172,6 +1124,7 @@ async function Hamdbari() {
     }
   }
 }
+
 
 
 // Call the function when page loads
@@ -1319,41 +1272,43 @@ fetchKalaam();
 fetchmuntakhibKalaam();
 Naatkebolfunction();
 
+
+let kalamData = null; // Global store to avoid multiple fetches
+
 async function loadKalamSnippets() {
   try {
-    // Fetch data from API
     const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
 
     const articleCards = document.querySelectorAll("#kalampost .poetry-types-card");
 
-    // Process first 4 items or available cards
-    const itemsToShow = Math.min(data.length, articleCards.length, 4);
+    // Hide all cards first
+    articleCards.forEach(card => {
+      card.style.display = "none";
+    });
 
-    for (let i = 0; i < itemsToShow; i++) {
+    // Show only the first 4 Kalaams in the first 4 cards
+    for (let i = 0; i < 3 && i < data.length && i < articleCards.length; i++) {
       const post = data[i];
       const urduKalam = post.ContentUrdu || "";
       const tag = post.SectionName || post.category || "کلام";
 
-      // Extract two meaningful lines
       const lines = urduKalam
         .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)
         .map(line => line.trim())
         .filter(line => line.length > 0);
-
       const couplet = lines.slice(0, 2).join("<br>");
 
-      // Update DOM elements
       const card = articleCards[i];
-      
+      card.style.display = "block"; // Show only these 4
+
       const pTag = card.querySelector(".poetry-type-description");
       if (pTag) pTag.innerHTML = couplet;
 
       const titleTag = card.querySelector(".poetry-type-title");
       if (titleTag) titleTag.textContent = tag;
 
-      // Make card clickable
       const kalamId = post._id || post.KalaamID;
       const kalamTitle = encodeURIComponent(post.Title || tag);
       card.style.cursor = "pointer";
@@ -1365,6 +1320,10 @@ async function loadKalamSnippets() {
     console.error("❌ Error loading kalam snippets:", error);
   }
 }
+
+
+
+
 
 async function loadSelectedKalamSnippets() {
   try {
