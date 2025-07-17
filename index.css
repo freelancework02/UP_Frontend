@@ -1,0 +1,893 @@
+/* Custom Font for Urdu Text */
+@font-face {
+  font-family: "NaatFont";
+  src: url("https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base Body Styles */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f0f2f5; /* Lighter background */
+  color: #333;
+  font-size: 1.125rem; /* Adjusted base font size */
+}
+
+/* Urdu Text Specific Styles */
+.urdu-text {
+  font-family: "NaatFont", "Noto Nastaliq Urdu", serif;
+  line-height: 2.2; /* Slightly adjusted line height */
+  font-size: 1.125rem;
+}
+
+.urdu-text-xl {
+  font-size: 2.2rem;
+}
+.urdu-text-lg {
+  font-size: 1.8rem;
+}
+.urdu-text-md {
+  font-size: 1.4rem;
+}
+.urdu-text-base {
+  font-size: 1.125rem;
+}
+.urdu-text-sm {
+  font-size: 1rem;
+}
+.urdu-text-xs {
+  font-size: 0.9rem;
+}
+
+/* Header Gradient Background */
+.header-gradient {
+  background: linear-gradient(
+    to bottom,
+    #d2f4f2,
+    #ffffff
+  ); /* Softer gradient */
+}
+
+/* Card Styles */
+.card {
+  background-color: white;
+  border-radius: 1.25rem; /* More rounded corners */
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.08),
+    0 3px 6px -3px rgba(0, 0, 0, 0.05); /* Enhanced shadow */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Softer transition */
+  overflow: hidden;
+  padding: 1.25rem; /* More padding */
+  border: 1px solid #e2e8f0; /* Subtle border */
+}
+
+.card:hover {
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -6px rgba(0, 0, 0, 0.08);
+}
+
+/* Section Title Container */
+.section-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem; /* Increased margin */
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0; /* Separator for titles */
+}
+
+/* Section Title Styles */
+.section-title {
+  font-weight: 700;
+  color: #2a415a; /* Darker, more prominent color */
+  font-size: 2rem; /* Adjusted size */
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Section Title Icon Wrapper */
+.section-title-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem; /* Adjusted size */
+  height: 3.2rem;
+  border-radius: 50%;
+  margin-right: 0.8rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for icon background */
+}
+
+/* Section Title Icon */
+.section-title-icon {
+  font-size: 1.6rem; /* Adjusted size */
+  color: white;
+}
+
+/* Gradient Backgrounds for Icons */
+.gradient-icon-bg-1 {
+  background-image: linear-gradient(45deg, #10b981, #34d399);
+} /* Emerald */
+.gradient-icon-bg-2 {
+  background-image: linear-gradient(45deg, #2563eb, #60a5fa);
+} /* Blue */
+.gradient-icon-bg-3 {
+  background-image: linear-gradient(45deg, #f59e0b, #fbbf24);
+} /* Amber */
+.gradient-icon-bg-4 {
+  background-image: linear-gradient(45deg, #ef4444, #f87171);
+} /* Red */
+.gradient-icon-bg-5 {
+  background-image: linear-gradient(45deg, #8b5cf6, #a78bfa);
+} /* Violet */
+.gradient-icon-bg-durood {
+  background-image: linear-gradient(45deg, #f97316, #fb923c);
+} /* Orange */
+.gradient-icon-bg-festivals {
+  background-image: linear-gradient(45deg, #f43f5e, #fb7185);
+} /* Rose */
+.gradient-icon-bg-poetry-info {
+  background-image: linear-gradient(45deg, #4caf50, #8bc34a);
+} /* Green */
+
+/* Responsive Section Title Size */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Footer Styles */
+.footer-bg {
+  background-color: #2a415a;
+  color: #cbd5e1;
+} /* Darker footer */
+
+/* WhatsApp Floating Action Button */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #25d366;
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.whatsapp-fab:hover {
+  background-color: #1dae52;
+  transform: scale(1.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.whatsapp-fab i {
+  font-size: 1.6rem;
+}
+
+/* Slide Up Fade In Animation */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slideUpFadeIn {
+  animation: slideUpFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+/* Slider Styles */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  background-color: transparent;
+} /* Removed background */
+.slider-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.slider-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+.slider-button.prev {
+  left: 10px;
+}
+.slider-button.next {
+  right: 10px;
+}
+
+/* Category Tags */
+.category-tag {
+  padding: 0.1rem 1rem; /* Reduced padding for compact pill */
+  border-radius: 9999px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  display: inline-flex;
+  align-items: center;
+}
+.category-tag.selected {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  border-color: currentColor;
+} /* Emphasize selection */
+.category-naat {
+  background-color: #e0f2f1;
+  color: #00796b;
+  border-color: #b2dfdb;
+}
+.category-naat.selected,
+.category-naat:hover {
+  background-color: #00796b;
+  color: white;
+  border-color: #00695c;
+}
+.category-salam {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border-color: #bbdefb;
+}
+.category-salam.selected,
+.category-salam:hover {
+  background-color: #1565c0;
+  color: white;
+  border-color: #1e88e5;
+}
+.category-manqabat {
+  background-color: #fff8e1;
+  color: #ff8f00;
+  border-color: #ffecb3;
+}
+.category-manqabat.selected,
+.category-manqabat:hover {
+  background-color: #ff8f00;
+  color: white;
+  border-color: #fb8c00;
+}
+.category-qataat {
+  background-color: #fce4ec;
+  color: #d81b60;
+  border-color: #f8bbd0;
+}
+.category-qataat.selected,
+.category-qataat:hover {
+  background-color: #d81b60;
+  color: white;
+  border-color: #c2185b;
+}
+.category-mawzoat {
+  background-color: #e8eaf6;
+  color: #303f9f;
+  border-color: #c5cae9;
+}
+.category-mawzoat.selected,
+.category-mawzoat:hover {
+  background-color: #303f9f;
+  color: white;
+  border-color: #3949ab;
+}
+.category-shayar {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+  border-color: #e1bee7;
+}
+.category-shayar.selected,
+.category-shayar:hover {
+  background-color: #6a1b9a;
+  color: white;
+  border-color: #7b1fa2;
+}
+.category-mazameen {
+  background-color: #e0f7fa;
+  color: #00838f;
+  border-color: #b2ebf2;
+}
+.category-mazameen.selected,
+.category-mazameen:hover {
+  background-color: #00838f;
+  color: white;
+  border-color: #0097a7;
+}
+.category-kutub {
+  background-color: #f9f0ff;
+  color: #8e44ad;
+  border-color: #e8daef;
+}
+.category-kutub.selected,
+.category-kutub:hover {
+  background-color: #8e44ad;
+  color: white;
+  border-color: #7d3c98;
+}
+
+/* Smaller font size for category post counts and pill-shaped design */
+.category-post-count {
+  font-size: 0.75rem; /* Slightly increased text size */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.3
+  ); /* Semi-transparent white background */
+  color: inherit; /* Inherit color from parent for contrast */
+  padding: 0.05rem 0.35rem; /* Reduced padding */
+  border-radius: 9999px; /* Pill shape */
+  margin-right: 0.5rem; /* Space between name and pill */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px; /* Ensure a minimum width for small numbers */
+}
+.category-name {
+  font-size: 20px; /* Explicitly set to 20px */
+}
+
+/* Mazameen Card Writer Icon */
+.mazameen-card .writer-icon-container {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.6rem;
+  padding: 0.3rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.mazameen-card .writer-icon-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Added to make icon white */
+}
+/* New gradient backgrounds for writer icons */
+.writer-icon-bg-1 {
+  background-image: linear-gradient(45deg, #60a5fa, #3b82f6);
+} /* Blue-ish */
+.writer-icon-bg-2 {
+  background-image: linear-gradient(45deg, #10b981, #059669);
+} /* Green-ish */
+.writer-icon-bg-3 {
+  background-image: linear-gradient(45deg, #f97316, #ea580c);
+} /* Orange-ish */
+
+/* Poet Card Styles */
+.poet-card .poet-icon-container {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  padding: 0.4rem;
+  margin: 0 auto 0.9rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+}
+.poet-card .poet-icon-container img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.poet-icon-gradient-1 {
+  background-image: linear-gradient(
+    45deg,
+    #ff9a9e 0%,
+    #fad0c4 99%,
+    #fad0c4 100%
+  );
+}
+.poet-icon-gradient-2 {
+  background-image: linear-gradient(to right, #a18cd1 0%, #fbc2eb 100%);
+}
+.poet-icon-gradient-3 {
+  background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+}
+.poet-icon-gradient-4 {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+/* Stats Bar */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* More spacing */
+  font-size: 0.95rem;
+  color: #6b7280;
+  padding-top: 0.6rem;
+  margin-top: 0.6rem;
+  border-top: 1px solid #f3f4f6;
+  margin-top: auto; /* Push to bottom of card */
+}
+.stats-bar i {
+  font-size: 1.1rem;
+  margin-right: 0.25rem;
+}
+.stats-bar .urdu-text-xs {
+  font-size: 0.95rem !important;
+}
+
+/* Share Icon Button (very small, Facebook style) */
+.share-icon-button {
+  background-color: transparent; /* Transparent background */
+  color: #6b7280; /* Gray color */
+  width: 20px; /* Very small width */
+  height: 20px; /* Very small height */
+  border: 1px solid #9ca3af; /* Thin outline */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none; /* Remove existing shadow */
+  transition: all 0.2s ease; /* Smooth transition for all properties */
+  padding: 0; /* No extra padding inside for a tight fit */
+  margin-left: auto; /* Push to the left in RTL */
+}
+.share-icon-button:hover {
+  background-color: #f3f4f6; /* Subtle hover background */
+  color: #4b5563; /* Darker gray on hover */
+  transform: scale(1.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight shadow on hover */
+}
+.share-icon-button i {
+  font-size: 0.7rem; /* Match button's font-size for icon */
+  margin-right: 0; /* Remove extra margin if any */
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  animation: fadeIn 0.3s ease-out;
+}
+.modal-content {
+  background-color: #fff;
+  margin: 3% auto;
+  padding: 30px; /* More padding */
+  border-radius: 1rem;
+  width: 95%;
+  max-width: 700px; /* Adjusted max-width */
+  position: relative;
+  animation: slideDownFadeIn 0.3s ease-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.modal-close-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #718096; /* Subtle close button */
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.modal-close-button:hover {
+  color: #333;
+}
+
+/* AI Search Modal Specific */
+.ai-search-modal-content {
+  border: 2px solid transparent;
+  animation: glowing-border 2.5s infinite alternate;
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.6), 0 0 30px rgba(40, 167, 69, 0.4);
+}
+@keyframes glowing-border {
+  0% {
+    border-color: rgba(40, 167, 69, 0.4);
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+  }
+  50% {
+    border-color: rgba(40, 167, 69, 0.8);
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.8);
+  }
+  100% {
+    border-color: rgba(40, 167, 69, 0.4);
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search Container and Input */
+.header-search-card {
+  background-color: white;
+  border-radius: 1.5rem; /* Even more rounded */
+  padding: 1.5rem 1rem; /* Fixed padding for all screens */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12); /* Stronger shadow */
+  border: 1px solid #e2e8f0;
+  width: 100%; /* Full width */
+}
+/* Mobile responsive adjustments for header-search-card */
+@media (max-width: 639px) {
+  /* Tailwind's 'sm' breakpoint for mobile */
+  .header-search-card {
+    padding: 0.2rem 1rem; /* Compact padding for mobile */
+  }
+}
+@media (min-width: 640px) {
+  /* Tailwind's 'sm' breakpoint */
+  .header-search-card {
+    max-width: 42rem; /* Tailwind's max-w-2xl */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: #f8f9fa;
+  border: 1px solid #d1d5db;
+  transition: all 0.3s ease;
+  padding: 0.25rem; /* Made padding more compact */
+}
+.search-input-wrapper:focus-within {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+} /* Emerald focus */
+
+.search-input-wrapper input[type="text"] {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  background-color: transparent;
+  text-align: right;
+}
+.search-button-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: 0.4rem; /* Adjusted margin-left */
+}
+.search-icon-button {
+  background-color: #fff;
+  color: #64748b; /* Slate gray */
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+.search-icon-button:hover {
+  background-color: #f1f5f9;
+  transform: scale(1.08);
+}
+.ai-search-button-inline {
+  background-color: #10b981;
+  color: white;
+} /* Emerald */
+.ai-search-button-inline:hover {
+  background-color: #059669;
+}
+/* Style for the new AI search SVG icon */
+.ai-search-icon-image {
+  filter: brightness(0) invert(1); /* Makes the SVG white */
+}
+
+/* Search Options */
+#searchOptionsContainer {
+  display: block;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 1rem 0; /* More padding */
+  position: static;
+  transform: none;
+  width: auto;
+  max-width: none;
+}
+
+/* Milad Banner Specific Styles */
+.milad-banner-section {
+  background-image: linear-gradient(
+    to bottom right,
+    #fce0e6,
+    #e0f2f1
+  ); /* Softer, more inviting gradient */
+  border-color: #f8bbd0; /* A soft border color */
+}
+.milad-banner-section .section-title-icon-wrapper {
+  background-image: linear-gradient(
+    45deg,
+    #d81b60,
+    #f06292
+  ); /* More vibrant gradient for the icon */
+}
+.milad-tab-button {
+  background-color: transparent; /* Make tabs transparent initially */
+  border: 1px solid currentColor; /* Outline effect */
+  color: #555; /* Default text color */
+  transition: all 0.3s ease;
+}
+.milad-tab-button:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover background */
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.milad-tab-button.active-tab {
+  color: white; /* White text for active tab */
+  background-image: linear-gradient(
+    45deg,
+    var(--tab-start-color),
+    var(--tab-end-color)
+  ); /* Dynamic gradient */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+/* Dynamic colors for active tabs */
+.milad-tab-button[data-tab="milad-seerat"].active-tab {
+  --tab-start-color: #8b5cf6;
+  --tab-end-color: #a78bfa;
+} /* Purple */
+.milad-tab-button[data-tab="milad-poetry"].active-tab {
+  --tab-start-color: #ec4899;
+  --tab-end-color: #f472b6;
+} /* Pink */
+.milad-tab-button[data-tab="milad-articles"].active-tab {
+  --tab-start-color: #ef4444;
+  --tab-end-color: #f87171;
+} /* Red */
+.milad-tab-button[data-tab="milad-events"].active-tab {
+  --tab-start-color: #f97316;
+  --tab-end-color: #fb923c;
+} /* Orange */
+
+/* Book Card Image */
+.book-card-image {
+  width: 100%;
+  height: 11rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+.download-button {
+  background-color: #06b6d4; /* Cyan */
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 1.05rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+.download-button:hover {
+  background-color: #0891b2;
+}
+
+/* Share Icon */
+.share-icon {
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-size: 1.45rem;
+}
+.share-icon:hover {
+  color: #10b981;
+  transform: scale(1.2);
+} /* Emerald hover */
+
+/* Pill Button */
+.pill-button {
+  background-color: #10b981; /* Emerald */
+  color: white;
+  padding: 0.4rem 0.9rem; /* Compacted */
+  border-radius: 9999px;
+  font-size: 0.9rem; /* Smaller font for compact */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+}
+.pill-button:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+} /* Adjusted hover */
+.pill-button i {
+  margin-right: 0.4rem;
+  font-size: 0.9rem;
+} /* Smaller icon */
+
+/* Article Category Tag */
+.article-category-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  z-index: 5; /* Ensure it's above other content */
+}
+
+/* Kalaam Preview Grid */
+.kalaam-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(130px, 1fr)
+  ); /* Slightly larger min-width */
+  gap: 1.25rem; /* Increased gap */
+  margin-top: 1.25rem;
+}
+.kalaam-preview-item-image {
+  width: 100%;
+  height: 140px; /* Slightly taller */
+  object-fit: cover;
+  border-radius: 0.85rem; /* More rounded */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.kalaam-preview-item-image:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+/* Modal-specific styling for the status-style slider */
+#kalaamModal .modal-content {
+  max-width: 95vw; /* Almost full width */
+  height: 90vh; /* Almost full height */
+  margin: 2.5vh auto; /* Center vertically */
+  display: flex; /* Use flexbox for internal layout */
+  flex-direction: column; /* Stack children vertically */
+  padding: 1.5rem; /* Adjust padding */
+  background-color: transparent; /* Make modal content background transparent */
+  box-shadow: none; /* Remove modal content shadow */
+}
+
+#kalaamModal .modal-slider-image {
+  width: 100%;
+  height: 100%; /* Make image take full height of its container */
+  object-fit: contain; /* Ensure full image is visible, scale down if needed */
+  border-radius: 0.75rem;
+}
+
+/* Ensure slider-wrapper and slider-slide inside modal take up available space */
+#kalaamModal .slider-wrapper {
+  flex-grow: 1; /* Allow wrapper to grow and fill space */
+  display: flex;
+  align-items: center; /* Center image vertically */
+  justify-content: center; /* Center image horizontally */
+}
+
+#kalaamModal .slider-slide {
+  display: flex; /* Use flexbox for individual slide content */
+  align-items: center; /* Center image inside slide */
+  justify-content: center; /* Center image inside slide */
+  background-color: transparent; /* Ensure slide background is transparent */
+}
+
+/* Category Card Styles */
+.category-card {
+  padding: 1rem;
+  border-top-width: 4px;
+  border-color: transparent;
+  text-align: center;
+}
+.category-card:hover {
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+}
+
+.category-card-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 0.75rem auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* To keep image circular */
+}
+.category-card-icon-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.category-card.category-naat {
+  border-top-color: #00796b;
+}
+.category-card.category-salam {
+  border-top-color: #1565c0;
+}
+.category-card.category-manqabat {
+  border-top-color: #ff8f00;
+}
+.category-card.category-qataat {
+  border-top-color: #d81b60;
+}
+.category-card.category-mawzoat {
+  border-top-color: #303f9f;
+}
+.category-card.category-shayar {
+  border-top-color: #6a1b9a;
+}
+.category-card.category-mazameen {
+  border-top-color: #00838f;
+}
+.category-card.category-kutub {
+  border-top-color: #8e44ad;
+}
+
+/* Utility for right-to-left text alignment with left-aligned icons */
+.flex-row-reverse-gap {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.5rem;
+}

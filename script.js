@@ -1,26 +1,39 @@
-// Import Firebase modules (add this at the top of your file)
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  limit,
-  query,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const response = await fetch("https://updated-naatacademy.onrender.com/api/dashboard/stats");
+    const data = await response.json();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC6tclAI1v3gmseON3S83AAzRGnQck-2Yo",
-  authDomain: "naat-academy-3185b.firebaseapp.com",
-  databaseURL: "https://naat-academy-3185b-default-rtdb.firebaseio.com",
-  projectId: "naat-academy-3185b",
-  storageBucket: "naat-academy-3185b.firebasestorage.app",
-  messagingSenderId: "246903290372",
-  appId: "1:246903290372:web:0d351dd6f1747aa4291351",
-};
+    if (data.success && data.stats) {
+      const stats = data.stats;
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+      // Map your stat keys to categories
+      const statMapping = {
+        'category-naat': stats.poetry || 0,
+        'category-salam': stats.poetry || 0,
+        'category-manqabat': stats.poetry || 0,
+        'category-qataat': stats.poetry || 0,
+        'category-mawzoat': stats.topics || 0,
+        'category-shayar': stats.writers || 0,
+        'category-mazameen': stats.articles || 0,
+        'category-kutub': stats.books || 0
+      };
+
+      // Update each card
+      for (const [categoryClass, count] of Object.entries(statMapping)) {
+        const el = document.querySelector(`.${categoryClass} .category-post-count`);
+        if (el) el.textContent = formatCount(count);
+      }
+    }
+  } catch (error) {
+    console.error("Failed to fetch stats:", error);
+  }
+
+  // Optional: Format numbers (e.g. 1500 → 1.5k)
+  function formatCount(num) {
+    if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return num;
+  }
+});
 
 
 function cleanText(text) {
