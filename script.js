@@ -369,79 +369,179 @@ async function loadwritersCards() {
 
 
 async function fetchKalaam() {
-  const response = await fetch(
-    "https://updated-naatacademy.onrender.com/api/kalaam"
-  );
-  const data = await response.json();
+  try {
+    const kalamContainer = document.getElementById("kalampost");
+    if (!kalamContainer) {
+      console.error("Container element not found");
+      return;
+    }
 
-  const kalamContainer = document.getElementById("kalampost");
-  kalamContainer.innerHTML = ""; // Clear existing
+    // Show loading state
+    kalamContainer.innerHTML = `
+      <div class="flex justify-center items-center h-48">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    `;
 
-  data.forEach((item, index) => {
-    const titleColorClass = ["amber", "blue", "rose"][index % 3]; // cycle through colors
+    const response = await fetch(
+      "https://updated-naatacademy.onrender.com/api/kalaam/limited?limit=4"
+    );
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-    const card = `
-            <article class="cursor-pointer card p-4 hover:bg-${titleColorClass}-50 transition-colors duration-300 poetry-types-card"
-            onclick="window.location.href='lyrics.html?id=${item.KalaamID}'">
-                <div class="flex justify-between items-center mb-3 poetry-type-title-group">
-                    <h3 class="text-xl urdu-text urdu-text-md font-bold text-${titleColorClass}-700 poetry-type-title">
-                        ${item.CategoryName}
-                    </h3>
-                    <a href="#" class="text-sm text-${titleColorClass}-600 hover:text-${titleColorClass}-800 urdu-text urdu-text-xs font-medium transition-colors poetry-type-collection-link">
-                        مجموعہ <i class="bi bi-arrow-left-short"></i>
-                    </a>
-                </div>
-                <img src="https://img.freepik.com/free-photo/books-imagination-still-life_23-2149082172.jpg"
-                    alt="${item.Title}"
-                    class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
-                    onerror="this.onerror=null;this.src='https://placehold.co/300x150?text=Kalaam';">
-                <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed poetry-type-description">
-                    ${item.ContentUrdu.split("\n").slice(0, 2).join("<br>")}
-                </p>
-                <div class="stats-bar poetry-type-stats-bar">
-                    <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">1.2k</span></span>
-                    <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">2.0k</span></span>
-                    <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
-                </div>
-            </article>
-        `;
-    kalamContainer.innerHTML += card;
-  });
+    const data = await response.json();
+    
+    // Handle different response formats (array or object with data property)
+    const kalaams = Array.isArray(data) ? data : 
+                   (data.data || data.kalaams || []);
+
+    // Clear container efficiently
+    kalamContainer.innerHTML = "";
+
+    // Color classes for cards
+    const titleColorClasses = ["amber", "blue", "rose"];
+    const defaultImage = "https://placehold.co/300x150?text=Kalaam";
+
+    // Use document fragment for better performance
+    const fragment = document.createDocumentFragment();
+
+    kalaams.slice(0, 4).forEach((item, index) => {
+      const titleColorClass = titleColorClasses[index % titleColorClasses.length];
+      const safeContent = item.ContentUrdu || item.contentUrdu || "";
+      const contentLines = safeContent.split("\n").filter(line => line.trim());
+      
+      const card = document.createElement('article');
+      card.className = `cursor-pointer card p-4 hover:bg-${titleColorClass}-50 transition-colors duration-300 poetry-types-card`;
+      card.onclick = () => window.location.href = `lyrics.html?id=${item.KalaamID || item._id || ''}`;
+      
+      card.innerHTML = `
+        <div class="flex justify-between items-center mb-3 poetry-type-title-group">
+          <h3 class="text-xl urdu-text urdu-text-md font-bold text-${titleColorClass}-700 poetry-type-title">
+            ${item.CategoryName || item.categoryName || "کلام"}
+          </h3>
+          <a href="category.html?category=${encodeURIComponent(item.CategoryName || '')}" 
+             class="text-sm text-${titleColorClass}-600 hover:text-${titleColorClass}-800 urdu-text urdu-text-xs font-medium transition-colors poetry-type-collection-link">
+            مجموعہ <i class="bi bi-arrow-left-short"></i>
+          </a>
+        </div>
+        <img src="${item.ImageUrl || defaultImage}"
+             alt="${item.Title || 'کلام'}"
+             class="w-full h-36 object-cover rounded-lg mb-3 shadow-sm poetry-type-image"
+             onerror="this.onerror=null;this.src='${defaultImage}'">
+        <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed poetry-type-description">
+          ${contentLines.slice(0, 2).join("<br>") || "کلام کا متن دستیاب نہیں"}
+        </p>
+        <div class="stats-bar poetry-type-stats-bar mt-3">
+          <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">${formatCount(item.likes || 0)}</span></span>
+          <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">${formatCount(item.views || 0)}</span></span>
+          <button class="share-icon-button" onclick="event.stopPropagation(); shareKalaam('${item.KalaamID || ''}')">
+            <i class="bi bi-share-fill"></i>
+          </button>
+        </div>
+      `;
+      
+      fragment.appendChild(card);
+    });
+
+    kalamContainer.appendChild(fragment);
+
+  } catch (error) {
+    console.error("Error fetching kalaam:", error);
+    const kalamContainer = document.getElementById("kalampost");
+    if (kalamContainer) {
+      kalamContainer.innerHTML = `
+        <div class="text-center p-8 text-red-500">
+          <p class="urdu-text text-lg">کلام لوڈ کرنے میں مسئلہ پیش آیا</p>
+          <p class="text-sm mt-2">${error.message}</p>
+          <button onclick="fetchKalaam()" class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+            دوبارہ کوشش کریں
+          </button>
+        </div>
+      `;
+    }
+  }
 }
+
+
+function formatCount(num) {
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1) + 'k';
+  }
+  return num.toString();
+}
+
+// Share function
+function shareKalaam(kalaamId) {
+  if (navigator.share) {
+    navigator.share({
+      title: 'نعت اکیڈمی',
+      text: 'اس خوبصورت کلام کو دیکھیں',
+      url: `https://naatacademy.com/lyrics.html?id=${kalaamId}`
+    }).catch(err => console.log('Error sharing:', err));
+  } else {
+    // Fallback for browsers that don't support Web Share API
+    const shareUrl = `https://naatacademy.com/lyrics.html?id=${kalaamId}`;
+    prompt("کاپی کرنے کے لیے لنک منتخب کریں:", shareUrl);
+  }
+}
+
 
 // In your main page's JavaScript (where you fetch the kalaam list)
  // Global variable (if not already defined)
- let muntakhibKalaam = null;
+let muntakhibKalaam = null;
 
 async function fetchmuntakhibKalaam() {
   try {
     // Use global data if already loaded, otherwise fetch
     if (!muntakhibKalaam) {
-      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam/limited?limit=6");
       if (!response.ok) throw new Error("Failed to fetch kalaam data");
-      muntakhibKalaam = await response.json();
+      const data = await response.json();
+      
+      // Handle both array response and object-with-data response formats
+      muntakhibKalaam = Array.isArray(data) ? data : 
+                        (data.data || data.kalaams || [data]);
     }
 
-    const kalaamList = Array.isArray(muntakhibKalaam) ? muntakhibKalaam.slice(5, 11) : [muntakhibKalaam];
     const container = document.getElementById("kalaam-container");
+    if (!container) {
+      console.error("Container element not found");
+      return;
+    }
+    
     container.innerHTML = ""; // Clear previous content
 
+    // Ensure we're working with an array and take first 6 items
+    const kalaamList = Array.isArray(muntakhibKalaam) ? 
+                      muntakhibKalaam.slice(0, 6) : 
+                      [muntakhibKalaam];
+
     kalaamList.forEach((item) => {
-      const firstTwoLines = item.ContentUrdu
-        ? item.ContentUrdu.split(/\r?\n/).slice(0, 2).join("<br>")
-        : "";
+      // Safely extract content lines
+      const content = item.ContentUrdu || item.contentUrdu || "";
+      const firstTwoLines = content.split(/\r?\n/)
+                                  .filter(line => line.trim())
+                                  .slice(0, 2)
+                                  .join("<br>");
+
+      // Safely extract other properties
+      const kalaamId = item.KalaamID || item._id || "";
+      const category = item.CategoryName || item.categoryName || item.SectionName || "کلام";
+      const poet = item.WriterName || item.writerName || "نامعلوم";
 
       const kalaamHTML = `
         <article class="card p-4 bg-white selected-kalaam-card cursor-pointer" 
-                 onclick="window.location.href='lyrics.html?id=${item.KalaamID || item._id}'">
+                 onclick="window.location.href='lyrics.html?id=${kalaamId}'">
           <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold text-green-700 mb-2 text-right selected-kalaam-title">
-              ${item.CategoryName || item.SectionName || "کلام"}
+              ${category}
           </h4>
           <p class="urdu-text urdu-text-sm sm:urdu-text-base text-gray-700 leading-relaxed mb-3 text-right selected-kalaam-couplet">
-              ${firstTwoLines}
+              ${firstTwoLines || "کلام کا متن دستیاب نہیں"}
           </p>
           <p class="urdu-text urdu-text-xs text-gray-600 text-right selected-kalaam-poet">
-              شاعر: ${item.WriterName || "نامعلوم"}
+              شاعر: ${poet}
           </p>
           <div class="stats-bar selected-kalaam-stats-bar">
               <span><i class="bi bi-heart-fill text-red-500"></i>
@@ -452,7 +552,7 @@ async function fetchmuntakhibKalaam() {
           </div>
           <div class="mt-4 flex justify-start items-center">
               <span class="category-tag urdu-text-xs selected-kalaam-category-tag">
-                ${item.CategoryName || item.SectionName || "کلام"}
+                ${category}
               </span>
           </div>
         </article>`;
@@ -461,6 +561,15 @@ async function fetchmuntakhibKalaam() {
     });
   } catch (error) {
     console.error("❌ Error fetching Muntakhib Kalaam:", error);
+    // Optional: Display error to user
+    const container = document.getElementById("kalaam-container");
+    if (container) {
+      container.innerHTML = `
+        <div class="text-center p-4 text-red-500">
+          <p class="urdu-text">کلام لوڈ کرنے میں مسئلہ پیش آیا</p>
+          <p class="text-sm">${error.message}</p>
+        </div>`;
+    }
   }
 }
 
@@ -552,7 +661,7 @@ async function NaatEtalim() {
   try {
     // ✅ Use cached data if available
     if (!naatetalim) {
-      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
+      const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam/limited?limit=4&offset=8");
       if (!response.ok) throw new Error("Network response was not ok");
       naatetalim = await response.json();
     }
@@ -1275,51 +1384,51 @@ Naatkebolfunction();
 
 let kalamData = null; // Global store to avoid multiple fetches
 
-async function loadKalamSnippets() {
-  try {
-    const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam");
-    if (!response.ok) throw new Error("Network response was not ok");
-    const data = await response.json();
+// async function loadKalamSnippets() {
+//   try {
+//     const response = await fetch("https://updated-naatacademy.onrender.com/api/kalaam/limited?limit=4&offset=8");
+//     if (!response.ok) throw new Error("Network response was not ok");
+//     const data = await response.json();
 
-    const articleCards = document.querySelectorAll("#kalampost .poetry-types-card");
+//     const articleCards = document.querySelectorAll("#kalampost .poetry-types-card");
 
-    // Hide all cards first
-    articleCards.forEach(card => {
-      card.style.display = "none";
-    });
+//     // Hide all cards first
+//     articleCards.forEach(card => {
+//       card.style.display = "none";
+//     });
 
-    // Show only the first 4 Kalaams in the first 4 cards
-    for (let i = 0; i < 3 && i < data.length && i < articleCards.length; i++) {
-      const post = data[i];
-      const urduKalam = post.ContentUrdu || "";
-      const tag = post.SectionName || post.category || "کلام";
+//     // Show only the first 4 Kalaams in the first 4 cards
+//     for (let i = 0; i < 3 && i < data.length && i < articleCards.length; i++) {
+//       const post = data[i];
+//       const urduKalam = post.ContentUrdu || "";
+//       const tag = post.SectionName || post.category || "کلام";
 
-      const lines = urduKalam
-        .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)
-        .map(line => line.trim())
-        .filter(line => line.length > 0);
-      const couplet = lines.slice(0, 2).join("<br>");
+//       const lines = urduKalam
+//         .split(/،|\n|\.|\r|!|\?|(?<=ہیں)/)
+//         .map(line => line.trim())
+//         .filter(line => line.length > 0);
+//       const couplet = lines.slice(0, 2).join("<br>");
 
-      const card = articleCards[i];
-      card.style.display = "block"; // Show only these 4
+//       const card = articleCards[i];
+//       card.style.display = "block"; // Show only these 4
 
-      const pTag = card.querySelector(".poetry-type-description");
-      if (pTag) pTag.innerHTML = couplet;
+//       const pTag = card.querySelector(".poetry-type-description");
+//       if (pTag) pTag.innerHTML = couplet;
 
-      const titleTag = card.querySelector(".poetry-type-title");
-      if (titleTag) titleTag.textContent = tag;
+//       const titleTag = card.querySelector(".poetry-type-title");
+//       if (titleTag) titleTag.textContent = tag;
 
-      const kalamId = post._id || post.KalaamID;
-      const kalamTitle = encodeURIComponent(post.Title || tag);
-      card.style.cursor = "pointer";
-      card.addEventListener("click", () => {
-        window.location.href = `lyrics.html?id=${kalamId}&title=${kalamTitle}`;
-      });
-    }
-  } catch (error) {
-    console.error("❌ Error loading kalam snippets:", error);
-  }
-}
+//       const kalamId = post._id || post.KalaamID;
+//       const kalamTitle = encodeURIComponent(post.Title || tag);
+//       card.style.cursor = "pointer";
+//       card.addEventListener("click", () => {
+//         window.location.href = `lyrics.html?id=${kalamId}&title=${kalamTitle}`;
+//       });
+//     }
+//   } catch (error) {
+//     console.error("❌ Error loading kalam snippets:", error);
+//   }
+// }
 
 
 
