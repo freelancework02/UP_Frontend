@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نعت شریف - کلام کی فہرست | نعت اکیڈمی</title>
+    <meta name="description" content="نعت اکیڈمی پر نعت شریف کے تمام کلام کی فہرست براؤز کریں۔ مشہور شعراء کے بہترین نعتیہ کلام سے اپنے روحانی سفر کو جلا بخشیں۔">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Font for Urdu Text */
+        @font-face {
+            font-family: 'NaatFont';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Base Body Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Urdu Text Specific Styles */
+        .urdu-text {
+            font-family: 'NaatFont', 'Noto Nastaliq Urdu', serif;
+            line-height: 2.2;
+            font-size: 1.125rem;
+        }
+
+        .urdu-text-xl { font-size: 2.2rem; }
+        .urdu-text-lg { font-size: 1.8rem; }
+        .urdu-text-md { font-size: 1.4rem; }
+        .urdu-text-base { font-size: 1.125rem; }
+        .urdu-text-sm { font-size: 1rem; }
+        .urdu-text-xs { font-size: 0.9rem; }
+
+        /* Header Gradient Background */
+        .header-gradient {
+            background: linear-gradient(to bottom, #d2f4f2, #ffffff);
+        }
+        
+        /* Footer Styles */
+        .footer-bg { background-color: #2a415a; color: #cbd5e1; }
+
+        /* WhatsApp Floating Action Button */
+        .whatsapp-fab {
+            position: fixed; bottom: 25px; right: 25px;
+            background-color: #25D366; color: white;
+            width: 55px; height: 55px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .whatsapp-fab:hover { background-color: #1DAE52; transform: scale(1.15); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); }
+        .whatsapp-fab i { font-size: 1.6rem; }
+        
+        /* Main Layout Styles */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar-card {
+            background: #fff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.08);
+        }
+        .sidebar-title {
+            font-weight: 700;
+            color: #2a415a;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            color: #475569;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .sidebar-nav a:hover {
+            background-color: #f1f5f9;
+            color: #10b981;
+        }
+        .sidebar-nav a.active {
+            background-color: #10b981;
+            color: white;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+            font-weight: 700;
+        }
+        .count-badge {
+            background-color: rgba(0,0,0,0.05);
+            color: #475569;
+            padding: 0.05rem 0.4rem;
+            border-radius: 9999px;
+            font-size: 0.65rem; /* Made smaller */
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-nav a.active .count-badge {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* New Enhanced Category Header */
+        .category-header {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #10b981;
+        }
+        .category-header::before { /* Decorative background element */
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-image: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0) 70%);
+            border-radius: 1.5rem;
+            z-index: 0;
+        }
+        .category-header-content {
+            position: relative;
+            z-index: 1;
+        }
+        .category-image-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-image: linear-gradient(45deg, #10b981, #34d399);
+            padding: 5px;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+            flex-shrink: 0;
+        }
+        .category-image-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+        
+        /* Compact Kalam List Item */
+        .kalam-item-card {
+            background-color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .kalam-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        .kalam-title {
+            color: #00796b;
+            font-weight: bold;
+        }
+        .kalam-excerpt {
+            color: #666;
+            border-right: 3px solid #10b981;
+            padding-right: 1rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .kalam-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .meta-stats {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* New Read More Link Style */
+        .read-more-link {
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.1rem;
+            transition: color 0.3s ease;
+        }
+        .read-more-link:hover {
+            color: #059669;
+        }
+        .read-more-link i {
+            font-size: 1rem;
+        }
+        
+        /* Poet Icon Styles */
+        .poet-icon-container {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            padding: 0.2rem;
+            flex-shrink: 0;
+        }
+        .poet-icon-gradient {
+            background-image: linear-gradient(45deg, #a18cd1 0%, #fbc2eb 100%);
+        }
+        .poet-icon-container img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        .pagination a, .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        .pagination a:hover {
+            background-color: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        .pagination .current {
+            background-color: #10b981;
+            color: white;
+            border-color: #10b981;
+            font-weight: bold;
+        }
+        .pagination .disabled {
+            color: #aaa;
+            background-color: #f9f9f9;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Section (Reused from main page) -->
+    <header class="header-gradient py-4 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-5">
+                <a href="index.html" aria-label="Naat Academy Home">
+                    <img src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png" alt="نعت اکیڈمی لوگو" class="h-24 md:h-28 mx-auto mb-3 transform hover:scale-105 transition-transform duration-300">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container mx-auto px-4 py-8">
+
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            
+            <!-- Main Content -->
+            <div class="lg:col-span-9">
+                <div class="kalam-list-container">
+                    <!-- Category Header -->
+                    <header class="category-header">
+                        <div class="category-header-content flex flex-col md:flex-row items-center gap-6 text-center md:text-right">
+                            <!-- Image -->
+                            <div class="category-image-container">
+                                <img src="https://img.freepik.com/free-photo/beautiful-masjid-nabawi-madinah_181624-2396.jpg" alt="نعت شریف">
+                            </div>
+                            <!-- Text Content -->
+                            <div class="flex-grow">
+                                <h1 class="urdu-text urdu-text-xl font-bold text-gray-800">نعت شریف</h1>
+                                <p class="urdu-text urdu-text-sm text-gray-600 mt-1">حضور نبی اکرم صلی اللہ علیہ وآلہ وسلم کی شانِ اقدس میں کہے گئے خوبصورت کلام کا مجموعہ</p>
+                                <!-- Breadcrumbs -->
+                                <nav class="mt-3 text-sm urdu-text-xs" aria-label="Breadcrumb">
+                                    <ol class="list-none p-0 inline-flex justify-center md:justify-start">
+                                        <li class="flex items-center">
+                                            <a href="index.html" class="text-gray-600 hover:text-green-700">ہوم</a>
+                                            <i class="bi bi-chevron-left mx-2 text-gray-400"></i>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <a href="#" class="text-gray-600 hover:text-green-700">تمام اصناف</a>
+                                            <i class="bi bi-chevron-left mx-2 text-gray-400"></i>
+                                        </li>
+                                        <li class="text-gray-500" aria-current="page">
+                                            نعت شریف
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Kalam List -->
+                    <div class="kalam-list">
+                        <!-- Kalam Item 1 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">مصطفیٰ جانِ رحمت پہ لاکھوں سلام</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                مصطفیٰ جانِ رحمت پہ لاکھوں سلام<br>
+                                شمعِ بزمِ ہدایت پہ لاکھوں سلام
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">اعلیٰ حضرت</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 3.5k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 10.2k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+                        
+                        <!-- Kalam Item 2 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">سب سے اولیٰ و اعلیٰ ہمارا نبی</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                سب سے اولیٰ و اعلیٰ ہمارا نبی<br>
+                                سب سے بالا و والا ہمارا نبی
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">اعلیٰ حضرت</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 2.8k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 8.1k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Kalam Item 3 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">وہ کمالِ حسنِ حضور ہے</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                وہ کمالِ حسنِ حضور ہے کہ گمانِ نقص جہاں نہیں
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">اعلیٰ حضرت</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 4.1k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 12.5k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Kalam Item 4 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">کوئی سلیقہ ہے آرزو کا</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                کوئی سلیقہ ہے آرزو کا، نہ بندگی میری بندگی ہے
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">مظفر وارثی</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 5.0k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 15.3k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Kalam Item 5 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">زہے مقدر حضورِ حق سے</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                زہے مقدر حضورِ حق سے سلام آیا پیام آیا
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">صبیح رحمانی</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 3.2k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 9.8k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+                        
+                        <!-- Kalam Item 6 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">یا نبی سلام علیک</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                یا نبی سلام علیک، یا رسول سلام علیک
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">نامعلوم</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 6.7k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 20.1k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+                        
+                        <!-- Kalam Item 7 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">لم یات نظیرک فی نظر</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                لم یات نظیرک فی نظر مثل تو نہ شد پیدا جانا
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">اعلیٰ حضرت</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 4.5k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 11.9k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Kalam Item 8 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">وہی رب ہے جس نے تجھ کو</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                وہی رب ہے جس نے تجھ کو ہمہ تن کرم بنایا
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">پیر نصیر الدین</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 3.9k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 10.5k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Kalam Item 9 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">حضور میری تو ساری بہار</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                حضور میری تو ساری بہار آپ سے ہے
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">خالد محمود</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 4.8k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 13.2k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Kalam Item 10 -->
+                        <article class="kalam-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-xs">جب گنبد خضریٰ پہ وہ پہلی نظر</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">
+                                جب گنبد خضریٰ پہ وہ پہلی نظر گئی
+                            </p>
+                            <div class="kalam-meta">
+                                <div class="flex items-center gap-2">
+                                    <div class="poet-icon-container poet-icon-gradient">
+                                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon">
+                                    </div>
+                                    <p class="poet-name urdu-text urdu-text-xs m-0 p-0">محمد علی ظہوری</p>
+                                </div>
+                                <div class="meta-stats">
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 5.2k</span>
+                                    <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 16.0k</span>
+                                </div>
+                                <a href="article_detail_page_urdu.html" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="pagination" aria-label="Page navigation">
+                        <a href="#" class="disabled"><i class="bi bi-chevron-right"></i></a>
+                        <span class="current">۱</span>
+                        <a href="#">۲</a>
+                        <a href="#">۳</a>
+                        <a href="#">۴</a>
+                        <a href="#">۵</a>
+                        <a href="#"><i class="bi bi-chevron-left"></i></a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="lg:col-span-3 mb-8 lg:mb-0">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title urdu-text urdu-text-lg">تمام اصناف</h3>
+                    <nav class="sidebar-nav flex flex-col gap-2">
+                        <a href="#" class="active urdu-text urdu-text-sm">
+                            <span>نعت شریف</span>
+                            <span class="count-badge">1500+</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>حمد باری تعالیٰ</span>
+                            <span class="count-badge">250</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>منقبت</span>
+                            <span class="count-badge">950</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>سلام</span>
+                            <span class="count-badge">1200</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>قطعات</span>
+                            <span class="count-badge">400</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>موضوعات</span>
+                            <span class="count-badge">780</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>شعراء</span>
+                            <span class="count-badge">150</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>مضامین</span>
+                            <span class="count-badge">250</span>
+                        </a>
+                        <a href="#" class="urdu-text urdu-text-sm">
+                            <span>کتب</span>
+                            <span class="count-badge">100</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-bg py-8 text-center shadow-inner mt-12">
+        <div class="container mx-auto px-4">
+            <p class="urdu-text urdu-text-lg mb-2 font-bold text-white/90">نعت اکیڈمی®</p>
+            <p class="text-sm text-gray-300">کاپی رائٹ © <span id="currentYear"></span> نعت اکیڈمی آرگنائزیشن۔ جملہ حقوق محفوظ ہیں۔</p>
+            <p class="text-xs mt-2 opacity-80 text-gray-400">ڈیزائن از القلم آرٹس ڈاٹ کام - اویس رضوی صدیقی</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp FAB -->
+    <a href="https://wa.me/yourphonenumber" target="_blank" class="whatsapp-fab" aria-label="Join WhatsApp Group"><i class="bi bi-whatsapp"></i></a>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تلاش کے نتائج - نعت اکیڈمی</title>
+    <meta name="description" content="نعت اکیڈمی پر تلاش کے نتائج۔ کلام، مضامین، اور شعراء کو آسانی سے تلاش کریں۔">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Font for Urdu Text */
+        @font-face {
+            font-family: 'NaatFont';
+            src: url('https://res.cloudinary.com/awescreative/raw/upload/v1749150996/Awes/naatfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Base Body Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Urdu Text Specific Styles */
+        .urdu-text {
+            font-family: 'NaatFont', 'Noto Nastaliq Urdu', serif;
+            line-height: 2.2;
+            font-size: 1.125rem;
+        }
+
+        .urdu-text-xl { font-size: 2.2rem; }
+        .urdu-text-lg { font-size: 1.8rem; }
+        .urdu-text-md { font-size: 1.4rem; }
+        .urdu-text-base { font-size: 1.125rem; }
+        .urdu-text-sm { font-size: 1rem; }
+        .urdu-text-xs { font-size: 0.9rem; }
+
+        /* Header Gradient Background */
+        .header-gradient {
+            background: linear-gradient(to bottom, #d2f4f2, #ffffff);
+        }
+        
+        /* Footer Styles */
+        .footer-bg { background-color: #2a415a; color: #cbd5e1; }
+
+        /* Search Header */
+        .search-header {
+            background: #fff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.08);
+        }
+        
+        /* Search Input Wrapper from main page */
+        .search-input-wrapper {
+            display: flex; align-items: center; border-radius: 9999px;
+            background-color: #f8f9fa; border: 1px solid #d1d5db;
+            transition: all 0.3s ease;
+            padding: 0.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-input-wrapper:focus-within { border-color: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); }
+        .search-input-wrapper input[type="text"] {
+            border: none; outline: none; flex-grow: 1;
+            padding: 0.6rem 1.2rem; font-size: 1.1rem;
+            background-color: transparent; text-align: right;
+        }
+        .search-button-group {
+            display: flex; align-items: center; gap: 0.6rem;
+            margin-left: 0.4rem;
+        }
+        .search-icon-button {
+            background-color: #fff; color: #64748b;
+            width: 3.2rem; height: 3.2rem; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .search-icon-button:hover { background-color: #f1f5f9; transform: scale(1.08); }
+        .ai-search-button-inline { background-color: #10b981; color: white; }
+        .ai-search-button-inline:hover { background-color: #059669; }
+        .ai-search-icon-image { filter: brightness(0) invert(1); }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+        .tabs-nav button {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #64748b;
+        }
+        .tabs-nav button:hover {
+            color: #10b981;
+        }
+        .tabs-nav button.active {
+            color: #10b981;
+            border-bottom-color: #10b981;
+        }
+        
+        /* Result Item Cards */
+        .result-item-card {
+            background-color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .result-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Kalam Specific Styles */
+        .kalam-title { color: #00796b; font-weight: bold; }
+        .kalam-excerpt { color: #666; border-right: 3px solid #10b981; padding-right: 1rem; margin-top: 0.5rem; margin-bottom: 1rem; }
+        
+        /* Article Specific Styles */
+        .article-title { color: #8b5cf6; font-weight: bold; }
+        .article-excerpt { color: #666; margin-top: 0.5rem; }
+
+        /* Writer Specific Styles */
+        .writer-card { display: flex; align-items: center; gap: 1.5rem; }
+        .writer-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid #10b981; }
+        .writer-name { color: #d946ef; font-weight: bold; }
+        .writer-meta { font-size: 0.8rem; color: #6b7280; }
+
+        /* Common Meta Styles */
+        .item-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; color: #777; margin-top: 1rem; }
+        .meta-stats { display: flex; gap: 1rem; }
+        .read-more-link { color: #10b981; text-decoration: none; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.1rem; transition: color 0.3s ease; }
+        .read-more-link:hover { color: #059669; }
+        .read-more-link i { font-size: 1rem; }
+        .poet-icon-container { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 0.5rem; padding: 0.2rem; flex-shrink: 0; background-image: linear-gradient(45deg, #a18cd1 0%, #fbc2eb 100%); }
+        .poet-icon-container img { width: 90%; height: 90%; object-fit: contain; filter: brightness(0) invert(1); }
+
+        /* Pagination Styles */
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 2.5rem; }
+        .pagination a, .pagination span { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; text-decoration: none; color: #333; background-color: #fff; border: 1px solid #ddd; transition: all 0.3s ease; }
+        .pagination a:hover { background-color: #10b981; color: white; border-color: #10b981; }
+        .pagination .current { background-color: #10b981; color: white; border-color: #10b981; font-weight: bold; }
+        .pagination .disabled { color: #aaa; background-color: #f9f9f9; pointer-events: none; }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="header-gradient py-4 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-5">
+                <a href="index.html" aria-label="Naat Academy Home">
+                    <img src="https://res.cloudinary.com/awescreative/image/upload/v1749154768/Awes/new_logo_naat_academy_image.png" alt="نعت اکیڈمی لوگو" class="h-24 md:h-28 mx-auto mb-3">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Search Header -->
+        <header class="search-header text-center">
+            <div class="search-input-wrapper">
+                <input type="text" id="mainSearchInput" value="امام احمد رضا" class="urdu-text urdu-text-sm" placeholder="یہاں تلاش کریں..."/>
+                <div class="search-button-group">
+                    <button id="mainSearchButton" class="search-icon-button" aria-label="Search">
+                        <i class="bi bi-search text-lg"></i>
+                    </button>
+                    <button id="aiSearchModalTrigger" class="search-icon-button ai-search-button-inline" aria-label="AI Search">
+                        <img src="https://res.cloudinary.com/awescreative/image/upload/v1749722719/Ai_Search_icon_ylzork.svg" alt="AI Search Icon" class="h-6 w-6 ai-search-icon-image">
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav flex justify-center">
+            <button class="tab-btn active urdu-text urdu-text-sm" data-tab="all">تمام (250)</button>
+            <button class="tab-btn urdu-text urdu-text-sm" data-tab="kalam">کلام (150)</button>
+            <button class="tab-btn urdu-text urdu-text-sm" data-tab="articles">مضامین (50)</button>
+            <button class="tab-btn urdu-text urdu-text-sm" data-tab="writers">شعراء (50)</button>
+        </div>
+
+        <!-- Search Results Container -->
+        <div>
+            <!-- All Tab Content -->
+            <div id="all" class="tab-content">
+                <!-- Kalam Result Item -->
+                <article class="result-item-card">
+                    <h2 class="kalam-title urdu-text urdu-text-md">مصطفیٰ جانِ رحمت پہ لاکھوں سلام</h2>
+                    <p class="kalam-excerpt urdu-text urdu-text-base">
+                        مصطفیٰ جانِ رحمت پہ لاکھوں سلام<br>
+                        شمعِ بزمِ ہدایت پہ لاکھوں سلام
+                    </p>
+                    <div class="item-meta">
+                        <div class="flex items-center gap-2">
+                            <div class="poet-icon-container"><img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon"></div>
+                            <p class="urdu-text urdu-text-xs m-0 p-0">اعلیٰ حضرت امام احمد رضا خان</p>
+                        </div>
+                        <div class="meta-stats">
+                            <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 3.5k</span>
+                            <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 10.2k</span>
+                        </div>
+                        <a href="#" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                    </div>
+                </article>
+                <!-- Article Result Item -->
+                <article class="result-item-card">
+                    <h2 class="article-title urdu-text urdu-text-md">امام احمد رضا خان کی نعتیہ شاعری کا تحقیقی جائزہ</h2>
+                    <p class="article-excerpt urdu-text urdu-text-sm">
+                        اس مضمون میں اعلیٰ حضرت امام احمد رضا خان کی نعتیہ شاعری کے فنی اور فکری پہلوؤں پر روشنی ڈالی گئی ہے اور ان کے کلام کی ادبی اہمیت کو اجاگر کیا گیا ہے۔
+                    </p>
+                    <div class="item-meta">
+                         <div class="flex items-center gap-2">
+                            <p class="urdu-text urdu-text-xs m-0 p-0">مضمون نگار: ڈاکٹر محمد حسین چشتی</p>
+                        </div>
+                        <div class="meta-stats">
+                            <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> 1.2k</span>
+                            <span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> 4.5k</span>
+                        </div>
+                        <a href="#" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                    </div>
+                </article>
+                <!-- Writer Result Item -->
+                <article class="result-item-card writer-card">
+                    <img src="https://placehold.co/60x60/d946ef/ffffff?text=AR" alt="Writer Avatar" class="writer-avatar">
+                    <div class="flex-grow">
+                        <h2 class="writer-name urdu-text urdu-text-md">اعلیٰ حضرت امام احمد رضا خان</h2>
+                        <p class="writer-meta urdu-text urdu-text-xs">عظیم عاشقِ رسولﷺ، فقیہ، اور شاعر۔ مجموعہ "حدائقِ بخشش" مشہور ہے۔</p>
+                    </div>
+                     <a href="#" class="read-more-link urdu-text"><span>پروفائل</span><i class="bi bi-arrow-left-short"></i></a>
+                </article>
+            </div>
+
+            <!-- Kalam Tab Content (Initially Hidden) -->
+            <div id="kalam" class="tab-content hidden">
+                <!-- Kalam Item 1-10 -->
+                <script>
+                    for(let i = 1; i <= 10; i++) {
+                        document.write(`
+                        <article class="result-item-card">
+                            <h2 class="kalam-title urdu-text urdu-text-md">کلام کا عنوان ${i} از امام احمد رضا</h2>
+                            <p class="kalam-excerpt urdu-text urdu-text-base">یہاں کلام کا مختصر اقتباس آئے گا...</p>
+                            <div class="item-meta">
+                                <div class="flex items-center gap-2"><div class="poet-icon-container"><img src="https://res.cloudinary.com/awescreative/image/upload/v1749156252/Awes/writer.svg" alt="Poet Icon"></div><p class="urdu-text urdu-text-xs m-0 p-0">اعلیٰ حضرت امام احمد رضا خان</p></div>
+                                <div class="meta-stats"><span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> ${Math.floor(Math.random() * 5)}.${Math.floor(Math.random() * 9)}k</span><span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> ${Math.floor(Math.random() * 20)}.${Math.floor(Math.random() * 9)}k</span></div>
+                                <a href="#" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+                        `);
+                    }
+                </script>
+            </div>
+
+            <!-- Articles Tab Content (Initially Hidden) -->
+            <div id="articles" class="tab-content hidden">
+                 <!-- Article Item 1-10 -->
+                 <script>
+                    for(let i = 1; i <= 10; i++) {
+                        document.write(`
+                        <article class="result-item-card">
+                            <h2 class="article-title urdu-text urdu-text-md">امام احمد رضا پر مضمون ${i}</h2>
+                            <p class="article-excerpt urdu-text urdu-text-sm">یہاں امام احمد رضا خان پر لکھے گئے مضمون کا خلاصہ آئے گا۔</p>
+                            <div class="item-meta">
+                                <div class="flex items-center gap-2"><p class="urdu-text urdu-text-xs m-0 p-0">مضمون نگار: ایک محقق</p></div>
+                                <div class="meta-stats"><span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-heart-fill text-red-400"></i> ${Math.floor(Math.random() * 3)}.${Math.floor(Math.random() * 9)}k</span><span class="urdu-text-xs flex items-center gap-1"><i class="bi bi-eye-fill text-blue-400"></i> ${Math.floor(Math.random() * 10)}.${Math.floor(Math.random() * 9)}k</span></div>
+                                <a href="#" class="read-more-link urdu-text"><span>پڑھیں</span><i class="bi bi-arrow-left-short"></i></a>
+                            </div>
+                        </article>
+                        `);
+                    }
+                </script>
+            </div>
+
+            <!-- Writers Tab Content (Initially Hidden) -->
+            <div id="writers" class="tab-content hidden">
+                <!-- Writer Item 1-10 -->
+                <script>
+                    const writers = [
+                        { name: "اعلیٰ حضرت امام احمد رضا خان", desc: "عظیم عاشقِ رسولﷺ، فقیہ، اور شاعر۔", avatar: "AR" },
+                        { name: "علامہ اقبال", desc: "شاعر مشرق اور فلسفی۔", avatar: "AI" },
+                        { name: "مظفر وارثی", desc: "عصرِ حاضر کے ممتاز نعت گو شاعر۔", avatar: "MW" },
+                        { name: "صبیح رحمانی", desc: "جدید نعتیہ ادب کے اہم شاعر۔", avatar: "SR" },
+                        { name: "پیر نصیر الدین نصیر", desc: "روحانی شخصیت اور صاحبِ دیوان شاعر۔", avatar: "PN" },
+                        { name: "محمد علی ظہوری", desc: "کلاسیکی انداز کے نعت گو شاعر۔", avatar: "MZ" },
+                        { name: "حفیظ جالندھری", desc: "پاکستان کے قومی ترانے کے خالق۔", avatar: "HJ" },
+                        { name: "احمد ندیم قاسمی", desc: "ادیب، شاعر، اور صحافی۔", avatar: "AQ" },
+                        { name: "پروفیسر اقبال عظیم", desc: "ممتاز نعت گو اور محقق۔", avatar: "IA" },
+                        { name: "بیدم شاہ وارثی", desc: "تصوف اور معرفت کے شاعر۔", avatar: "BW" }
+                    ];
+                    writers.forEach(writer => {
+                        document.write(`
+                        <article class="result-item-card writer-card">
+                            <img src="https://placehold.co/60x60/d946ef/ffffff?text=${writer.avatar}" alt="Writer Avatar" class="writer-avatar">
+                            <div class="flex-grow">
+                                <h2 class="writer-name urdu-text urdu-text-md">${writer.name}</h2>
+                                <p class="writer-meta urdu-text urdu-text-xs">${writer.desc}</p>
+                            </div>
+                            <a href="#" class="read-more-link urdu-text"><span>پروفائل</span><i class="bi bi-arrow-left-short"></i></a>
+                        </article>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="pagination" aria-label="Page navigation">
+            <a href="#" class="disabled"><i class="bi bi-chevron-right"></i></a>
+            <span class="current">۱</span>
+            <a href="#">۲</a>
+            <a href="#">۳</a>
+            <a href="#">۴</a>
+            <a href="#">۵</a>
+            <a href="#"><i class="bi bi-chevron-left"></i></a>
+        </nav>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-bg py-8 text-center shadow-inner mt-12">
+        <div class="container mx-auto px-4">
+            <p class="urdu-text urdu-text-lg mb-2 font-bold text-white/90">نعت اکیڈمی®</p>
+            <p class="text-sm text-gray-300">کاپی رائٹ © <span id="currentYear"></span> نعت اکیڈمی آرگنائزیشن۔ جملہ حقوق محفوظ ہیں۔</p>
+            <p class="text-xs mt-2 opacity-80 text-gray-400">ڈیزائن از القلم آرٹس ڈاٹ کام - اویس رضوی صدیقی</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Tabs functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Deactivate all buttons and hide all content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+
+                // Activate the clicked button
+                button.classList.add('active');
+
+                // Show the corresponding content
+                const tabId = button.dataset.tab;
+                const targetContent = document.getElementById(tabId);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
