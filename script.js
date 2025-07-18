@@ -776,7 +776,7 @@ async function Fetchgroupcontainer() {
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
-    console.log("API Data:", data); // For debugging
+    console.log("API Data:", data); // Debug
 
     const container = document.getElementById("group-container");
     if (!container) {
@@ -786,15 +786,21 @@ async function Fetchgroupcontainer() {
 
     container.innerHTML = ""; // Clear existing content
 
-    // Color classes for different modules
     const colorClasses = [
       'text-green-700', 'text-blue-700', 'text-amber-700',
       'text-rose-700', 'text-purple-700', 'text-teal-700'
     ];
 
-    data.slice(0, 6).forEach((item, index) => { // Only show first 6 items
+    data.slice(0, 6).forEach((item, index) => {
       const card = document.createElement("article");
-      card.className = "card p-4 poetry-info-module-card";
+      card.className = "card p-4 poetry-info-module-card cursor-pointer hover:shadow-md transition";
+      card.style.cursor = "pointer";
+
+      // Redirect on click
+      const articleID = item.ArticleID;
+      card.addEventListener("click", () => {
+        window.location.href = `./Pages/article.html?id=${articleID}`;
+      });
 
       // Image
       const img = document.createElement("img");
@@ -807,13 +813,13 @@ async function Fetchgroupcontainer() {
       title.className = `urdu-text urdu-text-md font-semibold mb-2 text-right poetry-info-module-title ${colorClasses[index % colorClasses.length]}`;
       title.textContent = item.Title || item.title || `مڈول ${index + 1}`;
 
-      // Description with line-clamp-3
+      // Description
       const description = document.createElement("p");
       description.className = "urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content line-clamp-3";
-
       const rawDescription = item.ContentUrdu || item.description || item.content || "تفصیل دستیاب نہیں";
       const cleanedDescription = cleanText(rawDescription);
       description.textContent = cleanedDescription;
+
       // Stats bar
       const statsBar = document.createElement("div");
       statsBar.className = "stats-bar";
@@ -823,7 +829,7 @@ async function Fetchgroupcontainer() {
         <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
       `;
 
-      // Append all elements
+      // Assemble the card
       card.appendChild(img);
       card.appendChild(title);
       card.appendChild(description);
@@ -834,29 +840,25 @@ async function Fetchgroupcontainer() {
 
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default content
+
     const container = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8');
     if (container) {
       container.innerHTML = `
-        <!-- Your original HTML content here as fallback -->
-        <article class="card p-4 poetry-info-module-card" onclick="window.location.href='lyrics.html?id=${item.KalaamID}>
-          <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
-          <h5 class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">
-            مڈول 1: شاعری کی تعریف اور اقسام</h5>
-          <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content line-clamp-3">
-            شاعری ایک ایسا فن ہے جس میں جذبات اور خیالات کا اظہار خوبصورت الفاظ اور منظم طریقوں سے کیا جاتا ہے۔</p>
+        <article class="card p-4 poetry-info-module-card" onclick="window.location.href='./Pages/article.html?id=1'">
+          <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop" alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
+          <h5 class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">مڈول 1: شاعری کی تعریف اور اقسام</h5>
+          <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content line-clamp-3">شاعری ایک ایسا فن ہے جس میں جذبات اور خیالات کا اظہار خوبصورت الفاظ اور منظم طریقوں سے کیا جاتا ہے۔</p>
           <div class="stats-bar">
-            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs"></span></span>
-            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs"></span></span>
+            <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">0</span></span>
+            <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">0</span></span>
             <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
           </div>
         </article>
-        <!-- Include other fallback articles as needed -->
       `;
     }
   }
 }
+
 
 // Call the function when page loads
 document.addEventListener("DOMContentLoaded", Fetchgroupcontainer);
