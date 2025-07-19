@@ -154,7 +154,7 @@ async function loadMiladArticles() {
       const defaultTab = document.createElement("button");
       defaultTab.dataset.tab = "milad-default";
       defaultTab.className =
-        "milad-tab-button urdu-text urdu-text-sm bg-purple-200 text-purple-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-purple-300 active-tab";
+        "milad-tab-button urdu-text urdu-text-sm bg-purple-300 text-purple-800 font-semibold py-2 px-5 rounded-full transition-all hover:bg-purple-300 active-tab";
       defaultTab.textContent = "سیرت";
       tabsContainer.appendChild(defaultTab);
     } else {
@@ -792,7 +792,7 @@ async function Fetchgroupcontainer() {
     ];
 
     data.slice(0, 6).forEach((item, index) => {
-      const card = document.createElement("article");
+      const card = document.createElement(".article");
       card.className = "card p-4 poetry-info-module-card cursor-pointer hover:shadow-md transition";
       card.style.cursor = "pointer";
 
@@ -801,6 +801,8 @@ async function Fetchgroupcontainer() {
       card.addEventListener("click", () => {
         window.location.href = `./Pages/article.html?id=${articleID}`;
       });
+
+      console.log("article id ", articleID)
 
       // Image
       const img = document.createElement("img");
@@ -844,7 +846,7 @@ async function Fetchgroupcontainer() {
     const container = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8');
     if (container) {
       container.innerHTML = `
-        <article class="card p-4 poetry-info-module-card" onclick="window.location.href='./Pages/article.html?id=1'">
+        <article class="card p-4 poetry-info-module-card" >
           <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop" alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
           <h5 class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">مڈول 1: شاعری کی تعریف اور اقسام</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content line-clamp-3">شاعری ایک ایسا فن ہے جس میں جذبات اور خیالات کا اظہار خوبصورت الفاظ اور منظم طریقوں سے کیا جاتا ہے۔</p>
