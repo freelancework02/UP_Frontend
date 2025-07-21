@@ -792,17 +792,17 @@ async function Fetchgroupcontainer() {
     ];
 
     data.slice(0, 6).forEach((item, index) => {
-      const card = document.createElement(".article");
+      const card = document.createElement("article");
       card.className = "card p-4 poetry-info-module-card cursor-pointer hover:shadow-md transition";
       card.style.cursor = "pointer";
 
       // Redirect on click
-      const articleID = item.ArticleID;
+      const articleID = item.ArticleID || item.id;
       card.addEventListener("click", () => {
         window.location.href = `./Pages/article.html?id=${articleID}`;
       });
 
-      console.log("article id ", articleID)
+      console.log("article id ", articleID);
 
       // Image
       const img = document.createElement("img");
@@ -824,7 +824,7 @@ async function Fetchgroupcontainer() {
 
       // Stats bar
       const statsBar = document.createElement("div");
-      statsBar.className = "stats-bar";
+      statsBar.className = "stats-bar flex justify-between items-center mt-3";
       statsBar.innerHTML = `
         <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">${item.likes || "0"}</span></span>
         <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">${item.views || "0"}</span></span>
@@ -843,14 +843,14 @@ async function Fetchgroupcontainer() {
   } catch (error) {
     console.error("Error fetching data:", error);
 
-    const container = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6.sm\\:gap-8');
+    const container = document.getElementById("group-container");
     if (container) {
       container.innerHTML = `
-        <article class="card p-4 poetry-info-module-card" >
+        <article class="card p-4 poetry-info-module-card">
           <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=1170&auto=format&fit=crop" alt="Poetry Intro" class="w-full h-32 object-cover rounded-lg mb-3">
           <h5 class="urdu-text urdu-text-md font-semibold text-green-700 mb-2 text-right poetry-info-module-title">مڈول 1: شاعری کی تعریف اور اقسام</h5>
           <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content line-clamp-3">شاعری ایک ایسا فن ہے جس میں جذبات اور خیالات کا اظہار خوبصورت الفاظ اور منظم طریقوں سے کیا جاتا ہے۔</p>
-          <div class="stats-bar">
+          <div class="stats-bar flex justify-between items-center mt-3">
             <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">0</span></span>
             <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">0</span></span>
             <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
@@ -862,8 +862,12 @@ async function Fetchgroupcontainer() {
 }
 
 
+// Make sure to call the function
+Fetchgroupcontainer();
+
+
 // Call the function when page loads
-document.addEventListener("DOMContentLoaded", Fetchgroupcontainer);
+// document.addEventListener("DOMContentLoaded", Fetchgroupcontainer);
 
 
 
@@ -1004,7 +1008,7 @@ async function loadBlogCards() {
       // Add click event to navigate to article detail page
       card.addEventListener("click", (e) => {
         if (!e.target.closest(".share-icon-button")) {
-          window.location.href = `article-detail.html?id=${article._id || article.id
+          window.location.href = `./Pages/article.html?id=${article.ArticleID || article.ArticleID
             }`;
         }
       });
@@ -1063,6 +1067,71 @@ function formatNumber(num) {
 document.addEventListener("DOMContentLoaded", function () {
   loadBlogCards();
 });
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const container = document.getElementById("groupingarticles");
+    const title = document.getElementById("groupname");
+    const descriptionLink = document.getElementById("groupdescription");
+
+    try {
+        const res = await fetch("http://localhost:5000/api/articles/sectionone");
+        const data = await res.json();
+
+        if (data.success && data.data.length > 0) {
+            const firstArticle = data.data[0];
+
+            // Set group title and description
+            title.innerText = firstArticle.GroupName || 'نام دستیاب نہیں';
+            descriptionLink.innerHTML = `${firstArticle.description || 'مزید معلومات'} <i class="bi bi-arrow-left-short ml-1"></i>`;
+
+            // Generate article cards
+            data.data.forEach(article => {
+                const card = document.createElement("article");
+                card.className = "card p-4 poetry-info-module-card";
+
+                const imageUrl = article.ThumbnailURL
+                    ? 'data:image/jpeg;base64,' + btoa(
+                        new Uint8Array(article.ThumbnailURL.data)
+                            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                      )
+                    : "https://via.placeholder.com/300x150?text=No+Image";
+
+                card.innerHTML = `
+                    <img src="${imageUrl}"
+                        alt="Module Thumbnail"
+                        class="w-full h-32 object-cover rounded-lg mb-3 poetry-info-thumbnail">
+
+                    <h5 class="urdu-text urdu-text-md font-semibold text-rose-700 mb-2 text-right poetry-info-module-title">
+                        ${article.Title || 'بدون عنوان'}
+                    </h5>
+
+                    <p class="urdu-text urdu-text-sm text-gray-700 leading-relaxed text-right poetry-info-module-content">
+                        ${article.ContentUrdu ? article.ContentUrdu.substring(0, 300) + '...' : 'کوئی تفصیل دستیاب نہیں'}
+                    </p>
+
+                    <div class="stats-bar">
+                        <span><i class="bi bi-heart text-gray-500"></i> <span class="like-count urdu-text-xs">0</span></span>
+                        <span><i class="bi bi-eye-fill text-blue-500"></i> <span class="view-count urdu-text-xs">0</span></span>
+                        <button class="share-icon-button"><i class="bi bi-share-fill"></i></button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+        } else {
+            container.innerHTML = "<p class='text-center urdu-text'>کوئی مضمون دستیاب نہیں</p>";
+        }
+
+    } catch (err) {
+        console.error("Error loading articles:", err);
+        container.innerHTML = "<p class='text-center text-red-600'>ڈیٹا لوڈ کرنے میں ناکامی</p>";
+    }
+});
+
+
 
 // Load on page
 loadBlogCards();
