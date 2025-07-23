@@ -304,7 +304,7 @@ function shareOnWhatsApp() {
   const kalaamId = urlParams.get("id");
   
   // Create share URL with both ID and title
-  const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&kalam=${encodeURIComponent(kalaamTitle)}`;
+  const shareUrl = `https://updated-naatacademy.onrender.com/share/kalaam/${kalaamId}`;
   
   // Create WhatsApp share link
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
@@ -322,7 +322,7 @@ function shareKalaam() {
   const kalaamId = urlParams.get("id");
   
   // Create share URL with both ID and title
-  const shareUrl = `https://freelancework02.github.io/UP_Frontend/lyrics.html?id=${kalaamId}&kalam=${(kalaamTitle)}`;
+  const shareUrl = `https://updated-naatacademy.onrender.com/share/kalaam/${kalaamId}`;
 
   if (navigator.share) {
     // Web Share API (for mobile devices)
