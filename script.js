@@ -1187,9 +1187,6 @@ async function LoadBlogCards() {
     const container = document.getElementById("blogCardsContainer");
     container.innerHTML = "";
 
-    const shuffledArticles = articles.sort(() => 0.5 - Math.random());
-    const selectedArticles = shuffledArticles.slice(0, 3);
-
     document.getElementById("totalArticleCount").textContent = articles.length;
 
     const categoryColors = {
@@ -1200,23 +1197,24 @@ async function LoadBlogCards() {
       تاریخ: { bg: "bg-amber-100", text: "text-amber-600", title: "text-amber-700", writerBg: "writer-icon-bg-5" },
     };
 
+    // Randomize and take 3 articles
+    const shuffledArticles = articles.sort(() => 0.5 - Math.random());
+    const selectedArticles = shuffledArticles.slice(0, 3);
+
     selectedArticles.forEach((article) => {
       const title = article.Title || "بدون عنوان";
-      const postUrdu = article.ContentUrdu || "";
-      const category = article.CategoryName || "نعت";
+      const description = article.ContentUrdu || "";
+      const category = article.CategoryName || "مضمون";
       const writer = article.WriterName || "نامعلوم مصنف";
-      const writerImage =
-        article.writerImage ||
+      const writerImage = article.writerImage ||
         "https://res.cloudinary.com/awescreative/image/upload/v1749154741/Awes/User_icon.svg";
-
       const statsLikes = article.likes || 0;
       const statsViews = article.views || 0;
 
-      const colors = categoryColors[category] || categoryColors["نعت"];
-      const description = postUrdu.replace(/\n/g, " ");
-      const truncatedDescription =
+      const colors = categoryColors[category] || categoryColors["مضمون"];
+     const truncatedDescription =
         description.length > 700
-          ? description.substring(0, 700) + "..."
+          ? description.substring(0, 100) + "..."
           : description;
 
       const card = document.createElement("article");
@@ -1227,13 +1225,12 @@ async function LoadBlogCards() {
         <h4 class="urdu-text urdu-text-md sm:urdu-text-lg font-semibold ${colors.title} mb-2 mt-9 text-right article-title">
           ${title}
         </h4>
-       <p class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-700 leading-relaxed mb-4 text-right article-preview-text line-clamp-2">
-   ${truncatedDescription}
-</p>
-
-
+        <p class="urdu-text urdu-text-xs sm:urdu-text-sm text-gray-700 leading-relaxed mb-4 text-right article-preview-text"
+           style="max-height:3.25em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">
+          ${truncatedDescription}
+        </p>
         <div class="flex items-center justify-end mt-3 pt-3 border-t border-gray-100 article-meta-row">
-          <p class="urdu-text urdu-text-xs text-gray-600 article-writer-info">مضمون نگار: ${writer}</p>
+          <p class="urdu urdu-text-xs text-gray-600 article-writer-info">مضمون نگار: ${writer}</p>
           <div class="writer-icon-container  article-writer-icon-container">
             <img src="${writerImage}" alt="Writer Icon" class="article-writer-icon">
           </div>
@@ -1245,17 +1242,13 @@ async function LoadBlogCards() {
         </div>
       `;
 
-      // Navigate to article detail page on card click
+      // Navigation
       card.addEventListener("click", (e) => {
-        if (
-          !e.target.closest(".share-icon-button") &&
-          !e.target.closest(".stats-bar")
-        ) {
+        if (!e.target.closest(".share-icon-button") && !e.target.closest(".stats-bar")) {
           window.location.href = `./Pages/article.html?id=${article.ArticleID || article.id}`;
         }
       });
-
-      // Share button functionality
+      // Share
       const shareBtn = card.querySelector(".share-icon-button");
       shareBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -1276,6 +1269,9 @@ async function LoadBlogCards() {
     `;
   }
 }
+
+
+
 
 
 
@@ -1431,7 +1427,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-// Load on page
-loadBlogCards();
+
 
 loadCategories();
